@@ -1,0 +1,53 @@
+TEJ2O — Cyberdétectives
+
+CONNEXION (comme Assiduité et Habiletés)
+- Mêmes comptes, classes et élèves qu'Assiduité et Habiletés (serveur « Assiduité »).
+- Élève : « S'identifier » la première fois (le mot de passe s'affiche 30 secondes), puis « Se connecter » avec prénom, nom et mot de passe.
+- Enseignant(e) : « Se connecter », « Créer un compte » (approbation par Mme Hakima dans Assiduité) ou « Mot de passe oublié » (question secrète).
+
+PAGES
+- index.html : connexion ; espace enseignant (publications, élèves, mots de passe, résultats, export CSV).
+- index.html?compte : compte de l'élève (leçons publiées, devoirs, notes).
+- site.html : portail des leçons et devoirs publiés.
+- access.js : vérifie l'accès sur chaque leçon, le défi final et le mini-projet.
+
+À METTRE SUR GITHUB
+Remplacer TOUS les fichiers en gardant les sous-dossiers (lecon-1 … lecon-6, defi-final, mini-projet).
+
+DÉFI FINAL (mode examen)
+- 14 situations tirées des leçons 1 à 6 ; ordre des situations et des choix mélangé pour chaque élève.
+- Une seule tentative. Le bouton ↺ de la colonne « Défi final » (Résultats) permet de le refaire.
+- Plein écran obligatoire. Changer d'onglet, de fenêtre ou quitter le plein écran = une sortie (heure enregistrée).
+- À la 3e sortie, le défi est envoyé automatiquement. Dans Résultats, « ⚠ 2 » = 2 sorties (survoler pour voir les heures).
+- Les explications ne sont pas montrées aux élèves ; l'aperçu enseignant affiche les réponses attendues.
+
+LEÇONS — VERSION 2 (novembre 2026)
+- Les six leçons ont la même présentation. Chaque notion a sa leçon : 1 Bases · 2 Comprendre l'hameçonnage · 3 Repérer · 4 Protéger ses comptes · 5 Réagir · 6 Synthèse.
+- Devoirs : 10 questions à 4 choix plus exigeants ; l'ordre des choix change pour chaque élève.
+- Les notes déjà enregistrées ne changent pas. Pour un devoir envoyé avant la mise à jour, le corrigé affiche les nouvelles questions avec leurs bonnes réponses et un avis « Ce devoir a été modifié après ton envoi ».
+- Pour faire refaire un devoir avec la nouvelle version : bouton ↺ dans Résultats (l'ancienne note est effacée).
+
+DÉFI FINAL — PUBLICATION ET CORRIGÉ
+- Espace enseignant → Publications → « Pour aller plus loin » : Défi final, Corrigé du défi et Mini-projet, chacun avec sa date d'ouverture.
+- Liens « Voir le défi » et « Voir le corrigé du défi » : visibles seulement dans le compte enseignant.
+- Élève : le défi apparaît dans son compte une fois publié ; le corrigé (ses réponses, les bonnes réponses, les explications) seulement s'il a envoyé son défi et que le corrigé est publié.
+
+DÉFI FINAL POUR LES ÉLÈVES PRÉSENTS (novembre 2026)
+- 👥 Élèves : une case 🏆 Défi devant chaque élève (+ « Tout cocher » / « Tout décocher »).
+- Le défi final s'ouvre seulement pour les élèves cochés ET quand il est publié dans 📣 Publications.
+- Un élève non coché voit le défi verrouillé ; son envoi serait refusé par le serveur.
+- Table du serveur : tej2o_final_students (classe, élève).
+
+MINI-PROJET : VERSION IMPRIMABLE (novembre 2026)
+- mini-projet/imprimer.html : tout le projet sur une seule page claire (5 parties + grille avec une case « Niveau » à remplir),
+  bouton « Imprimer ou enregistrer en PDF ». Accès : l'enseignante toujours ; l'élève quand le mini-projet est publié.
+- Liens : dans le compte de l'élève (section 🎬 Mini-projet), dans 📣 Publications (enseignante) et en haut du mini-projet.
+- Nombre de scénarios : 5 pour un projet individuel, 7 pour un projet à deux (pages 1, 2, 4 et critère 10 de la grille).
+- Outil : Quizizz ou Genially (pages 1, 3, 4 et critère 7).
+
+MINI-PROJET : MODIFIER LE DOCUMENT (novembre 2026)
+- Page du mini-projet, compte enseignant : « ⬇️ Télécharger en Word (pour modifier) » donne Mini-projet TEJ2O.doc.
+- Modifie le fichier dans Word, enregistre-le (.docx ou .doc), puis « ⬆️ Mettre mon fichier sur le site » : un aperçu s’affiche, « 💾 Publier sur le site » le met en ligne.
+- Les élèves voient alors ta version, sur la page du mini-projet et dans la version imprimable. « ↺ Version d’origine » la retire.
+- Garde les sauts de page (ou les lignes « Page 1 / 5 · … ») pour que le site redécoupe le document en pages.
+- Liens : projet d’Ilef et Julie-Anne (Wayground) et découverte de Quizizz.

@@ -1,0 +1,484 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TEJ2O — Connexion</title>
+<style>
+:root{color-scheme:dark;--bg:#071d18;--panel:#123a2f;--panel2:#0b2c23;--line:#3b6557;--line2:#527568;--gold:#e8c77c;--text:#f6f7f2;--muted:#c5d7cd;--ok:#9fd8b4;--err:#f0a596}
+*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,Segoe UI,sans-serif;background:radial-gradient(circle at 90% 0,#225b46,#071d18 65%);color:var(--text);min-height:100vh}
+main{max-width:1100px;margin:auto;padding:28px 20px 60px}h1{color:var(--gold);margin:0 0 4px;font-size:clamp(26px,4vw,36px)}h2{margin:0 0 12px}h3{margin:0 0 10px;color:var(--gold)}p,small,.sub{color:var(--muted)}a{color:var(--gold)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}
+label{display:block;margin:12px 0 4px;font-weight:600}input,select,textarea{display:block;width:100%;background:#09281f;color:white;border:1px solid #779b89;border-radius:9px;padding:11px;font:inherit}textarea{min-height:120px}
+button{background:var(--gold);color:#08231b;border:0;border-radius:9px;padding:11px 15px;font-weight:750;cursor:pointer;font:inherit;font-weight:750}button:disabled{opacity:.5;cursor:default}.ghost{background:#295a47;color:white}.danger{background:#9e403c;color:#fff}.small{padding:6px 10px;font-size:14px}
+.link{background:none;color:var(--gold);padding:0;text-decoration:underline;font-weight:600}
+.hide{display:none!important}.msg{padding:10px 12px;border-radius:10px;margin:10px 0;white-space:pre-wrap}.msg.ok{background:#16483a;color:var(--ok)}.msg.err{background:#4a2420;color:var(--err)}
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:18px}.role{text-align:left;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:6px;font-weight:400}.role:hover,.role:focus-visible{border-color:var(--gold);outline:none}.role b{font-size:21px;color:var(--gold)}.role .ico{font-size:42px}
+.login{max-width:470px;margin:20px auto}.login form{display:flex;flex-direction:column;gap:2px}.login form button{margin-top:14px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:14px}.top .act{display:flex;gap:8px;flex-wrap:wrap}.top .act a{display:inline-block;padding:10px 14px;border:1px solid var(--line2);border-radius:9px;text-decoration:none;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.tab{background:#0b2c23;color:white;border:1px solid var(--line2)}.tab.on{background:var(--gold);color:#08231b}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}@media(max-width:1000px){.cols{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:700px){.cols{grid-template-columns:1fr}}
+.col{padding:14px;border:1px solid var(--line2);border-radius:14px;background:var(--panel2);min-width:0}.col h4{color:var(--gold);margin:0 0 8px}
+.rel{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid #355d4d}.rel:last-child{border:0}.rel input[type=checkbox]{width:22px;height:22px;display:inline-block}.rel .nm{min-width:90px;font-weight:700}.rel input[type=datetime-local]{width:auto;flex:1;min-width:170px;padding:7px}.rel .st{font-size:13px;color:var(--muted);width:100%}
+.tbl{overflow-x:auto;margin-top:10px}table{width:100%;border-collapse:collapse;min-width:720px}td,th{border-bottom:1px solid var(--line2);padding:8px;text-align:left;vertical-align:middle}th{color:var(--gold);font-size:14px}td.c,th.c{text-align:center}
+.mdp{font-family:ui-monospace,Consolas,monospace;font-size:16px;letter-spacing:1px;color:var(--gold);font-weight:800}.okv{color:var(--ok)}.sc{font-weight:800}
+.fiche-fond{position:fixed;inset:0;background:#000a;display:grid;place-items:center;padding:16px;z-index:50}.fiche{max-width:420px;width:100%;text-align:center}.fiche .mdp{font-size:34px;margin:12px 0}
+.activity{display:inline-block;padding:9px 12px;margin:5px 5px 5px 0;border:1px solid #638778;border-radius:10px;color:white;text-decoration:none}.activity.locked{opacity:.45;pointer-events:none}
+.hw{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #355d4d;flex-wrap:wrap}
+footer{margin-top:30px;color:#bdd2c7;font-size:14px}
+.etat{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;font-weight:900;font-size:18px;color:#fff}.etat.ok{background:#2e9e5b}.etat.non{background:#c8443a}
+
+.guide{max-width:880px;margin:22px auto 0}.guide h2{display:flex;gap:8px;align-items:center;font-size:21px}
+.guide .tabs{margin:10px 0}
+.g-etapes{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:8px}
+.g-etapes li{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 10px;border:1.5px solid var(--line2);border-radius:10px;background:var(--panel2)}
+.g-etapes li.g-actif{border-color:#e8553d;background:rgba(232,85,61,.12)}
+.g-num{width:32px;height:32px;border-radius:50%;background:var(--gold);color:#08231b;display:grid;place-items:center;font-weight:800}
+.g-chip{display:inline-block;background:#2b5a49;border:1.5px solid var(--gold);border-radius:7px;padding:0 8px;font-weight:700}
+.g-voir{white-space:nowrap}
+@media(max-width:600px){.g-etapes li{grid-template-columns:30px minmax(0,1fr)}.g-voir{grid-column:2;justify-self:start}}
+.g-fleche{position:absolute;z-index:1000;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:2px;animation:g-saut .6s ease-in-out infinite alternate}
+.g-fleche.dessous{flex-direction:column-reverse;animation-name:g-saut2}.g-fleche.dessous svg{transform:rotate(180deg)}
+.g-bulle{background:#e8553d;color:#fff;font-weight:700;font-size:14px;border-radius:999px;padding:3px 12px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.g-cible{outline:4px solid #e8553d!important;outline-offset:3px;animation:g-pulse 1s ease-in-out infinite}
+@keyframes g-saut{to{transform:translateY(9px)}}@keyframes g-saut2{to{transform:translateY(-9px)}}@keyframes g-pulse{50%{outline-color:rgba(232,85,61,.3)}}
+
+.menubar{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 4px;position:relative;z-index:30}
+.menu{position:relative}.menubar>.mbtn.vue{background:#0b2c23;color:#fff;border:1px solid var(--line2)}.menubar>.mbtn.vue.on{background:var(--gold);color:#08231b;border-color:var(--gold)}.menubar>.mbtn.vue:hover{border-color:var(--gold)}
+.menu>.mbtn{background:#0b2c23;color:#fff;border:1px solid var(--line2);display:flex;align-items:center;gap:8px}.menu>.mbtn::after{content:"▾";color:var(--gold)}
+.menu:hover>.mbtn,.menu.ouvert>.mbtn,.menu:focus-within>.mbtn{border-color:var(--gold);color:var(--gold)}
+.mliste{display:none;position:absolute;top:100%;left:0;min-width:280px;padding:8px;margin:0;list-style:none;background:#0f3328;border:1px solid var(--gold);border-radius:12px;box-shadow:0 14px 40px #000a}
+.menu::after{content:"";position:absolute;left:0;right:0;top:100%;height:8px}
+.menu:hover .mliste,.menu.ouvert .mliste,.menu:focus-within .mliste{display:block}
+.mliste li.titre{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 10px 4px}
+.mliste li.sep{border-top:1px solid var(--line2);margin:6px 4px}
+.mliste button{display:flex;gap:10px;width:100%;text-align:left;background:none;color:#fff;font-weight:600;padding:9px 10px;border-radius:8px}
+.mliste button:hover,.mliste button:focus-visible{background:#1d4a3b;color:var(--gold);outline:none}.mliste button.rouge{color:#f0a596}.mliste button:disabled{opacity:.4}
+.modal-fond{position:fixed;inset:0;background:#000b;display:grid;place-items:center;padding:16px;z-index:60;overflow-y:auto}
+.modal{width:min(520px,100%);margin:0}.modal h2{display:flex;gap:8px}.modal .boutons{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.attention{background:#4a2420;border:1px solid #9e403c;border-radius:10px;padding:12px;color:#f6d6cf}
+.onglets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+#flash{position:fixed;left:50%;transform:translateX(-50%);bottom:max(16px,env(safe-area-inset-bottom));z-index:40;width:min(560px,calc(100% - 32px));pointer-events:none}#flash .msg{box-shadow:0 8px 30px #0008;margin:0}
+.defi-barre{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:rgba(232,199,124,.12);border:1px solid #e8c77c;border-radius:12px;padding:10px 14px;margin:0 0 12px}.defi-case{width:22px;height:22px;accent-color:#e8c77c;cursor:pointer}</style></head><body><main id="app"><p>Chargement…</p></main><div id="flash" aria-live="polite"></div>
+<script type="module">
+import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/+esm';
+/* TEJ2O sign-in: same accounts, classes and students as Assiduité and Habiletés ("assiduite" server function).
+   The returned session is handed to Supabase (setSession) so that access.js and site.html can read it afterwards. */
+const URL_SB='https://dcnfxwtszqeqfaxlbfbl.supabase.co', KEY='sb_publishable_UTy7pKbk6xnw6mjRoy08GQ_5OuU1ymE', FN_A=URL_SB+'/functions/v1/assiduite';
+const db=createClient(URL_SB,KEY);
+const LABELS={lesson1:'Leçon 1',lesson2:'Leçon 2',lesson3:'Leçon 3',lesson4:'Leçon 4',lesson5:'Leçon 5',lesson6:'Leçon 6',homework1:'Devoir 1',homework2:'Devoir 2',homework3:'Devoir 3',homework4:'Devoir 4',homework5:'Devoir 5',homework6:'Devoir 6',final:'Défi final',corrigefinal:'Corrigé du défi',project:'Mini-projet',corrige1:'Corrigé 1',corrige2:'Corrigé 2',corrige3:'Corrigé 3',corrige4:'Corrigé 4',corrige5:'Corrigé 5',corrige6:'Corrigé 6'};
+const path=id=>id.startsWith('lesson')?'lecon-'+id.slice(6)+'/index.html':id.startsWith('homework')?'lecon-'+id.slice(8)+'/index.html?devoir=1':id==='final'?'defi-final/index.html':'mini-projet/index.html';
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $=s=>document.querySelector(s), app=$('#app');
+const compte=new URLSearchParams(location.search).has('compte');
+const UI={tab:location.hash==='#enseignant'?'prof':location.hash==='#eleve'?'eleve':'',mode:'login',prefill:null,info:null,forgotQ:null,classId:null,vue:'pub',flash:null};
+let T=null; // teacher data
+
+/* ---------- Server calls ---------- */
+async function api(body,auth=false){
+ const h={'content-type':'application/json',apikey:KEY};
+ if(auth){const {data:{session}}=await db.auth.getSession();if(session)h.authorization='Bearer '+session.access_token}
+ let r;try{r=await fetch(FN_A,{method:'POST',headers:h,body:JSON.stringify(body)})}catch{throw new Error('Connexion au serveur impossible. Vérifie Internet et réessaie.')}
+ const d=await r.json().catch(()=>({error:'Réponse illisible du serveur.'}));
+ if(!r.ok||d.error)throw new Error(d.error||'Action impossible. Réessaie.');
+ return d;
+}
+async function moi(){const {data,error}=await db.rpc('tej2o_me');if(error)throw error;return data||{role:null}}
+let ancre=null;function noterAncre(el){const sec=el?.closest('[data-ancre]');ancre=sec?{k:sec.dataset.ancre,top:sec.getBoundingClientRect().top}:null}
+function garderPosition(fn){const y=window.scrollY,a=ancre;ancre=null;fn();if(a){const el=document.querySelector(`[data-ancre="${a.k}"]`);if(el){window.scrollTo(0,window.scrollY+el.getBoundingClientRect().top-a.top);return}}window.scrollTo(0,y)}
+let flashT;function message(t,ok=true){UI.flash={t,ok};const z=$('#flash');if(z){z.innerHTML=`<div class="msg ${ok?'ok':'err'}" role="status">${esc(t)}</div>`;clearTimeout(flashT);flashT=setTimeout(()=>{z.innerHTML='';UI.flash=null},ok?4000:9000)}}
+
+/* ---------- Startup ---------- */
+async function demarrer(){
+ const {data:{session}}=await db.auth.getSession();
+ if(!session){renderLogin();return}
+ let m;try{m=await moi()}catch(e){app.innerHTML=`<div class="panel"><div class="msg err">${esc(e.message)}</div></div>`;return}
+ if(m.role==='teacher'){await chargerProf();return}
+ if(m.role==='student'){if(compte){await renderCompte(m)}else location.replace('site.html');return}
+ await db.auth.signOut();UI.info=null;renderLogin('Ce compte n’est pas un compte élève ou enseignant de TEJ2O. Connecte-toi avec ton prénom, ton nom et ton mot de passe.');
+}
+
+
+/* ---------- "How do I sign in?" guide (same as Assiduité) ---------- */
+const GUIDE={eleve:{premiere:[
+ {v:'',c:'.role[data-tab="eleve"]',t:'Sur la page d’accueil, clique sur',b:'Je suis élève',f:'Clique ici'},
+ {v:'eleve',m:'login',c:'[data-mode="identify"]',t:'Clique sur le lien',b:'S’identifier pour recevoir mon mot de passe',f:'Clique ici'},
+ {v:'eleve',m:'identify',c:'#lFirst,#lLast',t:'Écris ton prénom, puis ton nom.',f:'Écris ici'},
+ {v:'eleve',m:'identify',c:'#loginBtn',t:'Clique sur le bouton',b:'S’identifier',f:'Clique ici'},
+ {t:'Ton mot de passe s’affiche pendant 30 secondes, une seule fois. Prends une capture d’écran ou écris-le sur une feuille.',ic:'📸'},
+ {t:'Ensuite, connecte-toi : regarde « Les autres fois ».',ic:'➡️'}],
+ ensuite:[
+ {v:'',c:'.role[data-tab="eleve"]',t:'Sur la page d’accueil, clique sur',b:'Je suis élève',f:'Clique ici'},
+ {v:'eleve',m:'login',c:'#lFirst,#lLast',t:'Écris ton prénom et ton nom.',f:'Écris ici'},
+ {v:'eleve',m:'login',c:'#lPass',t:'Écris ton mot de passe (celui de ta capture d’écran).',f:'Écris ici'},
+ {v:'eleve',m:'login',c:'#loginBtn',t:'Clique sur le bouton',b:'Se connecter',f:'Clique ici'},
+ {t:'C’est le même mot de passe que pour Assiduité et Habiletés. Si tu l’as déjà récupéré là-bas, connecte-toi directement.',ic:'🔑'}]},
+ prof:{premiere:[
+ {v:'',c:'.role[data-tab="prof"]',t:'Sur la page d’accueil, clique sur',b:'Je suis enseignant(e)',f:'Clique ici'},
+ {v:'prof',m:'login',c:'[data-mode="signup"]',t:'Clique sur le lien',b:'Créer un compte',f:'Clique ici'},
+ {v:'prof',m:'signup',c:'#lFirst,#lLast',t:'Écris ton prénom, puis ton nom.',f:'Écris ici'},
+ {v:'prof',m:'signup',c:'#lPass,#lPass2',t:'Choisis ton mot de passe (8 caractères ou plus) et écris-le deux fois.',f:'Écris ici'},
+ {v:'prof',m:'signup',c:'#lQ,#lA',t:'Écris une question secrète et sa réponse. Elles te serviront si tu oublies ton mot de passe.',f:'Écris ici'},
+ {v:'prof',m:'signup',c:'#loginBtn',t:'Clique sur le bouton',b:'Créer mon compte',f:'Clique ici'},
+ {t:'Attends que Mme Hakima approuve ton compte. Ensuite, connecte-toi comme dans « Les autres fois ».',ic:'⏳'}],
+ ensuite:[
+ {v:'',c:'.role[data-tab="prof"]',t:'Sur la page d’accueil, clique sur',b:'Je suis enseignant(e)',f:'Clique ici'},
+ {v:'prof',m:'login',c:'#lFirst,#lLast',t:'Écris ton prénom et ton nom.',f:'Écris ici'},
+ {v:'prof',m:'login',c:'#lPass',t:'Écris ton mot de passe.',f:'Écris ici'},
+ {v:'prof',m:'login',c:'#loginBtn',t:'Clique sur le bouton',b:'Se connecter',f:'Clique ici'},
+ {t:'C’est le même compte et le même mot de passe que pour Assiduité et Habiletés.',ic:'🔑'}]}};
+let gMin=null,gJeton=0;
+const gRole=()=>UI.tab||UI.guideRole||'eleve', gQuand=()=>UI.guideQuand||(UI.mode==='identify'?'premiere':UI.tab==='eleve'&&UI.mode==='login'?'ensuite':'premiere'), gListe=()=>GUIDE[gRole()][gQuand()];
+function guideHtml(){const r=gRole(),q=gQuand(),L=gListe();let n=0;
+ return`<aside class="guide panel" aria-label="Comment me connecter"><h2>🧭 Comment me connecter ?</h2>
+ ${!UI.tab?`<div class="tabs"><button class="tab ${r==='eleve'?'on':''}" data-grole="eleve">Je suis élève</button><button class="tab ${r==='prof'?'on':''}" data-grole="prof">Je suis enseignant(e)</button></div>`:''}
+ <div class="tabs"><button class="tab ${q==='premiere'?'on':''}" data-gquand="premiere">${r==='eleve'?'1. La première fois : s’identifier':'La première fois'}</button><button class="tab ${q==='ensuite'?'on':''}" data-gquand="ensuite">${r==='eleve'?'2. Les autres fois : se connecter':'Les autres fois'}</button></div>
+ <ol class="g-etapes">${L.map((o,i)=>`<li data-gi="${i}"><span class="g-num">${o.ic?o.ic:++n}</span><div>${esc(o.t)}${o.b?` <span class="g-chip">${esc(o.b)}</span>`:''}</div>${o.c?`<button class="ghost small g-voir" data-gvoir="${i}">👉 Montre-moi</button>`:''}</li>`).join('')}</ol>
+ <button data-gtout="1">▶ Montre-moi toutes les étapes</button></aside>`}
+function guideEffacer(){clearTimeout(gMin);gMin=null;document.querySelectorAll('.g-fleche').forEach(e=>e.remove());document.querySelectorAll('.g-cible').forEach(e=>e.classList.remove('g-cible'));document.querySelectorAll('.g-etapes li.g-actif').forEach(e=>e.classList.remove('g-actif'))}
+function guideAller(o){if(o.v===undefined)return;if(o.v===''){if(UI.tab){UI.guideRole=UI.tab;UI.tab='';UI.mode='login';UI.prefill=null;renderLogin()}return}
+ if(UI.tab!==o.v||UI.mode!==o.m){UI.tab=o.v;UI.mode=o.m;UI.prefill=null;UI.info=null;UI.forgotQ=null;renderLogin()}}
+function guideMontrer(i){guideEffacer();UI.guideRole=gRole();UI.guideQuand=gQuand();const o=gListe()[i];if(!o)return;guideAller(o);
+ const li=document.querySelector(`.g-etapes li[data-gi="${i}"]`);if(li)li.classList.add('g-actif');if(!o.c)return;
+ const t=[...document.querySelectorAll(o.c)];if(!t.length)return;t.forEach(e=>e.classList.add('g-cible'));t[0].scrollIntoView({block:'center',behavior:'smooth'});
+ const j=++gJeton;setTimeout(()=>{if(j===gJeton)guidePlacer(t[0],o.f||'Clique ici')},450)}
+function guidePlacer(el,txt){document.querySelectorAll('.g-fleche').forEach(e=>e.remove());const r=el.getBoundingClientRect(),dessous=r.top<110,d=document.createElement('div');
+ d.className='g-fleche'+(dessous?' dessous':'');d.setAttribute('aria-hidden','true');d.innerHTML=`<span class="g-bulle">${esc(txt)}</span><svg viewBox="0 0 60 70" width="54" height="63"><path d="M22 2h16v38h16L30 68 6 40h16z" fill="#e8553d" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></svg>`;
+ document.body.append(d);const w=d.offsetWidth,h=d.offsetHeight,x=Math.max(6,Math.min(innerWidth-w-6,r.left+Math.min(r.width/2,120)-w/2));d.style.left=x+scrollX+'px';d.style.top=(dessous?r.bottom+6:r.top-h-6)+scrollY+'px'}
+function guideTout(){const L=gListe();let i=0;const suite=()=>{if(i>=L.length){gMin=setTimeout(guideEffacer,2500);return}guideMontrer(i);i++;gMin=setTimeout(suite,3200)};suite()}
+/* ---------- Sign-in (same as Assiduité) ---------- */
+function renderLogin(err){
+ const entete=`<header><h1>🛡️ TEJ2O — Cyberdétectives</h1><p>Connexion avec ton prénom, ton nom et ton mot de passe. C’est le même compte que pour Assiduité et Habiletés.</p></header>`;
+ if(!UI.tab){
+  app.innerHTML=entete+(err?`<div class="msg err">${esc(err)}</div>`:'')+`<div class="roles"><button class="role" data-tab="eleve"><span class="ico">🎒</span><b>Je suis élève</b><span>Je fais les leçons et j’envoie mes devoirs.</span></button><button class="role" data-tab="prof"><span class="ico">🧑‍🏫</span><b>Je suis enseignant(e)</b><span>Je publie les leçons et les devoirs et je vois les résultats.</span></button></div><div class="panel" style="max-width:880px;margin:18px auto 0"><b>🎒 Élève : 2 étapes</b><ol style="margin:8px 0 0"><li><b>La première fois</b>, clique sur « Je suis élève », puis sur <b>« S’identifier »</b> : ton mot de passe s’affiche une seule fois. Note-le !</li><li><b>Les autres fois</b>, clique sur « Je suis élève » et <b>« Se connecter »</b> avec ton prénom, ton nom et ce mot de passe.</li></ol><small>Tu as déjà ton mot de passe d’Assiduité ? C’est le même : passe directement à l’étape 2.</small></div>`+guideHtml();
+  return;
+ }
+ const eleve=UI.tab==='eleve',m=UI.mode,ident=eleve&&m==='identify',sg=!eleve&&m==='signup',fg=!eleve&&m==='forgot',q=fg?UI.forgotQ:null;
+ const titre=eleve?(ident?'Première connexion':'Espace élève'):sg?'Créer mon compte':fg?'Mot de passe oublié':'Espace enseignant';
+ const intro=eleve?(ident?'Écris ton prénom et ton nom. Ton mot de passe s’affichera pendant 30 secondes, une seule fois : prends une capture d’écran ou écris-le.':'Connecte-toi avec ton prénom, ton nom et ton mot de passe. Pas encore de mot de passe ? Clique d’abord sur « S’identifier » plus bas.')
+  :sg?'Choisis ton mot de passe et une question secrète. Ton compte sera actif dès que Mme Hakima l’aura approuvé. Ce compte sert aussi pour Assiduité et Habiletés.'
+  :fg?(q?'Réponds à ta question secrète, puis choisis un nouveau mot de passe.':'Écris ton prénom et ton nom pour afficher ta question secrète.'):'Connecte-toi avec ton prénom, ton nom et ton mot de passe (le même que dans Assiduité).';
+ const ro=fg&&q?' readonly':'';
+ const champ=(id,lab,type,auto,extra='')=>`<label for="${id}">${lab}</label><input type="${type}" id="${id}" autocomplete="${auto}"${extra} required>`;
+ let plus='';
+ if(sg)plus=champ('lPass','Mot de passe (8 caractères ou plus)','password','new-password',' minlength="8"')+champ('lPass2','Confirme le mot de passe','password','new-password',' minlength="8"')+champ('lQ','Question secrète','text','off',' maxlength="200" placeholder="Ex. : Le nom de ma première école ?"')+champ('lA','Réponse','text','off',' maxlength="200"');
+ else if(fg&&q)plus=`<label>Ta question secrète</label><div><b>${esc(q)}</b></div>`+champ('lA','Ta réponse','text','off',' maxlength="200"')+champ('lPass','Nouveau mot de passe (8 caractères ou plus)','password','new-password',' minlength="8"')+champ('lPass2','Confirme le nouveau mot de passe','password','new-password',' minlength="8"');
+ else if(!ident&&!fg)plus=champ('lPass','Mot de passe','password','current-password');
+ const bouton=ident?'S’identifier':sg?'Créer mon compte':fg?(q?'Changer mon mot de passe':'Afficher ma question'):'Se connecter';
+ const liens=eleve?(ident?'Tu as déjà ton mot de passe ? <button class="link" data-mode="login">Se connecter</button>':'Première connexion ? <button class="link" data-mode="identify">S’identifier pour recevoir mon mot de passe</button>')
+  :(sg||fg?'Tu as déjà un compte ? <button class="link" data-mode="login">Se connecter</button>':'Pas encore de compte ? <button class="link" data-mode="signup">Créer un compte</button><br>Mot de passe oublié ? <button class="link" data-mode="forgot">Répondre à ma question secrète</button>');
+ app.innerHTML=entete+`<div class="panel login"><button class="link" data-tab="">← ${eleve?'Je ne suis pas élève':'Je ne suis pas enseignant(e)'}</button><h2 style="margin-top:12px">${eleve?'🎒':'🧑‍🏫'} ${titre}</h2><p>${intro}</p>${UI.info?`<div class="msg ok">${esc(UI.info)}</div>`:''}${err?`<div class="msg err">${esc(err)}</div>`:''}
+ <form id="loginForm" autocomplete="on"><label for="lFirst">Prénom</label><input id="lFirst" autocomplete="given-name" value="${esc(UI.prefill?.first||'')}"${ro} required><label for="lLast">Nom</label><input id="lLast" autocomplete="family-name" value="${esc(UI.prefill?.last||'')}"${ro} required>${plus}<div id="loginMsg"></div><button id="loginBtn">${bouton}</button></form><p style="margin-top:14px">${liens}</p></div>`+guideHtml();
+ const f=(fg&&q)?$('#lA'):(UI.prefill?.first&&!ident&&!sg&&!fg?$('#lPass'):$('#lFirst'));f&&f.focus();
+ $('#loginForm').onsubmit=e=>{e.preventDefault();soumettre()};
+}
+async function soumettre(){
+ const first=$('#lFirst').value.trim(),last=$('#lLast').value.trim(),msg=$('#loginMsg'),btn=$('#loginBtn'),lab=btn.textContent,v=id=>$(id)?$(id).value:'';
+ const prof=UI.tab==='prof',m=UI.mode;msg.innerHTML='';
+ if(!first||!last){msg.innerHTML='<div class="msg err">Écris le prénom et le nom.</div>';return}
+ btn.disabled=true;btn.textContent='Un instant…';
+ try{
+  if(m==='identify'){const r=await api({action:'student_identify',first,last});UI.mode='login';UI.prefill={first:r.first_name,last:r.last_name};renderLogin();fiche(r.first_name+' '+r.last_name,r.password,true);return}
+  if(prof&&m==='signup'){
+   const p=v('#lPass'),p2=v('#lPass2'),qq=v('#lQ').trim(),ra=v('#lA').trim();
+   if(p.length<8)throw new Error('Le mot de passe doit avoir 8 caractères ou plus.');if(p!==p2)throw new Error('Les deux mots de passe ne sont pas identiques.');
+   if(qq.length<3)throw new Error('Écris ta question secrète.');if(!ra)throw new Error('Écris la réponse à ta question secrète.');
+   const r=await api({action:'teacher_signup',first,last,password:p,question:qq,answer:ra});UI.mode='login';UI.prefill={first,last};UI.info=r.message;renderLogin();return;
+  }
+  if(prof&&m==='forgot'){
+   if(!UI.forgotQ){const r=await api({action:'teacher_forgot_question',first,last});UI.forgotQ=r.question;UI.prefill={first,last};renderLogin();return}
+   const ra=v('#lA').trim(),p=v('#lPass'),p2=v('#lPass2');
+   if(!ra)throw new Error('Écris ta réponse.');if(p.length<8)throw new Error('Le nouveau mot de passe doit avoir 8 caractères ou plus.');if(p!==p2)throw new Error('Les deux mots de passe ne sont pas identiques.');
+   const r=await api({action:'teacher_forgot_reset',first,last,answer:ra,password:p});UI.mode='login';UI.forgotQ=null;UI.prefill={first,last};UI.info=r.message;renderLogin();return;
+  }
+  const password=v('#lPass');if(!password)throw new Error('Écris le mot de passe.');
+  const r=await api({action:prof?'teacher_login':'student_login',first,last,password});
+  const {error}=await db.auth.setSession({access_token:r.session.access_token,refresh_token:r.session.refresh_token});
+  if(error)throw new Error('Session refusée : '+error.message);
+  UI.info=null;UI.prefill=null;app.innerHTML='<p>Chargement…</p>';await demarrer();
+ }catch(err){msg.innerHTML=`<div class="msg err">${esc(err.message)}</div>`;btn.disabled=false;btn.textContent=lab}
+}
+function fiche(nom,mdp,minuterie){
+ const d=document.createElement('div');d.className='fiche-fond';
+ d.innerHTML=`<div class="fiche panel" role="dialog" aria-modal="true"><small>${minuterie?'Ton mot de passe':'Mot de passe de l’élève'}</small><h2>${esc(nom)}</h2><div class="mdp">${esc(mdp)}</div>${minuterie?'<p>Prends une capture d’écran ou écris-le. Il disparaît dans <b id="ficheS">30</b> secondes et ne sera plus affiché.</p>':'<p>Donne-le à l’élève. Il peut aussi le voir une fois avec « S’identifier ».</p>'}<button id="ficheOk">${minuterie?'J’ai noté mon mot de passe':'Fermer'}</button></div>`;
+ document.body.append(d);const fermer=()=>{clearInterval(t);d.remove()};$('#ficheOk').onclick=fermer;
+ let n=30,t=minuterie?setInterval(()=>{n--;const s=$('#ficheS');if(s)s.textContent=n;if(n<=0)fermer()},1000):null;
+}
+
+/* ---------- Teacher dashboard ---------- */
+async function chargerProf(){
+ try{
+  T=await api({action:'participation_teacher'},true);
+  const {data:hid,error:eh}=await db.from('tej2o_hidden_classes').select('class_id');if(eh)throw eh;
+  T.toutes=T.classes;T.masquees=new Set((hid||[]).map(h=>h.class_id));T.classes=T.toutes.filter(c=>!T.masquees.has(c.id));
+  if(!UI.classId||!T.classes.some(c=>c.id===UI.classId))UI.classId=T.classes[0]?.id||null;
+  if(UI.classId){
+   const [{data:rel,error:e1},{data:res,error:e2}]=await Promise.all([
+    db.from('tej2o_releases').select('activity_id,enabled,available_at').eq('class_id',UI.classId),
+    db.from('tej2o_results').select('student_id,activity_id,score,completed_at,answers').eq('class_id',UI.classId)]);
+   if(e1||e2)throw (e1||e2);
+   T.rel=new Map((rel||[]).map(r=>[r.activity_id,r]));T.res=res||[];
+   // Students allowed to do the final challenge (checked in the class list).
+   const {data:fs,error:e3}=await db.from('tej2o_final_students').select('student_id').eq('class_id',UI.classId);if(e3)throw e3;
+   T.defi=new Set((fs||[]).map(x=>x.student_id));
+  }
+  garderPosition(renderProf);
+ }catch(e){app.innerHTML=`<div class="panel"><div class="msg err">${esc(e.message)}</div><button id="sortir">Se déconnecter</button></div>`;$('#sortir').onclick=sortir}
+}
+const ouvert=r=>!!r&&r.enabled&&(!r.available_at||Date.parse(r.available_at)<=Date.now());
+const enLocal=iso=>{if(!iso)return'';const d=new Date(iso);return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16)};
+function etatPub(r){if(!r||!r.enabled)return'🔒 Non publié';if(!ouvert(r))return'⏳ Ouvre le '+new Date(r.available_at).toLocaleString('fr-CA',{dateStyle:'medium',timeStyle:'short'});return'✅ Visible par les élèves'}
+function renderProf(){
+ const c=T.classes.find(x=>x.id===UI.classId);
+ const ids=new Set(T.members.filter(m=>m.class_id===UI.classId).map(m=>m.student_id));
+ const eleves=T.students.filter(s=>ids.has(s.id)).sort((a,b)=>a.last_name.localeCompare(b.last_name,'fr')||a.first_name.localeCompare(b.first_name,'fr'));
+ const autres=T.students.filter(s=>!ids.has(s.id)).sort((a,b)=>a.last_name.localeCompare(b.last_name,'fr'));
+ const pend=new Map(T.pending.map(p=>[p.student_id,p.password])),vu=new Set(T.revealed.map(r=>r.student_id));
+ const relRow=id=>{const r=T.rel?.get(id);return`<div class="rel" data-id="${id}"><input type="checkbox" ${r?.enabled?'checked':''} aria-label="Publier ${LABELS[id]}"><span class="nm">${LABELS[id]}</span><input type="datetime-local" value="${enLocal(r?.available_at)}" aria-label="Date d’ouverture"><span class="st">${etatPub(r)}</span></div>`};
+ const hw=[1,2,3,4,5,6].map(i=>'homework'+i);
+ const note=(sid,a)=>T.res.find(r=>r.student_id===sid&&r.activity_id===a);
+ // Final challenge cell: score, exits recorded in exam mode (hover for times) and redo button.
+ const celluleDefi=s=>{const n=note(s.id,'final');if(!n)return'<td class="c">—</td>';const so=n.answers?.sorties||[];
+  const det=so.map((x,i)=>`${i+1}) ${new Date(x.t).toLocaleTimeString('fr-CA',{hour:'2-digit',minute:'2-digit'})} · ${x.raison}${x.s?` · ${x.s} s`:''}`).join('\n');
+  const badge=so.length?` <span title="${esc(det)}" style="color:#ffb36b;font-weight:800;cursor:help">⚠ ${so.length}</span>`:'';
+  return`<td class="c"><span class="sc" title="Envoyé le ${new Date(n.completed_at).toLocaleString('fr-CA',{dateStyle:'medium',timeStyle:'short'})}${n.answers?.envoiAuto?' (envoi automatique après 3 sorties)':''}">${n.score} %</span>${badge} <button class="link small" data-redo="${s.id}|final" title="Permettre de refaire">↺</button></td>`};
+ app.innerHTML=`<div class="top"><div><h1>🧑‍🏫 TEJ2O — Espace enseignant</h1><div class="sub">Bonjour ${esc(T.me.first_name)} ${esc(T.me.last_name)} · mêmes classes et élèves qu’Assiduité</div></div><div class="act"><a href="site.html">Voir le site</a><button class="ghost" id="sortir">Se déconnecter</button></div></div>
+ 
+ <nav class="menubar" aria-label="Menus enseignant">
+  <button class="mbtn vue ${UI.vue==='pub'?'on':''}" data-vue="pub" aria-pressed="${UI.vue==='pub'}">📣 Publications</button>
+  <button class="mbtn vue ${UI.vue==='eleves'?'on':''}" data-vue="eleves" aria-pressed="${UI.vue==='eleves'}">👥 Élèves</button>
+  <button class="mbtn vue ${UI.vue==='res'?'on':''}" data-vue="res" aria-pressed="${UI.vue==='res'}">📊 Résultats</button>
+  <div class="menu"><button class="mbtn" data-ouvrir="menuClasses" aria-haspopup="true">🏫 Gérer les classes</button><ul class="mliste" id="menuClasses">
+   <li class="titre">Classes</li>
+   <li><button data-menu="newClass">➕ Créer une classe</button></li>
+   <li><button data-menu="renameClass" ${c?'':'disabled'}>✏️ Modifier le nom de la classe</button></li>
+   <li><button data-menu="deleteClass" class="rouge" ${c?'':'disabled'}>🗑️ Supprimer la classe</button></li>
+   <li><button data-menu="visibles">👁️ Classes affichées dans TEJ2O${T.masquees.size?` (${T.masquees.size} masquée${T.masquees.size>1?'s':''})`:''}</button></li>
+   <li class="sep"></li><li class="titre">Élèves${c?' de '+esc(c.name):''}</li>
+   <li><button data-vue="eleves" ${c?'':'disabled'}>👥 Liste des élèves</button></li>
+   <li><button data-menu="addStudent" ${c?'':'disabled'}>👤 Ajouter un élève</button></li>
+   <li><button data-menu="addList" ${c?'':'disabled'}>📋 Ajouter une liste d’élèves</button></li>
+   <li><button data-menu="addOld" ${c&&autres.length?'':'disabled'}>🔁 Ajouter des élèves de mes autres classes</button></li>
+   <li><button data-menu="editStudent" ${eleves.length?'':'disabled'}>✏️ Modifier un élève</button></li>
+   <li><button data-menu="removeStudent" class="rouge" ${eleves.length?'':'disabled'}>➖ Retirer un élève de la classe</button></li>
+  </ul></div>
+  <div class="menu"><button class="mbtn" data-ouvrir="menuExcel" aria-haspopup="true">⬇️ Télécharger Excel</button><ul class="mliste" id="menuExcel">
+   <li class="titre">Par classe</li>
+   <li><button data-menu="xlClasse" ${eleves.length?'':'disabled'}>📊 Résultats de toute la classe</button></li>
+   <li><button data-menu="xlTous" ${eleves.length?'':'disabled'}>📑 Un onglet par élève</button></li>
+   <li class="sep"></li><li class="titre">Par élève</li>
+   <li><button data-menu="xlEleve" ${eleves.length?'':'disabled'}>👤 Résultats d’un élève…</button></li>
+  </ul></div>
+ </nav>
+ <div class="tabs">${T.classes.map(x=>`<button class="tab ${x.id===UI.classId?'on':''}" data-class="${x.id}">${esc(x.name)}</button>`).join('')}</div>
+ ${!c?`<div class="panel"><p>${T.toutes.length?'Toutes tes classes sont masquées dans TEJ2O. Choisis celles à afficher avec <b>🏫 Gérer les classes → 👁️ Classes affichées</b>.':'Crée une classe avec le menu <b>🏫 Gérer les classes</b> pour commencer.'}</p></div>`:`
+ ${UI.vue==='pub'?`<section class="panel" data-ancre="pub"><h2>📣 Publications — ${esc(c.name)}</h2><p>Coche une activité pour la publier : c’est enregistré tout de suite. Tu peux aussi choisir une date d’ouverture.</p>
+  <div class="cols"><div class="col"><h4>📘 Leçons</h4>${[1,2,3,4,5,6].map(i=>relRow('lesson'+i)).join('')}</div><div class="col"><h4>📝 Devoirs</h4>${hw.map(relRow).join('')}</div><div class="col"><h4>✅ Corrigés</h4>${[1,2,3,4,5,6].map(i=>relRow('corrige'+i)).join('')}<p class="sub" style="margin:8px 0 0">Un corrigé publié apparaît dans le compte de l’élève, seulement pour un devoir déjà envoyé.</p></div></div>
+  <div class="col" style="margin-top:16px"><h4>🏆 Pour aller plus loin</h4>${relRow('final')}${relRow('corrigefinal')}${relRow('project')}<p style="margin:8px 0 0"><a href="mini-projet/imprimer.html" target="_blank" rel="noopener">🖨️ Version imprimable du mini-projet</a> · <a href="mini-projet/index.html">📝 Mini-projet : télécharger en Word ou mettre ton fichier sur le site</a></p><p class="sub" style="margin:10px 0 0">🏆 Le défi final s’ouvre seulement pour les élèves cochés dans 👥 Élèves. 👁️ <a href="defi-final/index.html"><b>Voir le défi</b></a> · 📋 <a href="defi-final/index.html?corrige=1"><b>Voir le corrigé du défi</b></a><br>Le défi et son corrigé restent visibles seulement dans ton compte tant qu’ils ne sont pas publiés. Le corrigé apparaît chez l’élève seulement s’il a déjà envoyé son défi.</p></div></section>`:`
+ ${UI.vue==='eleves'?`<section class="panel" data-ancre="eleves"><h2>👥 Liste des élèves — ${esc(c.name)} · ${eleves.length} élève${eleves.length>1?'s':''}</h2><p>Un mot de passe en or n’a pas encore été récupéré par l’élève : donne-le-lui, ou il le verra une fois avec « S’identifier ». Pour ajouter des élèves : <b>🏫 Gérer les classes</b>.</p><div class="defi-barre">🏆 <b>Défi final</b> : coche les élèves présents. Seuls les élèves cochés y ont accès (le défi doit aussi être publié dans 📣 Publications). <button class="ghost small" data-defitous="1">Tout cocher</button> <button class="ghost small" data-defitous="0">Tout décocher</button> <span class="sub">${eleves.filter(s=>T.defi?.has(s.id)).length} / ${eleves.length} coché${eleves.filter(s=>T.defi?.has(s.id)).length>1?'s':''}</span></div><div class="tbl"><table style="min-width:640px"><thead><tr><th>#</th><th class="c">🏆 Défi</th><th>Nom</th><th>Prénom</th><th>Mot de passe</th><th>Actions</th></tr></thead><tbody>${eleves.map((s,i)=>`<tr><td>${i+1}</td><td class="c"><input type="checkbox" class="defi-case" data-defi="${s.id}" ${T.defi?.has(s.id)?'checked':''} aria-label="Défi final pour ${esc(s.first_name)} ${esc(s.last_name)}"></td><td><b>${esc(s.last_name)}</b></td><td>${esc(s.first_name)}</td><td>${pend.has(s.id)?`<span class="mdp">${esc(pend.get(s.id))}</span>`:vu.has(s.id)?'<span class="okv">✓ récupéré</span>':'<span class="okv">✓ défini</span>'}</td><td><button class="ghost small" data-menu="editStudent" data-sid="${s.id}">✏️ Modifier</button> <button class="ghost small" data-reset="${s.id}">Nouveau mot de passe</button> <button class="danger small" data-remove="${s.id}">Retirer</button></td></tr>`).join('')||`<tr><td colspan="5">Aucun élève dans cette classe pour le moment. Ajoute-les avec <b>🏫 Gérer les classes</b>.</td></tr>`}</tbody></table></div></section>`:`<section class="panel" data-ancre="resultats"><h2>📊 Résultats — ${esc(c.name)} · ${eleves.length} élève${eleves.length>1?'s':''}</h2><p>↺ permet à l’élève de refaire un devoir. Pour un fichier Excel : <b>⬇️ Télécharger Excel</b>.</p><div class="tbl"><table><thead><tr><th>Élève</th>${hw.map((a,i)=>`<th class="c">D${i+1}</th>`).join('')}<th class="c">Moyenne</th><th class="c">Défi final</th></tr></thead><tbody>${eleves.map(s=>{const ns=hw.map(a=>note(s.id,a)).filter(Boolean);return`<tr><td><b>${esc(s.last_name)}</b>, ${esc(s.first_name)}</td>${hw.map(a=>{const n=note(s.id,a);return`<td class="c">${n?`<span class="sc" title="Envoyé le ${new Date(n.completed_at).toLocaleString('fr-CA',{dateStyle:'medium',timeStyle:'short'})}">${n.score} %</span> <button class="link small" data-redo="${s.id}|${a}" title="Permettre de refaire">↺</button>`:'—'}</td>`}).join('')}<td class="c"><b>${ns.length?Math.round(ns.reduce((t,n)=>t+n.score,0)/ns.length)+' %':'—'}</b></td>${celluleDefi(s)}</tr>`}).join('')||`<tr><td colspan="9">Aucun élève dans cette classe pour le moment.</td></tr>`}</tbody></table></div></section>`}`}
+`}
+ <footer>Les classes et les élèves sont les mêmes dans Assiduité et Habiletés : une modification ici se voit aussi là-bas. Les comptes enseignants sont approuvés par Mme Hakima dans Assiduité.</footer>`;
+}
+app.addEventListener('click',async e=>{
+ const b=e.target.closest('button');if(!b)return;noterAncre(b);
+ if(b.dataset.gvoir!==undefined){guideMontrer(+b.dataset.gvoir);return}
+ if(b.dataset.defitous!==undefined){const c=T.classes.find(x=>x.id===UI.classId),ids=T.members.filter(m=>m.class_id===c.id).map(m=>m.student_id);if(ids.length)await cocherDefi(ids,b.dataset.defitous==='1');return}
+ if(b.dataset.gtout){guideTout();return}
+ if(b.dataset.grole){UI.guideRole=b.dataset.grole;UI.guideQuand=null;guideEffacer();renderLogin();return}
+ if(b.dataset.gquand){UI.guideQuand=b.dataset.gquand;guideEffacer();renderLogin();return}
+ if(b.dataset.tab!==undefined){guideEffacer();UI.guideQuand=null;UI.tab=b.dataset.tab;UI.mode='login';UI.info=null;UI.forgotQ=null;UI.prefill=null;renderLogin();return}
+ if(b.dataset.mode){guideEffacer();UI.guideQuand=null;UI.mode=b.dataset.mode;UI.info=null;UI.forgotQ=null;renderLogin();return}
+ if(b.id==='sortir'){sortir();return}
+ if(b.dataset.class){UI.classId=b.dataset.class;UI.flash=null;await chargerProf();return}
+ if(b.dataset.save){await enregistrerPub(b.closest('.rel'));return}
+ if(b.dataset.reset){
+  const s=T.students.find(x=>x.id===b.dataset.reset);
+  b.disabled=true;
+  try{const r=await api({action:'participation_reset_password',class_id:UI.classId,student_id:s.id},true);fiche(s.first_name+' '+s.last_name,r.password,false);message('Nouveau mot de passe créé pour '+s.first_name+' '+s.last_name+'.');await chargerProf()}catch(err){message(err.message,false);b.disabled=false}
+  return;
+ }
+ if(b.dataset.remove){
+  const s=T.students.find(x=>x.id===b.dataset.remove);
+  if(b.dataset.confirm!=='1'){b.dataset.confirm='1';b.textContent='Confirmer le retrait ?';setTimeout(()=>{if(b.isConnected){b.dataset.confirm='';b.textContent='Retirer'}},5000);return}
+  try{await api({action:'participation_members',class_id:UI.classId,remove:[s.id]},true);message(s.first_name+' '+s.last_name+' est retiré(e) de la classe. Son compte est gardé.');await chargerProf()}catch(err){message(err.message,false)}
+  return;
+ }
+ if(b.dataset.redo){
+  const [sid,a]=b.dataset.redo.split('|'),s=T.students.find(x=>x.id===sid);
+  if(b.dataset.confirm!=='1'){b.dataset.confirm='1';b.textContent='Effacer ?';setTimeout(()=>{if(b.isConnected){b.dataset.confirm='';b.textContent='↺'}},5000);return}
+  const {error}=await db.from('tej2o_results').delete().eq('class_id',UI.classId).eq('student_id',sid).eq('activity_id',a);
+  if(error){message('Impossible : '+error.message,false);return}
+  message(s.first_name+' '+s.last_name+' peut refaire le '+LABELS[a]+'.');await chargerProf();return;
+ }
+ if(b.dataset.vue){document.querySelectorAll('.menu.ouvert').forEach(x=>x.classList.remove('ouvert'));document.activeElement?.blur?.();UI.vue=b.dataset.vue;renderProf();window.scrollTo(0,0);return}
+ if(b.dataset.ouvrir){const m=b.closest('.menu');const o=!m.classList.contains('ouvert');document.querySelectorAll('.menu.ouvert').forEach(x=>x.classList.remove('ouvert'));if(o)m.classList.add('ouvert');return}
+ if(b.dataset.menu){document.querySelectorAll('.menu.ouvert').forEach(x=>x.classList.remove('ouvert'));document.activeElement?.blur?.();ouvrirMenu(b.dataset.menu,b.dataset.sid);return}
+});
+// Publications are saved as soon as the checkbox or the opening date changes.
+async function enregistrerPub(row){
+ const id=row.dataset.id,on=row.querySelector('input[type=checkbox]').checked,d=row.querySelector('input[type=datetime-local]').value,st=row.querySelector('.st'),b=row.querySelector('[data-save]');
+ const r={class_id:UI.classId,activity_id:id,enabled:on,available_at:d?new Date(d).toISOString():null};
+ st.textContent='⏳ Enregistrement…';if(b)b.disabled=true;
+ const {error}=await db.from('tej2o_releases').upsert(r,{onConflict:'class_id,activity_id'});
+ if(b)b.disabled=false;
+ if(error){st.textContent='⚠️ Non enregistré';message('Publication impossible : '+error.message,false);return}
+ T.rel.set(id,r);st.textContent=etatPub(r);message(LABELS[id]+' : '+etatPub(r));
+}
+app.addEventListener('change',e=>{const row=e.target.closest('.rel');if(row&&e.target.matches('input'))enregistrerPub(row);if(e.target.matches('.defi-case'))cocherDefi([e.target.dataset.defi],e.target.checked)});
+// Final challenge for some students only: one row per checked student.
+async function cocherDefi(ids,oui){
+ const req=oui?db.from('tej2o_final_students').upsert(ids.map(id=>({class_id:UI.classId,student_id:id})),{onConflict:'class_id,student_id'})
+             :db.from('tej2o_final_students').delete().eq('class_id',UI.classId).in('student_id',ids);
+ const {error}=await req;
+ if(error){message('Le défi n’a pas pu être modifié : '+error.message,false);await chargerProf();return}
+ ids.forEach(id=>oui?T.defi.add(id):T.defi.delete(id));
+ message(ids.length>1?(oui?'Défi final ouvert pour toute la classe.':'Défi final fermé pour toute la classe.'):(oui?'Défi final ouvert pour cet élève.':'Défi final fermé pour cet élève.'));
+ garderPosition(renderProf);
+}
+app.addEventListener('submit',async e=>{
+ const f=e.target;if(f.id==='loginForm')return;e.preventDefault();noterAncre(f);
+ const btn=f.querySelector('button');btn.disabled=true;
+ try{
+  if(f.id==='newClass'){const r=await api({action:'participation_create_class',name:$('#ncName').value.trim()},true);UI.classId=r.id;message('Classe créée.');await chargerProf();return}
+  if(f.id==='addList'){
+   const students=$('#liste').value.split(/\r?\n/).map(l=>l.trim()).filter(Boolean).map(l=>{if(/[;\t,]/.test(l)){const [a,...b]=l.split(/[;\t,]/);return{first:a.trim(),last:b.join(' ').trim()}}const p=l.split(/\s+/);return{first:p[0],last:p.slice(1).join(' ')}});
+   if(!students.length)throw new Error('Écris au moins un élève.');
+   const bad=students.find(s=>!s.first||!s.last);if(bad)throw new Error('Il manque le nom de famille pour « '+bad.first+' ».');
+   const r=await api({action:'participation_add_students',class_id:UI.classId,students},true);
+   const cr=r.results.filter(x=>x.status==='créé').length,ex=r.results.filter(x=>x.status==='existant').length,er=r.results.filter(x=>x.status==='erreur');
+   message(`${cr} compte(s) créé(s)${ex?`, ${ex} élève(s) déjà existant(s) ajouté(s) à la classe`:''}.${er.length?' Erreurs : '+er.map(x=>x.first+' '+x.last+' ('+x.error+')').join(' ; '):''} Les mots de passe sont dans la liste.`,!er.length);
+   await chargerProf();return;
+  }
+  if(f.id==='addOld'){const add=[...$('#anciens').selectedOptions].map(o=>o.value);if(!add.length)throw new Error('Choisis au moins un élève.');await api({action:'participation_members',class_id:UI.classId,add},true);message(add.length+' élève(s) ajouté(s) à la classe.');await chargerProf();return}
+ }catch(err){message(err.message,false);btn.disabled=false}
+});
+
+/* ---------- Menus: manage classes and download Excel ---------- */
+document.addEventListener('click',e=>{if(!e.target.closest('.menu'))document.querySelectorAll('.menu.ouvert').forEach(x=>x.classList.remove('ouvert'))});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.menu.ouvert').forEach(x=>x.classList.remove('ouvert'));fermerModal()}});
+const classeCourante=()=>T.classes.find(x=>x.id===UI.classId);
+function elevesClasse(){const ids=new Set(T.members.filter(m=>m.class_id===UI.classId).map(m=>m.student_id));return T.students.filter(s=>ids.has(s.id)).sort((a,b)=>a.last_name.localeCompare(b.last_name,'fr')||a.first_name.localeCompare(b.first_name,'fr'))}
+const optEleves=(liste,sel)=>liste.map(s=>`<option value="${s.id}" ${s.id===sel?'selected':''}>${esc(s.last_name)}, ${esc(s.first_name)}</option>`).join('');
+function fermerModal(){document.querySelector('.modal-fond')?.remove()}
+function modal(titre,corps,bouton,action,danger=false){
+ fermerModal();const d=document.createElement('div');d.className='modal-fond';
+ d.innerHTML=`<form class="panel modal" role="dialog" aria-modal="true" aria-label="${esc(titre)}"><h2>${titre}</h2>${corps}<div id="modalMsg"></div><div class="boutons"><button class="${danger?'danger':''}" type="submit">${bouton}</button><button type="button" class="ghost" data-fermer="1">Annuler</button></div></form>`;
+ document.body.append(d);
+ d.addEventListener('click',e=>{if(e.target===d||e.target.dataset.fermer)fermerModal()});
+ const f=d.querySelector('form');f.querySelector('input,select,textarea')?.focus();
+ f.onsubmit=async e=>{e.preventDefault();const btn=f.querySelector('[type=submit]'),lab=btn.textContent;btn.disabled=true;btn.textContent='Un instant…';
+  try{await action(f)}catch(err){btn.disabled=false;btn.textContent=lab;f.querySelector('#modalMsg').innerHTML=`<div class="msg err">${esc(err.message)}</div>`}};
+ return f;
+}
+function lireListe(txt){return txt.split(/\r?\n/).map(l=>l.trim()).filter(Boolean).map(l=>{if(/[;\t,]/.test(l)){const [a,...b]=l.split(/[;\t,]/);return{first:a.trim(),last:b.join(' ').trim()}}const p=l.split(/\s+/);return{first:p[0],last:p.slice(1).join(' ')}})}
+async function ajouterEleves(students){
+ const bad=students.find(s=>!s.first||!s.last);if(bad)throw new Error('Il manque le nom de famille pour « '+bad.first+' ».');
+ const r=await api({action:'participation_add_students',class_id:UI.classId,students},true);
+ const cr=r.results.filter(x=>x.status==='créé'),ex=r.results.filter(x=>x.status==='existant').length,er=r.results.filter(x=>x.status==='erreur');
+ if(!cr.length&&!ex&&er.length)throw new Error(er.map(x=>x.first+' '+x.last+' : '+x.error).join('\n'));
+ fermerModal();UI.vue='eleves';await chargerProf();
+ if(cr.length===1&&students.length===1)fiche(cr[0].first+' '+cr[0].last,cr[0].password,false);
+ message(`${cr.length} compte(s) créé(s)${ex?`, ${ex} élève(s) qui avai(en)t déjà un compte ajouté(s) à la classe`:''}.${er.length?' Erreurs : '+er.map(x=>x.first+' '+x.last+' ('+x.error+')').join(' ; '):''}`,!er.length);
+}
+function ouvrirMenu(k,sid){
+ const c=classeCourante(),el=elevesClasse();
+ if(k==='newClass')return modal('➕ Créer une classe','<label for="mNom">Nom de la classe</label><input id="mNom" maxlength="100" placeholder="TEJ2O — Groupe A" required><small>La classe apparaîtra aussi dans Assiduité et Habiletés.</small>','Créer la classe',async f=>{
+  const r=await api({action:'participation_create_class',name:f.querySelector('#mNom').value.trim()},true);UI.classId=r.id;fermerModal();await chargerProf();message('Classe créée. Ajoute maintenant des élèves avec le menu 🏫 Gérer les classes.')});
+ if(k==='visibles')return modal('👁️ Classes affichées dans TEJ2O',`<p>Coche les classes à voir dans TEJ2O. Les classes décochées sont seulement cachées ici : elles restent dans Assiduité et Habiletés, avec leurs élèves et leurs évaluations.</p>${T.toutes.map(x=>`<label style="display:flex;gap:10px;align-items:center;font-weight:600"><input type="checkbox" value="${x.id}" ${T.masquees.has(x.id)?'':'checked'} style="width:22px;height:22px">${esc(x.name)}</label>`).join('')}`,'Enregistrer',async f=>{
+  const coches=new Set([...f.querySelectorAll('input[type=checkbox]:checked')].map(i=>i.value));
+  const cacher=T.toutes.filter(x=>!coches.has(x.id)&&!T.masquees.has(x.id)).map(x=>({class_id:x.id}));
+  const montrer=T.toutes.filter(x=>coches.has(x.id)&&T.masquees.has(x.id)).map(x=>x.id);
+  if(cacher.length){const {error}=await db.from('tej2o_hidden_classes').insert(cacher);if(error)throw error}
+  if(montrer.length){const {error}=await db.from('tej2o_hidden_classes').delete().in('class_id',montrer);if(error)throw error}
+  fermerModal();await chargerProf();message(coches.size+' classe(s) affichée(s) dans TEJ2O.')});
+ if(!c)return;
+ if(k==='renameClass')return modal('✏️ Modifier le nom de la classe',`<label for="mNom">Nouveau nom</label><input id="mNom" maxlength="100" value="${esc(c.name)}" required><small>Le nouveau nom s’affichera aussi dans Assiduité et Habiletés.</small>`,'Enregistrer',async f=>{
+  const name=f.querySelector('#mNom').value.trim();if(name.length<2)throw new Error('Écris un nom d’au moins 2 caractères.');
+  await api({action:'participation_rename_class',class_id:c.id,name},true);fermerModal();await chargerProf();message('La classe s’appelle maintenant « '+name+' ».')});
+ if(k==='deleteClass')return modal('🗑️ Supprimer la classe',`<div class="attention"><b>Attention : c’est définitif.</b><br>Supprimer « ${esc(c.name)} » efface aussi, dans Assiduité et Habiletés, ses évaluations et autoévaluations, ainsi que les publications et les notes de devoirs TEJ2O. Les comptes des élèves sont gardés.</div><label for="mOk">Pour confirmer, écris SUPPRIMER</label><input id="mOk" autocomplete="off" required>`,'Supprimer définitivement',async f=>{
+  if(f.querySelector('#mOk').value.trim()!=='SUPPRIMER')throw new Error('Écris SUPPRIMER en majuscules pour confirmer.');
+  await api({action:'participation_delete_class',class_id:c.id},true);UI.classId=null;fermerModal();await chargerProf();message('La classe « '+c.name+' » est supprimée.')},true);
+ if(k==='addStudent')return modal('👤 Ajouter un élève à '+esc(c.name),'<label for="mPre">Prénom</label><input id="mPre" maxlength="100" required><label for="mNomF">Nom de famille</label><input id="mNomF" maxlength="100" required><small>Un mot de passe de 8 caractères est créé. L’élève le verra une fois avec « S’identifier ». S’il a déjà un compte (Assiduité, Habiletés), il est simplement ajouté à la classe.</small>','Ajouter l’élève',async f=>{
+  await ajouterEleves([{first:f.querySelector('#mPre').value.trim(),last:f.querySelector('#mNomF').value.trim()}])});
+ if(k==='addList')return modal('📋 Ajouter une liste d’élèves à '+esc(c.name),'<label for="mListe">Un élève par ligne : Prénom Nom (ou Prénom ; Nom pour les noms composés)</label><textarea id="mListe" placeholder="Léa Tremblay&#10;Marc-André ; Diallo Bah" required></textarea><small>Tu peux copier-coller deux colonnes (Prénom, Nom) depuis Excel.</small>','Créer les comptes',async f=>{
+  const l=lireListe(f.querySelector('#mListe').value);if(!l.length)throw new Error('Écris au moins un élève.');await ajouterEleves(l)});
+ if(k==='addOld'){const ids=new Set(el.map(s=>s.id)),autres=T.students.filter(s=>!ids.has(s.id)).sort((a,b)=>a.last_name.localeCompare(b.last_name,'fr'));
+  return modal('🔁 Ajouter des élèves de mes autres classes',`<label for="mAutres">Choisis un ou plusieurs élèves (Ctrl ou Cmd pour en choisir plusieurs)</label><select id="mAutres" multiple size="10" required>${optEleves(autres)}</select><small>Ils gardent leur mot de passe actuel.</small>`,'Ajouter à '+esc(c.name),async f=>{
+   const add=[...f.querySelector('#mAutres').selectedOptions].map(o=>o.value);if(!add.length)throw new Error('Choisis au moins un élève.');
+   await api({action:'participation_members',class_id:c.id,add},true);fermerModal();UI.vue='eleves';await chargerProf();message(add.length+' élève(s) ajouté(s) à '+c.name+'.')})}
+ if(k==='editStudent'){
+  const f=modal('✏️ Modifier un élève',`<label for="mQui">Élève</label><select id="mQui">${optEleves(el,sid)}</select><label for="mPre">Prénom</label><input id="mPre" maxlength="100" required><label for="mNomF">Nom de famille</label><input id="mNomF" maxlength="100" required><label for="mMdp">Nouveau mot de passe (facultatif, 8 caractères ou plus)</label><input id="mMdp" type="text" minlength="8" maxlength="128" autocomplete="off" placeholder="Laisse vide pour garder le mot de passe actuel"><small>Le nom change aussi dans Assiduité et Habiletés.</small>`,'Enregistrer',async f=>{
+   const id=f.querySelector('#mQui').value,first=f.querySelector('#mPre').value.trim(),last=f.querySelector('#mNomF').value.trim(),password=f.querySelector('#mMdp').value.trim();
+   if(password&&password.length<8)throw new Error('Le mot de passe doit avoir 8 caractères ou plus.');
+   await api({action:'participation_update_student',class_id:c.id,student_id:id,first,last,...(password?{password}:{})},true);fermerModal();await chargerProf();message('Élève modifié : '+first+' '+last+(password?' (nouveau mot de passe enregistré).':'.'))});
+  const remplir=()=>{const s=T.students.find(x=>x.id===f.querySelector('#mQui').value);f.querySelector('#mPre').value=s?.first_name||'';f.querySelector('#mNomF').value=s?.last_name||''};
+  f.querySelector('#mQui').onchange=remplir;remplir();return;
+ }
+ if(k==='removeStudent')return modal('➖ Retirer un élève de '+esc(c.name),`<label for="mQui">Élève</label><select id="mQui">${optEleves(el,sid)}</select><small>L’élève n’est plus dans cette classe, mais son compte et ses autres classes sont gardés. Ses notes de devoirs de cette classe ne s’affichent plus.</small>`,'Retirer de la classe',async f=>{
+  const id=f.querySelector('#mQui').value,s=T.students.find(x=>x.id===id);
+  await api({action:'participation_members',class_id:c.id,remove:[id]},true);fermerModal();await chargerProf();message(s.first_name+' '+s.last_name+' est retiré(e) de '+c.name+'.')},true);
+ if(k==='xlClasse')return excel('classe');
+ if(k==='xlTous')return excel('tous');
+ if(k==='xlEleve')return modal('👤 Télécharger les résultats d’un élève',`<label for="mQui">Élève</label><select id="mQui">${optEleves(el,sid)}</select>`,'⬇️ Télécharger le fichier Excel',async f=>{await excel('eleve',f.querySelector('#mQui').value);fermerModal()});
+}
+let xlsxPret=null;
+function chargerXLSX(){if(window.XLSX)return Promise.resolve();if(xlsxPret)return xlsxPret;
+ xlsxPret=new Promise((ok,ko)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';s.onload=ok;s.onerror=()=>{xlsxPret=null;ko(new Error('Le module Excel n’a pas pu se charger. Vérifie Internet et réessaie.'))};document.head.append(s)});return xlsxPret}
+const fichierNom=t=>t.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/gi,'_').replace(/^_|_$/g,'');
+const dateFr=iso=>iso?new Date(iso).toLocaleString('fr-CA',{dateStyle:'medium',timeStyle:'short'}):'';
+function lignesEleve(s){
+ const hw=[1,2,3,4,5,6].map(i=>'homework'+i),rows=[];let somme=0,n=0;
+ for(const a of hw){const r=T.res.find(x=>x.student_id===s.id&&x.activity_id===a),p=T.rel?.get(a);
+  const statut=r?'Envoyé':!p||!p.enabled?'Non publié':ouvert(p)?'À faire':'Publié le '+dateFr(p.available_at);
+  if(r){somme+=r.score;n++}rows.push([LABELS[a],statut,r?r.score:'',r?dateFr(r.completed_at):''])}
+ return {rows,moy:n?Math.round(somme/n):'',n};
+}
+function feuilleEleve(s,c){
+ const {rows,moy,n}=lignesEleve(s);
+ const aoa=[['TEJ2O — Résultats de l’élève'],['Élève',s.first_name+' '+s.last_name],['Classe',c.name],['Exporté le',dateFr(new Date().toISOString())],[],['Devoir','Statut','Note (%)','Date d’envoi'],...rows,[],['Devoirs envoyés',n+' / 6'],['Moyenne des devoirs envoyés (%)',moy]];
+ const ws=XLSX.utils.aoa_to_sheet(aoa);ws['!cols']=[{wch:32},{wch:24},{wch:10},{wch:24}];ws['!merges']=[{s:{r:0,c:0},e:{r:0,c:3}}];return ws;
+}
+async function excel(mode,sid){
+ try{
+  await chargerXLSX();const c=classeCourante(),el=elevesClasse(),wb=XLSX.utils.book_new();let nom;
+  if(mode==='eleve'){const s=T.students.find(x=>x.id===sid);XLSX.utils.book_append_sheet(wb,feuilleEleve(s,c),'Résultats');nom='TEJ2O_'+fichierNom(c.name)+'_'+fichierNom(s.last_name+'_'+s.first_name)}
+  else{
+   const hw=[1,2,3,4,5,6].map(i=>'homework'+i);
+   const aoa=[['TEJ2O — Résultats de la classe '+c.name],['Exporté le',dateFr(new Date().toISOString())],[],['Nom','Prénom',...hw.map(a=>LABELS[a]+' (%)'),'Devoirs envoyés','Moyenne (%)','Défi final (%)','Sorties (défi)']];
+   for(const s of el){const {rows,moy,n}=lignesEleve(s);const f=T.res.find(x=>x.student_id===s.id&&x.activity_id==='final');aoa.push([s.last_name,s.first_name,...rows.map(r=>r[2]),n+' / 6',moy,f?f.score:'',f?(f.answers?.sorties||[]).length:''])}
+   const ws=XLSX.utils.aoa_to_sheet(aoa);ws['!cols']=[{wch:20},{wch:18},...hw.map(()=>({wch:12})),{wch:16},{wch:13},{wch:14},{wch:14}];XLSX.utils.book_append_sheet(wb,ws,'Classe');
+   if(mode==='tous'){const pris=new Set();for(const s of el){let t=(s.last_name+' '+s.first_name).replace(/[\\/?*[\]:]/g,'').slice(0,28)||'Élève';let u=t,i=2;while(pris.has(u.toLowerCase()))u=t.slice(0,26)+' '+i++;pris.add(u.toLowerCase());XLSX.utils.book_append_sheet(wb,feuilleEleve(s,c),u)}}
+   nom='TEJ2O_'+fichierNom(c.name)+(mode==='tous'?'_par_eleve':'_classe');
+  }
+  XLSX.writeFile(wb,nom+'.xlsx');message('Fichier Excel téléchargé : '+nom+'.xlsx');
+ }catch(err){message(err.message,false);throw err}
+}
+async function sortir(){fermerModal();await db.auth.signOut();T=null;UI.flash=null;UI.tab='';renderLogin()}
+
+/* ---------- Student account ---------- */
+// Final challenge in the student account: shown once published, with its answer key once that is published too.
+// Mini-project in the student account: the guide and its printable version, once published.
+function projetEleve(open){if(!open.has('project'))return'';
+ return`<h3 style="margin-top:18px">🎬 Mini-projet</h3><p><a href="mini-projet/index.html"><b>Voir le projet</b></a> &nbsp;·&nbsp; <a href="mini-projet/imprimer.html"><b>🖨️ Version imprimable</b></a></p>`}
+function defiEleve(open,done){const r=done.get('final');if(!open.has('final')&&!r)return'';
+ const cor=r?(open.has('corrigefinal')?'<a href="defi-final/index.html?corrige=1"><b>📋 Voir le corrigé</b></a>':'<span class="sub">🔒 Pas encore</span>'):'<span class="sub">—</span>';
+ return`<h3 style="margin-top:18px">🏆 Défi final</h3><div class="tbl"><table style="min-width:600px"><thead><tr><th class="c">État</th><th>Activité</th><th>Date de réalisation</th><th class="c">Score</th><th>Corrigé</th></tr></thead><tbody><tr><td class="c">${r?'<span class="etat ok" title="Fait">✓</span>':'<span class="etat non" title="Pas encore fait">✗</span>'}</td><td>${r?'<b>Défi final</b>':'<a href="defi-final/index.html"><b>Défi final</b></a>'}</td><td>${r?new Date(r.completed_at).toLocaleString('fr-CA',{dateStyle:'long',timeStyle:'short'}):'<span class="sub">À faire</span>'}</td><td class="c">${r?`<span class="sc">${r.score} %</span>`:'—'}</td><td>${cor}</td></tr></tbody></table></div>`}
+async function renderCompte(m){
+ // The student account shows every published or sent homework with a green check (done) or a red X (not done yet).
+ const ids=m.classes.map(c=>c.id);
+ const [{data:rel,error:e1},{data:res,error:e2}]=await Promise.all([
+  ids.length?db.from('tej2o_releases').select('class_id,activity_id,enabled,available_at').in('class_id',ids):{data:[]},
+  db.from('tej2o_results').select('class_id,activity_id,score,completed_at')]);
+ if(e1||e2){app.innerHTML=`<div class="panel"><div class="msg err">${esc((e1||e2).message)}</div></div>`;return}
+ const {data:coche}=await db.from('tej2o_final_students').select('class_id');const defiOk=new Set((coche||[]).map(x=>x.class_id));
+ const hw=[1,2,3,4,5,6].map(n=>'homework'+n);
+ app.innerHTML=`<div class="top"><div><h1>🎒 Mon compte</h1><div class="sub">${esc(m.first_name)} ${esc(m.last_name)}</div></div><div class="act"><a href="site.html">← Leçons et devoirs</a><button class="ghost" id="sortir">Se déconnecter</button></div></div>`+
+ (m.classes.length?m.classes.map(c=>{
+  const open=new Set((rel||[]).filter(r=>r.class_id===c.id&&ouvert(r)).map(r=>r.activity_id));
+  if(!defiOk.has(c.id))open.delete('final');
+  // Answer key link: only when the teacher published it and the homework was sent.
+  const corrige=(a,r)=>!r?'<span class="sub">—</span>':open.has('corrige'+a.slice(8))?`<a href="lecon-${a.slice(8)}/index.html?corrige=1"><b>📝 Voir le corrigé</b></a>`:'<span class="sub">🔒 Pas encore</span>';
+  const done=new Map((res||[]).filter(r=>r.class_id===c.id).map(r=>[r.activity_id,r]));
+  const lignes=hw.filter(a=>open.has(a)||done.has(a));
+  const faits=lignes.filter(a=>done.has(a)).map(a=>done.get(a));
+  const moy=faits.length?Math.round(faits.reduce((t,r)=>t+r.score,0)/faits.length):null;
+  return`<section class="panel"><h2>📝 Mes devoirs — ${esc(c.name)}</h2>${lignes.length?`<p>${faits.length} devoir${faits.length>1?'s':''} fait${faits.length>1?'s':''} sur ${lignes.length}.</p><div class="tbl"><table style="min-width:600px"><thead><tr><th class="c">État</th><th>Devoir</th><th>Date de réalisation</th><th class="c">Score</th><th>Corrigé</th></tr></thead><tbody>${lignes.map(a=>{const r=done.get(a);return`<tr><td class="c">${r?'<span class="etat ok" title="Fait" aria-label="Fait">✓</span>':'<span class="etat non" title="Pas encore fait" aria-label="Pas encore fait">✗</span>'}</td><td>${r?`<b>${esc(LABELS[a])}</b>`:`<a href="${path(a)}"><b>${esc(LABELS[a])}</b></a>`}</td><td>${r?new Date(r.completed_at).toLocaleString('fr-CA',{dateStyle:'long',timeStyle:'short'}):'<span class="sub">À faire</span>'}</td><td class="c">${r?`<span class="sc">${r.score} %</span>`:'—'}</td><td>${corrige(a,r)}</td></tr>`}).join('')}</tbody>${faits.length>1?`<tfoot><tr><th></th><th colspan="2">Moyenne des devoirs faits</th><th class="c">${moy} %</th><th></th></tr></tfoot>`:''}</table></div>`:'<p>Aucun devoir n’est publié pour le moment.</p>'}${defiEleve(open,done)}${projetEleve(open)}</section>`}).join('')
+ :'<div class="panel"><p>Tu n’es inscrit(e) dans aucune classe TEJ2O. Demande à ton enseignant(e) de t’ajouter.</p></div>');
+}
+demarrer();
+</script></body></html>
