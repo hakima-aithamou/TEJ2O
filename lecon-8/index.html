@@ -1,0 +1,255 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TEJ2O | Unité 5 · Leçon 2 — Les variables</title>
+<link rel="stylesheet" href="../algo/lecon.css"></head><body data-activity="lesson8"><nav class="tej-nav" aria-label="Navigation principale"><a href="../site.html">← Accueil TEJ2O</a><span>Unité 5 · Algorithmes et Python</span></nav><main class="shell"><header class="top"><div><div class="brand">TEJ2O <span style="color:#fff;font-weight:400">| Algorithmes et Python</span></div><div class="small">Unité 5 · Leçon 2 — Les variables</div></div><span class="pill">Unité 5</span></header><div class="intro"><div><h1>Ranger et changer des données</h1><div class="small">Quatre notions, puis un devoir de dix questions.</div></div><div class="small" id="stepLabel"></div></div><div class="tabs" id="tabs"></div><div class="progress"><div class="fill" id="fill"></div></div><section id="content" aria-live="polite"></section><div class="nav"><button id="prev">← Précédent</button><span class="hint" id="navHint"></span><button id="next">Suivant →</button></div><div class="footer">TEJ2O · Unité 5 · Algorithmes et Python</div></main>
+<script>
+const LECON = {
+ "num": 8,
+ "aff": 2,
+ "titre": "Les variables",
+ "labels": [
+  "1 · Une variable",
+  "2 · Les types",
+  "3 · L’affectation",
+  "4 · Bien nommer",
+  "Devoir · 10 questions"
+ ],
+ "stages": [
+  {
+   "type": "qcm",
+   "title": "Qu’est-ce qu’une variable ?",
+   "lead": [
+    "Une **variable** est une case mémoire **nommée** qui garde une donnée pendant que l’algorithme s’exécute.",
+    "C’est comme une **boîte** avec une étiquette : on y range une valeur, et cette valeur **peut changer** au fil des calculs.",
+    "Chaque variable a un **nom unique** qui permet de la retrouver et de l’utiliser.",
+    "Pourquoi ? Pour **mémoriser** un résultat et le réutiliser plus tard, sans réécrire chaque valeur à chaque étape."
+   ],
+   "tip": "Exemples de variables : un score dans un jeu, un nombre choisi par l’utilisateur, un résultat de calcul.",
+   "doc": "Jeu à analyser",
+   "sample": [
+    "Au début de la partie, le joueur a 0 point.",
+    "Chaque pièce ramassée donne 10 points.",
+    "À la fin, le jeu affiche le total des points."
+   ],
+   "consigne": "Pourquoi ce jeu a-t-il besoin d’une variable `score` ?",
+   "opts": [
+    "Parce que le nombre de points change pendant la partie et doit rester en mémoire jusqu’à la fin.",
+    "Parce qu’un jeu doit toujours avoir au moins une variable, même inutile.",
+    "Parce que le score ne change jamais.",
+    "Pour afficher le nom du joueur."
+   ],
+   "correct": 0,
+   "why": "Le score commence à 0 et augmente de 10 à chaque pièce : il faut une boîte pour garder la valeur actuelle et la modifier. C’est exactement le rôle d’une variable."
+  },
+  {
+   "type": "qcm",
+   "title": "Les types de variables",
+   "lead": [
+    "**Entier (int)** : un nombre sans virgule, pour compter. Ex. : 7, −3, 0, 42.",
+    "**Flottant (float)** : un nombre décimal. Ex. : 3.14, −0.5. En programmation, la virgule s’écrit avec un **point**.",
+    "**Chaîne (str)** : du texte entre guillemets. Ex. : \"Bonjour\", \"Algorithme\".",
+    "**Booléen (bool)** : une valeur logique, **True** (vrai) ou **False** (faux), pour les tests."
+   ],
+   "tip": "Le type dépend de la valeur rangée dans la boîte : \"42\" entre guillemets est du texte, 42 sans guillemets est un nombre.",
+   "doc": "Variables à analyser",
+   "code": "age ← 15\nprix ← 4.99\nnom ← \"Algorithme\"\nconnecte ← True",
+   "consigne": "Quel est le type de la variable `prix` ?",
+   "opts": [
+    "Entier (int)",
+    "Flottant (float)",
+    "Chaîne (str)",
+    "Booléen (bool)"
+   ],
+   "correct": 1,
+   "why": "4.99 est un nombre décimal : c’est un flottant. age est un entier, nom une chaîne de caractères et connecte un booléen."
+  },
+  {
+   "type": "qcm",
+   "title": "L’affectation : donner une valeur",
+   "lead": [
+    "En pseudocode, `X ← 7` se lit « X prend la valeur 7 ». La flèche **←** est l’**affectation**.",
+    "Quand X reçoit une nouvelle valeur, **l’ancienne est remplacée** : la boîte ne garde qu’une valeur à la fois.",
+    "On peut calculer avec la variable elle-même : `X ← X × 5` prend la valeur actuelle de X, la multiplie par 5 et range le résultat dans X.",
+    "`p ← p + 1` augmente p de 1 : on dit qu’on **incrémente** p. C’est la base des **compteurs**."
+   ],
+   "tip": "Pour suivre une variable, note sa valeur après chaque ligne : 7 → 35 → 39.",
+   "doc": "Évolution de la variable X",
+   "svg": "<svg class=\"flow\" viewBox=\"0 0 400 190\" role=\"img\" aria-label=\"La variable X vaut 7, puis 35 après la multiplication par 5, puis 39 après l’ajout de 4.\"><defs><marker id=\"fv\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto\"><path d=\"M0 0L10 5L0 10z\" fill=\"#24342e\"/><\/marker><\/defs><g font-family=\"system-ui,Segoe UI,sans-serif\" text-anchor=\"middle\"><rect x=\"14\" y=\"58\" width=\"96\" height=\"74\" rx=\"10\" fill=\"#fbe7c2\" stroke=\"#b07a1e\" stroke-width=\"2\"/><text x=\"62\" y=\"50\" font-size=\"13\" fill=\"#4a5a52\">Départ<\/text><text x=\"26\" y=\"78\" font-size=\"13\" font-weight=\"700\" fill=\"#7a5410\" text-anchor=\"start\">X<\/text><text x=\"62\" y=\"116\" font-size=\"30\" font-weight=\"800\" fill=\"#24342e\">7<\/text><rect x=\"152\" y=\"58\" width=\"96\" height=\"74\" rx=\"10\" fill=\"#fbe7c2\" stroke=\"#b07a1e\" stroke-width=\"2\"/><text x=\"200\" y=\"50\" font-size=\"13\" fill=\"#4a5a52\">Après × 5<\/text><text x=\"164\" y=\"78\" font-size=\"13\" font-weight=\"700\" fill=\"#7a5410\" text-anchor=\"start\">X<\/text><text x=\"200\" y=\"116\" font-size=\"30\" font-weight=\"800\" fill=\"#24342e\">35<\/text><rect x=\"290\" y=\"58\" width=\"96\" height=\"74\" rx=\"10\" fill=\"#fbe7c2\" stroke=\"#b07a1e\" stroke-width=\"2\"/><text x=\"338\" y=\"50\" font-size=\"13\" fill=\"#4a5a52\">Après + 4<\/text><text x=\"302\" y=\"78\" font-size=\"13\" font-weight=\"700\" fill=\"#7a5410\" text-anchor=\"start\">X<\/text><text x=\"338\" y=\"116\" font-size=\"30\" font-weight=\"800\" fill=\"#24342e\">39<\/text><line x1=\"112\" y1=\"95\" x2=\"148\" y2=\"95\" stroke=\"#24342e\" stroke-width=\"2\" marker-end=\"url(#fv)\"/><line x1=\"250\" y1=\"95\" x2=\"286\" y2=\"95\" stroke=\"#24342e\" stroke-width=\"2\" marker-end=\"url(#fv)\"/><text x=\"130\" y=\"86\" font-size=\"12\" font-weight=\"700\" fill=\"#2c5aa0\">× 5<\/text><text x=\"268\" y=\"86\" font-size=\"12\" font-weight=\"700\" fill=\"#2c5aa0\">+ 4<\/text><text x=\"200\" y=\"168\" font-size=\"13\" fill=\"#4a5a52\">Une seule boîte X : chaque nouvelle valeur remplace l’ancienne.<\/text><\/g><\/svg>",
+   "consigne": "L’algorithme fait `X ← 7`, puis `X ← X × 5`, puis `X ← X + 4`. Si on remplace la première ligne par `X ← 2`, quelle est la valeur finale de X ?",
+   "opts": [
+    "39",
+    "14",
+    "11",
+    "10"
+   ],
+   "correct": 1,
+   "why": "X vaut 2, puis 2 × 5 = 10, puis 10 + 4 = 14. Les mêmes instructions donnent un autre résultat avec une autre valeur de départ : c’est ce qui rend un algorithme utile."
+  },
+  {
+   "type": "qcm",
+   "title": "Bien nommer une variable",
+   "lead": [
+    "**Format valide** : pas d’espace ; le nom commence par une lettre ou un trait de soulignement (_) ; on évite les caractères spéciaux.",
+    "**Noms clairs** : `score`, `nombre_utilisateur`, `temperature_moyenne` disent ce que contient la boîte.",
+    "**Mots réservés** : on n’utilise pas les mots du langage comme `for`, `if`, `while` ou `return`.",
+    "**Bonne pratique** : préfère `points_de_force` à `a` ou `x` ; ton algorithme sera plus facile à lire et à corriger."
+   ],
+   "tip": "Un bon nom de variable répond à la question : « Qu’est-ce qu’il y a dans cette boîte ? »",
+   "doc": "Noms proposés par une équipe",
+   "sample": [
+    "nombre eleves",
+    "2points",
+    "if",
+    "nombre_eleves"
+   ],
+   "consigne": "Lequel de ces noms est à la fois valide et clair ?",
+   "opts": [
+    "nombre eleves",
+    "2points",
+    "if",
+    "nombre_eleves"
+   ],
+   "correct": 3,
+   "why": "« nombre eleves » contient une espace, « 2points » commence par un chiffre et « if » est un mot réservé. « nombre_eleves » est valide et dit clairement ce qu’il contient."
+  }
+ ],
+ "questions": [
+  [
+   "Qu’est-ce qu’une variable ?",
+   [
+    "Une instruction qui affiche un message",
+    "Une case mémoire nommée qui garde une valeur qui peut changer",
+    "Un nombre qui ne change jamais",
+    "Un symbole mathématique"
+   ],
+   1,
+   "Une variable est une boîte avec un nom ; sa valeur peut changer pendant l’exécution de l’algorithme."
+  ],
+  [
+   "Quel type convient pour la valeur 3.14 ?",
+   [
+    "Entier (int)",
+    "Chaîne (str)",
+    "Flottant (float)",
+    "Booléen (bool)"
+   ],
+   2,
+   "3.14 est un nombre décimal : c’est un flottant (float)."
+  ],
+  [
+   "Quel type convient pour la valeur \"Bonjour\" ?",
+   [
+    "Chaîne (str)",
+    "Entier (int)",
+    "Flottant (float)",
+    "Booléen (bool)"
+   ],
+   0,
+   "Du texte entre guillemets est une chaîne de caractères (str)."
+  ],
+  [
+   "Une variable indique si l’élève est connecté (vrai ou faux). Quel est son type ?",
+   [
+    "Entier (int)",
+    "Booléen (bool)",
+    "Chaîne (str)",
+    "Flottant (float)"
+   ],
+   1,
+   "Une valeur qui ne peut être que vraie ou fausse (True ou False) est un booléen."
+  ],
+  [
+   "Qu’affiche ce pseudocode ?",
+   [
+    "4",
+    "12",
+    "10",
+    "14"
+   ],
+   2,
+   "X vaut 4, puis 4 × 3 = 12, puis 12 − 2 = 10.",
+   "X ← 4\nX ← X × 3\nX ← X − 2\nAFFICHER X"
+  ],
+  [
+   "Qu’affiche ce pseudocode ?",
+   [
+    "10",
+    "14",
+    "7",
+    "9"
+   ],
+   1,
+   "a ← 5 + 2 = 7, puis b ← 7 × 2 = 14. On utilise toujours la valeur la plus récente de chaque variable.",
+   "a ← 5\nb ← 2\na ← a + b\nb ← a × b\nAFFICHER b"
+  ],
+  [
+   "Que fait l’instruction p ← p + 1 ?",
+   [
+    "Elle remet p à 1",
+    "Elle augmente p de 1",
+    "Elle compare p et 1",
+    "Elle crée une deuxième variable p"
+   ],
+   1,
+   "Elle prend la valeur actuelle de p, ajoute 1 et range le résultat dans p : on incrémente p. C’est ce que fait un compteur."
+  ],
+  [
+   "Lequel de ces noms de variable n’est PAS valide ?",
+   [
+    "score",
+    "nombre_eleves",
+    "_total",
+    "prix final"
+   ],
+   3,
+   "Un nom de variable ne peut pas contenir d’espace. On écrirait prix_final."
+  ],
+  [
+   "L’utilisateur entre 20. Qu’affiche cet algorithme ?",
+   [
+    "3",
+    "4",
+    "5",
+    "10"
+   ],
+   1,
+   "X : 20 → 10 → 5 → 4 et p : 0 → 1 → 2 → 3. On affiche X, qui vaut 4 à la fin (3 est la valeur de p).",
+   "LIRE X\np ← 0\nX ← X ÷ 2\np ← p + 1\nX ← X ÷ 2\np ← p + 1\nX ← X − 1\np ← p + 1\nAFFICHER X"
+  ],
+  [
+   "Pourquoi préférer points_de_force plutôt que x comme nom de variable ?",
+   [
+    "Parce que x est un mot réservé",
+    "Parce que les noms courts sont interdits",
+    "Parce que le nom dit ce que contient la variable : l’algorithme est plus facile à lire et à corriger",
+    "Parce que l’ordinateur calcule plus vite avec les noms longs"
+   ],
+   2,
+   "x est valide, mais il ne dit rien. Un nom explicite aide toute personne qui lit l’algorithme, y compris toi plus tard."
+  ]
+ ],
+ "ecrire": [
+  {
+   "titre": "Le score d’un jeu",
+   "enonce": "Le score commence à 0. Le joueur ramasse 3 pièces de 10 points chacune. Écris l’algorithme qui met à jour la variable score après chaque pièce, puis affiche le score.",
+   "verif": [
+    "score ← 0 au début",
+    "score ← score + 10 trois fois",
+    "AFFICHER score à la fin (30)"
+   ],
+   "modele": "score ← 0\nscore ← score + 10\nscore ← score + 10\nscore ← score + 10\nAFFICHER score"
+  },
+  {
+   "titre": "Échanger deux variables",
+   "enonce": "a contient 5 et b contient 9. Écris un algorithme qui échange leurs valeurs (a doit contenir 9 et b doit contenir 5). Aide : utilise une troisième variable temp.",
+   "verif": [
+    "garder la valeur de a dans temp avant de la remplacer",
+    "a ← b",
+    "b ← temp"
+   ],
+   "modele": "a ← 5\nb ← 9\ntemp ← a\na ← b\nb ← temp\nAFFICHER a, b"
+  }
+ ]
+};
+</script>
+<script src="../algo/python.js"></script>
+<script src="../algo/lecon.js"></script>
+<script>window.tej2oAccessReady=import('../access.js');</script><script type="module">try{await window.tej2oAccessReady;const c=window.TEJ2O?.corrige;if(c){openCorrige(c)}else if(new URLSearchParams(location.search).has("devoir")&&(window.TEJ2O?.teacher||window.TEJ2O?.homeworkOpen))go(4)}catch(err){console.error("Accès TEJ2O",err);const box=document.createElement("aside");box.style="padding:18px;margin:16px;border:2px solid #d5a83b;background:#163a2e;color:#fff";box.textContent="Impossible de vérifier l’accès à cette leçon. Vérifie Internet et ouvre le site depuis son adresse HTTPS.";document.body.prepend(box)}</script><script src="../telecharger.js"></script></body></html>

@@ -1,0 +1,356 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TEJ2O | Unité 5 · Leçon 7 — Python : l’indentation et les variables</title>
+<link rel="stylesheet" href="../algo/lecon.css"></head><body data-activity="lesson13"><nav class="tej-nav" aria-label="Navigation principale"><a href="../site.html">← Accueil TEJ2O</a><span>Unité 5 · Algorithmes et Python</span></nav><main class="shell"><header class="top"><div><div class="brand">TEJ2O <span style="color:#fff;font-weight:400">| Algorithmes et Python</span></div><div class="small">Unité 5 · Leçon 7 — Python : l’indentation et les variables</div></div><span class="pill">Unité 5</span></header><div class="intro"><div><h1>Écrire ses premières lignes de Python</h1><div class="small">Quatre activités courtes, puis un devoir de dix questions.</div></div><div class="small" id="stepLabel"></div></div><div class="tabs" id="tabs"></div><div class="progress"><div class="fill" id="fill"></div></div><section id="content" aria-live="polite"></section><div class="nav"><button id="prev">← Précédent</button><span class="hint" id="navHint"></span><button id="next">Suivant →</button></div><div class="footer">TEJ2O · Unité 5 · Algorithmes et Python</div></main>
+<script>
+const LECON = {
+ "num": 13,
+ "aff": 7,
+ "titre": "Python : l’indentation et les variables",
+ "labels": [
+  "1 · Écrire du Python",
+  "2 · L’indentation",
+  "3 · Les variables",
+  "4 · Changer une variable",
+  "Devoir · 10 questions"
+ ],
+ "stages": [
+  {
+   "type": "qcm",
+   "title": "Comment s’écrit un programme Python ?",
+   "lead": [
+    "Un programme Python est une suite d’**instructions**, **une par ligne**.",
+    "Python lit les lignes **de haut en bas**, une à la fois.",
+    "Python fait la différence entre **majuscules et minuscules** : `print` fonctionne, `Print` donne une erreur.",
+    "Une ligne qui commence par **#** est un **commentaire** : Python l’ignore. Il sert à expliquer le programme aux humains."
+   ],
+   "exemples": [
+    {
+     "t": "Trois instructions, trois lignes",
+     "code": "print(\"Bonjour\")\nprint(\"Je suis en 10e année\")\nprint(\"Au revoir\")",
+     "sortie": "Bonjour\nJe suis en 10e année\nAu revoir"
+    },
+    {
+     "t": "Un commentaire n’est pas exécuté",
+     "note": "La ligne avec # n’apparaît pas à l’écran.",
+     "code": "# Ce programme dit bonjour\nprint(\"Bonjour\")",
+     "sortie": "Bonjour"
+    }
+   ],
+   "tip": "Une instruction par ligne, lue de haut en bas, en respectant les majuscules et les minuscules.",
+   "doc": "Programme à analyser",
+   "code": "# Message de bienvenue\nprint(\"Salut\")\n# print(\"Allô\")\nprint(\"Bienvenue\")",
+   "consigne": "Qu’affiche ce programme ?",
+   "opts": [
+    "Salut puis Bienvenue",
+    "Salut, Allô puis Bienvenue",
+    "Message de bienvenue, Salut, Bienvenue",
+    "Rien du tout"
+   ],
+   "correct": 0,
+   "why": "Les lignes 1 et 3 commencent par # : ce sont des commentaires, Python les ignore. Seuls les deux autres print sont exécutés."
+  },
+  {
+   "type": "qcm",
+   "title": "L’indentation : décaler pour former un bloc",
+   "lead": [
+    "**L’indentation**, ce sont les espaces au début d’une ligne.",
+    "En Python, elle n’est **pas une décoration** : elle montre quelles lignes forment un **bloc**.",
+    "Une ligne qui se termine par **deux-points** `:` annonce un bloc. Les lignes du bloc sont décalées de **4 espaces** (touche Tab).",
+    "Une ligne ordinaire commence **tout à gauche**. Un décalage en trop ou en moins donne une **IndentationError**."
+   ],
+   "syntaxe": {
+    "t": "Comment l’écrire",
+    "code": "if age >= 16:\n    print(\"Tu peux conduire\")\n    print(\"Sois prudent\")\nprint(\"Fin\")",
+    "parties": [
+     [
+      "if age >= 16:",
+      "la ligne se termine par `:` : un bloc commence"
+     ],
+     [
+      "    print(...)",
+      "décalée de 4 espaces : fait partie du bloc"
+     ],
+     [
+      "print(\"Fin\")",
+      "revenue tout à gauche : ne fait plus partie du bloc"
+     ]
+    ]
+   },
+   "exemples": [
+    {
+     "t": "Un décalage inutile",
+     "fauxT": "Erreur : IndentationError",
+     "faux": "print(\"Bonjour\")\n    print(\"Salut\")",
+     "bonT": "Correct",
+     "bon": "print(\"Bonjour\")\nprint(\"Salut\")",
+     "pourquoi": "La 2e ligne ne suit pas un deux-points : elle doit commencer tout à gauche."
+    },
+    {
+     "t": "Un bloc oublié",
+     "fauxT": "Erreur : IndentationError",
+     "faux": "if note >= 50:\nprint(\"Réussi\")",
+     "bonT": "Correct",
+     "bon": "if note >= 50:\n    print(\"Réussi\")",
+     "pourquoi": "Après les deux-points, Python attend au moins une ligne décalée."
+    },
+    {
+     "t": "Dans le bloc ou après le bloc ?",
+     "note": "La condition est fausse : le bloc décalé est sauté. La dernière ligne, tout à gauche, s’exécute toujours. (On verra if en détail à la leçon 9.)",
+     "code": "note = 30\nif note >= 50:\n    print(\"Réussi\")\nprint(\"Fin du programme\")",
+     "sortie": "Fin du programme"
+    }
+   ],
+   "tip": "Après un deux-points, on décale de 4 espaces. Pour sortir du bloc, on revient tout à gauche.",
+   "doc": "Programme à analyser",
+   "code": "age = 12\nif age >= 16:\n    print(\"Permis possible\")\n    print(\"Bonne route\")\nprint(\"Merci\")",
+   "consigne": "Qu’affiche ce programme ?",
+   "opts": [
+    "Merci",
+    "Permis possible, Bonne route, Merci",
+    "Bonne route, Merci",
+    "Rien : il y a une erreur"
+   ],
+   "correct": 0,
+   "why": "12 >= 16 est faux : tout le bloc décalé (les deux lignes) est sauté. print(\"Merci\") est tout à gauche, hors du bloc : il s’exécute."
+  },
+  {
+   "type": "qcm",
+   "title": "Les variables : donner une valeur",
+   "lead": [
+    "Une **variable** est une boîte qui porte un **nom** et contient une **valeur**.",
+    "On donne une valeur avec le signe **=** : `age = 15`. Le **nom** est à gauche, la **valeur** à droite.",
+    "**Faut-il déclarer la variable avant ? Non.** En Python, la variable est **créée** la première fois qu’on lui donne une valeur.",
+    "Python devine aussi le **type** tout seul, d’après la valeur : nombre entier, nombre décimal ou texte."
+   ],
+   "syntaxe": {
+    "t": "Comment l’écrire",
+    "code": "age = 15",
+    "parties": [
+     [
+      "age",
+      "le nom de la variable (à gauche)"
+     ],
+     [
+      "=",
+      "« reçoit » : ce n’est pas le = des maths"
+     ],
+     [
+      "15",
+      "la valeur rangée dans la boîte (à droite)"
+     ]
+    ]
+   },
+   "exemples": [
+    {
+     "t": "Les trois types de valeurs",
+     "lignes": [
+      "`age = 15` : un nombre **entier** (int).",
+      "`taille = 1.65` : un nombre **décimal** (float). On écrit un **point**, pas une virgule.",
+      "`nom = \"Maya\"` : du **texte** (str), toujours entre guillemets."
+     ]
+    },
+    {
+     "t": "Pas de déclaration en Python",
+     "lignes": [
+      "En **Java** ou en **C**, il faut d’abord déclarer : `int age;` puis `age = 15;`.",
+      "En **Python**, une seule ligne suffit : `age = 15`.",
+      "Pas de type à écrire, pas de point-virgule."
+     ]
+    },
+    {
+     "t": "Utiliser une variable avant de lui donner une valeur",
+     "fauxT": "Erreur : NameError",
+     "faux": "print(score)\nscore = 10",
+     "bonT": "Correct",
+     "bon": "score = 10\nprint(score)",
+     "pourquoi": "À la ligne 1, la variable score n’existe pas encore : elle n’a reçu aucune valeur."
+    },
+    {
+     "t": "Bien nommer une variable",
+     "lignes": [
+      "Lettres, chiffres et `_` seulement : `note_finale`, `prix2`.",
+      "Pas d’espace et pas de chiffre au début : `note finale` et `2prix` sont refusés.",
+      "`Note` et `note` sont deux variables différentes.",
+      "Choisis un nom qui dit ce que la boîte contient."
+     ]
+    }
+   ],
+   "tip": "On ne déclare pas une variable en Python : on lui donne une valeur avec =, et elle existe.",
+   "doc": "Lignes à analyser",
+   "code": "prix = 12\nnom = \"Léo\"\ntaille = 1.7",
+   "consigne": "Que faut-il écrire avant ces trois lignes pour créer les variables ?",
+   "opts": [
+    "Rien : chaque ligne crée la variable en lui donnant une valeur.",
+    "int prix, str nom, float taille",
+    "declare prix, nom, taille",
+    "var prix = 0"
+   ],
+   "correct": 0,
+   "why": "En Python, on ne déclare pas les variables. prix = 12 crée la variable prix et lui donne la valeur 12. Python sait tout seul que 12 est un entier, \"Léo\" un texte et 1.7 un décimal."
+  },
+  {
+   "type": "code",
+   "title": "Changer la valeur d’une variable",
+   "lead": [
+    "On peut donner une **nouvelle valeur** à une variable : l’ancienne est **remplacée**.",
+    "`vies = vies - 1` se lit de **droite à gauche** : Python calcule `vies - 1`, puis range le résultat dans `vies`.",
+    "Opérations : `+` addition, `-` soustraction, `*` multiplication, `/` division.",
+    "Ici, `print(...)` sert seulement à voir la valeur. On l’étudie en détail à la prochaine leçon."
+   ],
+   "exemples": [
+    {
+     "t": "La valeur est remplacée",
+     "note": "La boîte x ne garde que sa dernière valeur.",
+     "code": "x = 5\nx = 8\nprint(x)",
+     "sortie": "8"
+    },
+    {
+     "t": "Ajouter à une variable",
+     "note": "À droite : 10 + 5 = 15. Puis 15 est rangé dans score.",
+     "code": "score = 10\nscore = score + 5\nprint(score)",
+     "sortie": "15"
+    }
+   ],
+   "tip": "Dans x = x + 1, Python calcule d’abord la droite avec l’ancienne valeur, puis remplace la valeur de x.",
+   "consigne": "Un jeu commence avec `vies = 3`. Le joueur perd une vie. Écris la ligne qui enlève 1 à `vies`, puis exécute : le programme doit afficher « Vies restantes : 2 ».",
+   "starter": "vies = 3\n# Le joueur perd une vie : enlève 1 à vies\n\nprint(\"Vies restantes :\", vies)\n",
+   "tests": [
+    {
+     "in": [],
+     "out": "Vies restantes : 2"
+    }
+   ],
+   "require": [
+    {
+     "re": "vies\\s*=\\s*vies\\s*-\\s*1|vies\\s*-=\\s*1",
+     "msg": "Change la variable avec la ligne `vies = vies - 1`."
+    }
+   ],
+   "hint": "Sous le commentaire, tout à gauche, écris `vies = vies - 1`.",
+   "solution": "vies = 3\n# Le joueur perd une vie : enlève 1 à vies\nvies = vies - 1\nprint(\"Vies restantes :\", vies)",
+   "bravo": "Si tu changes la première ligne en `vies = 5`, le programme affichera 4 sans autre changement : c’est l’intérêt d’une variable."
+  }
+ ],
+ "questions": [
+  [
+   "En Python, faut-il déclarer une variable avant de lui donner une valeur ?",
+   [
+    "Oui, toujours avec son type",
+    "Non, elle est créée quand on lui donne une valeur",
+    "Oui, avec le mot var",
+    "Seulement pour les nombres"
+   ],
+   1,
+   "En Python, `age = 15` suffit : la variable est créée à ce moment-là."
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "7",
+    "10",
+    "3",
+    "x"
+   ],
+   1,
+   "x reçoit 7, puis x = 7 + 3 = 10. print(x) affiche la valeur, pas le nom.",
+   "x = 7\nx = x + 3\nprint(x)"
+  ],
+  [
+   "Que fait la ligne 1 de ce programme ?",
+   [
+    "Elle affiche « Calcul du total »",
+    "Rien : c’est un commentaire",
+    "Elle crée une variable",
+    "Elle donne une erreur"
+   ],
+   1,
+   "Une ligne qui commence par # est un commentaire : Python l’ignore.",
+   "# Calcul du total\ntotal = 4 * 5"
+  ],
+  [
+   "Pourquoi ce programme donne-t-il une erreur ?",
+   [
+    "La 2e ligne est décalée sans raison",
+    "Il manque des guillemets",
+    "print est mal écrit",
+    "Il faut déclarer nom"
+   ],
+   0,
+   "La 2e ligne ne suit pas un deux-points : elle doit commencer tout à gauche (IndentationError).",
+   "nom = \"Sam\"\n    print(nom)"
+  ],
+  [
+   "Combien d’espaces met-on habituellement pour indenter un bloc ?",
+   [
+    "1",
+    "2",
+    "4",
+    "10"
+   ],
+   2,
+   "La convention en Python est de 4 espaces (la touche Tab dans l’éditeur de la page)."
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "Bravo puis Fin",
+    "Fin",
+    "Bravo",
+    "Rien"
+   ],
+   1,
+   "8 >= 10 est faux : la ligne décalée est sautée. print(\"Fin\") est hors du bloc : elle s’exécute.",
+   "points = 8\nif points >= 10:\n    print(\"Bravo\")\nprint(\"Fin\")"
+  ],
+  [
+   "Quel nom de variable est accepté par Python ?",
+   [
+    "note finale",
+    "2note",
+    "note_finale",
+    "note-finale"
+   ],
+   2,
+   "Lettres, chiffres et _ seulement, sans espace, sans tiret et sans chiffre au début."
+  ],
+  [
+   "Quelle valeur est un nombre décimal (float) ?",
+   [
+    "\"3.5\"",
+    "3.5",
+    "3,5",
+    "35"
+   ],
+   1,
+   "On écrit un point. Avec des guillemets, \"3.5\" est du texte. 35 est un entier."
+  ],
+  [
+   "Pourquoi ce programme donne-t-il une erreur ?",
+   [
+    "total n’a pas encore de valeur à la ligne 1",
+    "Il faut écrire Print",
+    "Il manque un deux-points",
+    "10 doit être entre guillemets"
+   ],
+   0,
+   "On ne peut pas utiliser une variable avant de lui donner une valeur : NameError.",
+   "print(total)\ntotal = 10"
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "8",
+    "20",
+    "10",
+    "4"
+   ],
+   0,
+   "y reçoit 4 × 2 = 8 à la ligne 2. Changer x ensuite ne recalcule pas y.",
+   "x = 4\ny = x * 2\nx = 10\nprint(y)"
+  ]
+ ],
+ "ecrire": []
+};
+</script>
+<script src="../algo/python.js"></script>
+<script src="../algo/lecon.js"></script>
+<script>window.tej2oAccessReady=import('../access.js');</script><script type="module">try{await window.tej2oAccessReady;const c=window.TEJ2O?.corrige;if(c){openCorrige(c)}else if(new URLSearchParams(location.search).has("devoir")&&(window.TEJ2O?.teacher||window.TEJ2O?.homeworkOpen))go(4)}catch(err){console.error("Accès TEJ2O",err);const box=document.createElement("aside");box.style="padding:18px;margin:16px;border:2px solid #d5a83b;background:#163a2e;color:#fff";box.textContent="Impossible de vérifier l’accès à cette leçon. Vérifie Internet et ouvre le site depuis son adresse HTTPS.";document.body.prepend(box)}</script><script src="../telecharger.js"></script></body></html>

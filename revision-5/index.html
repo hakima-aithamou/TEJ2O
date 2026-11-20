@@ -1,0 +1,38 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TEJ2O | Unité 5 · Révision</title>
+<link rel="stylesheet" href="../algo/lecon.css"><style>
+.part{margin:22px 0}.part>h2{display:flex;align-items:center;gap:10px}.part>h2 .n{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--gold);color:#0b2620;font-size:17px}
+.consigne{color:var(--muted);font-style:italic;margin:-4px 0 12px}
+table.f{width:100%;border-collapse:collapse;margin:8px 0}table.f th,table.f td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:middle}table.f th{background:#1d4a3b;color:var(--gold);font-size:14px}
+table.f input[type=text],table.f select{width:100%;background:#0b1f1a;color:#eef7f2;border:1px solid #3d6a5a;border-radius:7px;padding:6px 8px;font:inherit}
+.ok-mark{border-color:#85c99b!important;box-shadow:0 0 0 2px #85c99b88;background-color:#1f4a32!important}.ko-mark{border-color:#e8ac88!important;box-shadow:0 0 0 2px #e8ac8888;background-color:#4a2a20!important}.radio.ok-mark,.radio.ko-mark{border:1px solid;border-radius:8px;padding:3px}
+.q{margin:16px 0}.q>p{font-weight:700;margin:0 0 6px}.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start}
+.trou{display:inline-block;width:auto;min-width:90px;background:#06140f;color:#ffe3a3;border:1px dashed #e9c77c;border-radius:6px;padding:1px 6px;font:inherit}
+.algo .trou{font:14px ui-monospace,Consolas,monospace}
+textarea.rep{width:100%;min-height:70px;background:#0b1f1a;color:#eef7f2;border:1px solid #3d6a5a;border-radius:9px;padding:8px 10px;font:15px/1.5 system-ui}
+.check-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:10px}.res{font-weight:700}.res.bon{color:#9fe5b7}.res.pas{color:#ffc6a5}
+.radio{display:flex;gap:12px;justify-content:center}.radio label{display:flex;gap:4px;align-items:center;cursor:pointer}
+.intro-box{border:1px solid #d9a93b;background:#2a3a1f;border-radius:14px;padding:14px 16px}
+.barre{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.barre a,.barre button{display:inline-block;text-decoration:none;padding:10px 15px;border-radius:10px;font-weight:750}
+.barre a{border:1px solid var(--gold);color:var(--gold)}.prof,.barre .prof{display:none}.is-prof .prof,.is-prof .barre .prof{display:inline-block}
+@media(max-width:700px){.two{grid-template-columns:1fr}}
+@media print{body{background:#fff;color:#000}.tej-nav,.barre,.check-row,.footer{display:none!important}.card{background:#fff;border:1px solid #999;break-inside:avoid}h1,h2,.part>h2{color:#000}.algo{background:#f3f3f3;color:#000;border-color:#999}.algo .kw,.algo .str,.algo .num{color:#000}
+ table.f th{background:#eee;color:#000}table.f input,table.f select,textarea.rep,.trou{background:#fff;color:#000;border:1px solid #999}.consigne,.small{color:#333}.intro-box{background:#fff}.shell{max-width:none}}
+
+.corr-box{margin-top:12px;border:1px solid #85c99b;background:#13321f;border-radius:10px;padding:10px 14px}.corr-box>b{color:#9fe5b7}.corr-box p{margin:6px 0}
+.corr-box table.f td,.corr-box table.f th{padding:5px 8px}
+.ordre-l{display:flex;align-items:center;gap:10px;margin:5px 0}.ordre-l select{width:70px;background:#0b1f1a;color:#eef7f2;border:1px solid #3d6a5a;border-radius:7px;padding:5px}
+.ordre-l pre{margin:0;flex:1;padding:6px 10px}
+.mini-q{margin:10px 0}.mini-q select{background:#0b1f1a;color:#eef7f2;border:1px solid #3d6a5a;border-radius:7px;padding:6px 8px;font:inherit;max-width:100%}
+.sortie{width:100%;max-width:340px;background:#0b1f1a;color:#eef7f2;border:1px solid #3d6a5a;border-radius:7px;padding:6px 8px;font:15px ui-monospace,Consolas,monospace}
+.etiq{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.03em;padding:2px 8px;border-radius:999px;background:#1d4a3b;color:var(--gold);margin-left:6px;vertical-align:middle}
+.mode-corrige .corr-box{display:block!important}.mode-corrige .check-row{display:none}.mode-corrige .part>*:not(h2):not(.corr-box){display:none}.mode-corrige .partie-titre>.consigne{display:none}.mode-corrige .intro-box,.mode-corrige .barre{display:none}
+@media print{.corr-box{background:#fff;border-color:#2e7d32;color:#000}.corr-box>b{color:#1b5e20}.ordre-l select,.mini-q select,.sortie{background:#fff;color:#000;border:1px solid #999}.etiq{background:#eee;color:#000}.corr-box[hidden]{display:none!important}#pyout,details,.part{break-inside:auto}.q,.ordre-l,tr{break-inside:avoid}textarea{min-height:0}table.f input[type=text],.trou,textarea{background:#fff!important;color:#000!important;border:1px solid #999!important}code{background:#eee!important;color:#000!important;border-color:#bbb!important}.part>h2,.consigne,.q>p{break-after:avoid}.bloc{break-inside:avoid}.partie-titre{break-after:avoid;break-inside:avoid}.corr-box .two{grid-template-columns:1fr!important}pre.algo{white-space:pre-wrap}}</style></head><body data-activity="revision5"><nav class="tej-nav" aria-label="Navigation principale"><a href="../site.html#u5-revision">← Accueil TEJ2O</a><span>Unité 5 · Algorithmes et Python</span></nav>
+<main class="shell"><header class="top"><div><div class="brand">TEJ2O <span style="color:#fff;font-weight:400">| Algorithmes et Python</span></div><div class="small">Unité 5 · Révision</div></div><span class="pill">Révision</span></header>
+<div class="intro"><div><h1>Révision de l’unité — Les algorithmes</h1><div class="small">Dix-huit exercices sur toute l’unité : partie A pour comprendre et lire des algorithmes, partie B pour en écrire. Tes réponses sont gardées dans ce navigateur pendant que tu travailles.</div></div></div>
+<div class="intro-box"><b>Pour t’entraîner.</b> Cette série n’est pas notée et ne s’envoie pas. Fais un exercice, clique sur <b>Vérifier</b> pour voir ce qui est juste, cherche encore, puis ouvre le <b>corrigé</b> pour comparer. Commence par ce que tu trouves difficile !</div>
+<div class="barre"><button type="button" id="btnImprimer">🖨️ Imprimer mes réponses</button><a href="revision-unite5.pdf" target="_blank" rel="noopener">📄 Version imprimable (PDF)</a><a href="revision-unite5-corrige.pdf" target="_blank" rel="noopener">📖 Corrigé (PDF)</a><button type="button" id="btnEffacer">🧽 Tout effacer</button></div>
+<div id="contenu"></div>
+<div class="footer">TEJ2O · Unité 5 · Révision</div></main>
+<script src="../algo/python.js"></script><script src="../algo/outils-pseudo.js"></script><script src="revision.js"></script>
+<script>window.tej2oAccessReady=import('../access.js');</script><script type="module">try{await window.tej2oAccessReady}catch(err){console.error("Accès TEJ2O",err)}</script>
+</body></html>

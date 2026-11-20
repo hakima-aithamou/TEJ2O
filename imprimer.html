@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TEJ2O | Impression</title>
+<style>
+:root{--encre:#17262c;--doux:#55636b;--trait:#c3ccd1;--fond-code:#f2f4f5;--vert:#1e7a3c;--accent:#17465a}
+*{box-sizing:border-box}
+html{visibility:hidden}
+body{margin:0;background:#e9eef0;color:var(--encre);font:15px/1.45 Arial,Helvetica,sans-serif}
+.barre{position:sticky;top:0;z-index:5;background:#071d18;color:#f7f3e6;padding:12px 16px;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;font:600 14px system-ui,sans-serif}
+.barre a{color:#f2d28a}
+.barre button{font:700 15px system-ui,sans-serif;background:#f2d28a;color:#071d18;border:0;border-radius:10px;padding:10px 18px;cursor:pointer}
+.barre button:disabled{opacity:.5;cursor:wait}
+.barre small{font-weight:400;color:#c9d6cf}
+#etat{max-width:820px;margin:16px auto;padding:0 16px;color:var(--doux)}
+#doc{max-width:820px;margin:0 auto 40px;padding:0 16px}
+.feuille{background:#fff;padding:36px 44px;margin:16px 0;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+h1{font-size:23px;color:var(--accent);margin:0 0 2px}
+.sous{color:var(--doux);margin:0 0 14px;font-size:16px}
+.ident{margin:6px 0 18px;white-space:pre-wrap}
+h2{font-size:18px;color:var(--accent);margin:22px 0 8px;break-after:avoid}
+h3{font-size:15.5px;margin:16px 0 6px;break-after:avoid}
+ul.points{margin:4px 0 8px;padding-left:22px}ul.points li{margin:3px 0}
+code,pre{font-family:"Courier New",monospace}
+code{background:var(--fond-code);padding:0 3px;border-radius:3px}
+pre{background:var(--fond-code);border:1px solid var(--trait);border-radius:6px;padding:8px 12px;margin:6px 0 10px;white-space:pre-wrap;font-size:13.5px;break-inside:avoid}
+.ecran{font-size:13px;color:var(--doux);margin:2px 0 0}
+.retenir{border-left:4px solid var(--accent);background:#eef4f6;padding:8px 12px;margin:10px 0;break-inside:avoid}
+.doc{border:1px dashed var(--trait);border-radius:6px;padding:8px 12px;margin:8px 0;break-inside:avoid}
+.doc p{margin:2px 0}
+table.syntaxe{border-collapse:collapse;margin:6px 0 10px;font-size:14px}
+table.syntaxe td{border:1px solid var(--trait);padding:4px 8px;vertical-align:top}
+.q{margin:14px 0 4px;font-weight:700;break-after:avoid}
+.opts{list-style:none;margin:2px 0 8px;padding-left:22px}
+.opts li{margin:2px 0;break-inside:avoid}
+.opts b{display:inline-block;width:22px}
+.opts .bon{color:var(--vert);font-weight:700}
+.why{color:var(--doux);font-style:italic;font-size:13.5px;margin:0 0 6px 22px}
+.consigne{font-style:italic;color:var(--doux);margin:2px 0 8px}
+.lignes{margin:6px 0 14px}
+.lignes div{height:30px;border-bottom:1px solid #9aa5ac}
+.bloc{break-inside:avoid}
+svg{max-width:100%;height:auto}
+.fin-lecon{break-after:page}
+@page{size:letter;margin:15mm 16mm 16mm;@bottom-right{content:counter(page);font:10px Arial,sans-serif;color:#7a868d}}
+@media print{
+ body{background:#fff}
+ .barre,#etat{display:none}
+ #doc{max-width:none;margin:0;padding:0}
+ .feuille{box-shadow:none;margin:0;padding:0;border-radius:0}
+ .feuille+.feuille{break-before:page}
+}
+</style>
+</head>
+<body>
+<div class="barre"><a href="index.html">← Retour à l’espace enseignante</a><span id="titreBarre"></span><span><button id="imprimer" disabled>🖨 Imprimer</button> <small>Pour garder un fichier : choisis « Enregistrer en PDF ».</small></span></div>
+<p id="etat">Chargement…</p>
+<main id="doc"></main>
+<script type="module">
+import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/+esm';
+/* Teacher page that prints, in one go, all the lessons, all the homework or all the answer keys of a unit.
+   URL: imprimer.html?de=7&a=18&quoi=lecons|devoirs|corriges&titre=Unité 5 · Algorithmes et Python
+   The content is read from the lesson pages themselves, so it always matches the site. */
+const db=createClient('https://dcnfxwtszqeqfaxlbfbl.supabase.co','sb_publishable_UTy7pKbk6xnw6mjRoy08GQ_5OuU1ymE');
+const q=new URLSearchParams(location.search);
+const de=Math.max(1,parseInt(q.get('de'))||1), a=Math.min(18,parseInt(q.get('a'))||6);
+const quoi=['lecons','devoirs','corriges'].includes(q.get('quoi'))?q.get('quoi'):'lecons';
+const titreUnite=q.get('titre')||'';
+const L='ABCD';
+const $=s=>document.querySelector(s), etat=$('#etat'), doc=$('#doc');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// Lesson text: **bold** and `code`, as on the lesson pages.
+const fmt=s=>esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/`([^`]+)`/g,'<code>$1</code>');
+const pre=c=>`<pre>${esc(c)}</pre>`;
+const lignes=n=>`<div class="lignes">${'<div></div>'.repeat(n)}</div>`;
+const NOM_QUOI={lecons:'Leçons',devoirs:'Devoirs',corriges:'Corrigés des devoirs'};
+
+// Reads the data of one lesson page: unit 4 pages declare "stages" and "questions", unit 5 pages declare LECON.
+async function lire(n){
+ let r;
+ try{r=await fetch(`lecon-${n}/index.html`,{cache:'no-store'})}
+ catch(e){throw Error(location.protocol==='file:'
+   ?'cette page est ouverte depuis ton ordinateur (fichier). Le navigateur y bloque la lecture des leçons : ouvre-la depuis ton site en ligne (adresse en https://…github.io/…).'
+   :'la leçon '+n+' n’a pas pu être lue (connexion Internet ?). Recharge la page.')}
+ if(!r.ok)throw Error('la leçon '+n+' est introuvable sur le site (dossier lecon-'+n+' manquant ?).');
+ const h=await r.text();
+ const m=h.match(/const LECON = (\{[\s\S]*?\n\});/);
+ if(m){const d=new Function('return '+m[1])();return{unite:5,aff:d.aff,titre:d.titre,stages:d.stages,questions:d.questions,ecrire:d.ecrire||[]}}
+ const i=h.indexOf('const stages=');
+ if(i<0)throw Error('format inconnu (leçon '+n+')');
+ const d=new Function(h.slice(i).split('\n')[0]+';return {stages,questions}')();
+ const t=(h.match(/<title>[^<]*?—\s*([^<]+)<\/title>/)||[])[1]||'';
+ return{unite:4,aff:n,titre:t.trim(),stages:d.stages,questions:d.questions,ecrire:[]};
+}
+
+function options(opts,bonne,why){
+ return `<ul class="opts">${opts.map((o,j)=>`<li class="${j===bonne?'bon':''}"><b>${L[j]}.</b>${fmt(o)}${j===bonne?' ✓':''}</li>`).join('')}</ul>${why?`<p class="why">${fmt(why)}</p>`:''}`;
+}
+
+function lecon(d){
+ let h=`<section class="feuille"><h1>Unité ${d.unite} · Leçon ${d.aff}</h1><p class="sous">${esc(d.titre)}</p>`;
+ d.stages.forEach((s,k)=>{
+  h+=`<h2>${k+1}. ${esc(s.title)}</h2><ul class="points">${(s.lead||[]).map(x=>`<li>${fmt(x)}</li>`).join('')}</ul>`;
+  if(s.svg)h+=`<div class="bloc">${s.svg}</div>`;
+  if(s.syntaxe)h+=`<div class="bloc"><h3>Comment l’écrire</h3>${pre(s.syntaxe.code)}<table class="syntaxe">${(s.syntaxe.parties||[]).map(p=>`<tr><td><code>${esc(p[0])}</code></td><td>${fmt(p[1])}</td></tr>`).join('')}</table></div>`;
+  if(s.exemples?.length){s.exemples.forEach((e,ie)=>{h+=`<div class="bloc">${ie?'':'<h3>Exemples</h3>'}<p><b>${fmt(e.t||'')}</b></p>${e.desc?`<p>${fmt(e.desc)}</p>`:''}${e.lignes?`<ul class="points">${e.lignes.map(l=>`<li>${fmt(l)}</li>`).join('')}</ul>`:''}${e.code?pre(Array.isArray(e.code)?e.code.join('\n'):e.code):''}${e.entrees?`<p class="ecran">L’utilisateur tape : ${e.entrees.map(x=>`<code>${esc(x)}</code>`).join(' puis ')}</p>`:''}${e.sortie!=null?`<p class="ecran">À l’écran :</p>${pre(e.sortie)}`:''}${e.faux?`<p>✗ <b>${esc(e.fauxT||'Mauvais ordre')}</b></p>${pre(Array.isArray(e.faux)?e.faux.join('\n'):e.faux)}${e.pourquoi?`<p>Pourquoi ? ${fmt(e.pourquoi)}</p>`:''}<p>✓ <b>${esc(e.bonT||'Bon ordre')}</b></p>${pre(Array.isArray(e.bon)?e.bon.join('\n'):e.bon)}`:''}${e.note?`<p>${fmt(e.note)}</p>`:''}</div>`})}
+  if(s.tip)h+=`<div class="retenir"><b>À retenir :</b> ${fmt(s.tip)}</div>`;
+  if(s.opts){
+   h+=`<div class="bloc"><h3>À toi de décider</h3>`;
+   if(s.sample||s.code)h+=`<div class="doc">${s.doc?`<p><b>${esc(s.doc)}</b></p>`:''}${(s.sample||[]).map(x=>`<p>${fmt(x)}</p>`).join('')}${s.code?pre(s.code):''}</div>`;
+   h+=`<p class="q">${fmt(s.consigne||'')}</p>${options(s.opts,-1)}</div>`;
+  }else if(s.type==='code'){
+   h+=`<div class="bloc"><h3>À toi de coder</h3><p>${fmt(s.consigne||'')}</p>${lignes(6)}</div>`;
+  }else if(s.exercices){
+   h+=`<h3>À toi d’écrire</h3>`;
+   s.exercices.forEach((e,j)=>{h+=`<div class="bloc"><p class="q">${j+1}. ${esc(e.titre)}</p><p>${fmt(e.enonce)}</p>${lignes(6)}</div>`});
+  }else if(s.consigne){h+=`<p>${fmt(s.consigne)}</p>`}
+ });
+ return h+`</section>`;
+}
+
+function devoir(d,cor){
+ let h=`<section class="feuille"><h1>Unité ${d.unite} · ${cor?'Corrigé':'Devoir'} ${d.aff}</h1><p class="sous">${esc(d.titre)}</p>`;
+ if(!cor)h+=`<p class="ident">Nom : ______________________________     Date : ________________     Note : ____ / 10</p>`;
+ h+=`<h2>${d.ecrire.length?'Partie 1 — Choix multiples':'Choix multiples'}</h2>${cor?'':'<p class="consigne">Encercle la lettre de la bonne réponse.</p>'}`;
+ d.questions.forEach((x,i)=>{h+=`<div class="bloc"><p class="q">${i+1}. ${fmt(x[0])}</p>${x[4]?pre(x[4]):''}${options(x[1],cor?x[2]:-1,cor?x[3]:'')}</div>`});
+ if(d.ecrire.length){
+  h+=`<h2>Partie 2 — Écris l’algorithme</h2>${cor?'':'<p class="consigne">Écris ton algorithme en pseudocode (LIRE, AFFICHER, ←, SI… ALORS, TANT QUE…).</p>'}`;
+  d.ecrire.forEach((e,j)=>{
+   h+=`<div class="bloc"><p class="q">${j+1}. ${esc(e.titre)}</p><p>${fmt(e.enonce)}</p></div>`;
+   h+=cor?`<div class="bloc">${pre(e.modele)}<p><b>À vérifier :</b></p><ul class="points">${e.verif.map(v=>`<li>☐ ${fmt(v)}</li>`).join('')}</ul></div>`:lignes(9);
+  });
+ }
+ return h+`</section>`;
+}
+
+try{
+ const {data:{session}}=await db.auth.getSession();
+ const {data:me,error}=session?await db.rpc('tej2o_me'):{data:null,error:null};
+ document.documentElement.style.visibility='visible';
+ if(!session||error||me?.role!=='teacher'){etat.textContent='Cette page est réservée à l’enseignante. Connecte-toi avec ton compte enseignante, puis rouvre-la depuis ton espace.';throw 0}
+ const titre=`${NOM_QUOI[quoi]}${titreUnite?' · '+titreUnite:''}`;
+ document.title='TEJ2O | '+titre; $('#titreBarre').textContent=titre;
+ const nums=[];for(let n=de;n<=a;n++)nums.push(n);
+ const data=await Promise.all(nums.map(lire));
+ doc.innerHTML=data.map(d=>quoi==='lecons'?lecon(d):devoir(d,quoi==='corriges')).join('');
+ etat.textContent=quoi==='lecons'?`${data.length} leçons prêtes à imprimer. Chacune commence sur une nouvelle page.`:`${data.length} ${quoi==='devoirs'?'devoirs':'corrigés'} prêts à imprimer. Chacun commence sur une nouvelle page.`;
+ $('#imprimer').disabled=false; $('#imprimer').onclick=()=>window.print();
+}catch(e){
+ document.documentElement.style.visibility='visible';
+ if(e)etat.textContent='Impossible de préparer l’impression : '+(e.message||e);
+}
+</script>
+</body>
+</html>

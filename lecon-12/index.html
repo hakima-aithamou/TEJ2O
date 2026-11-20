@@ -1,0 +1,386 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TEJ2O | Unité 5 · Leçon 6 — Atelier : écrire des algorithmes</title>
+<link rel="stylesheet" href="../algo/lecon.css"></head><body data-activity="lesson12"><nav class="tej-nav" aria-label="Navigation principale"><a href="../site.html">← Accueil TEJ2O</a><span>Unité 5 · Algorithmes et Python</span></nav><main class="shell"><header class="top"><div><div class="brand">TEJ2O <span style="color:#fff;font-weight:400">| Algorithmes et Python</span></div><div class="small">Unité 5 · Leçon 6 — Atelier : écrire des algorithmes</div></div><span class="pill">Unité 5</span></header><div class="intro"><div><h1>À toi d’écrire l’algorithme</h1><div class="small">Des situations à transformer en pseudocode, du plus simple au plus difficile, puis un devoir de dix questions.</div></div><div class="small" id="stepLabel"></div></div><div class="tabs" id="tabs"></div><div class="progress"><div class="fill" id="fill"></div></div><section id="content" aria-live="polite"></section><div class="nav"><button id="prev">← Précédent</button><span class="hint" id="navHint"></span><button id="next">Suivant →</button></div><div class="footer">TEJ2O · Unité 5 · Algorithmes et Python</div></main>
+<script>
+const LECON = {
+ "num": 12,
+ "aff": 6,
+ "titre": "Atelier : écrire des algorithmes",
+ "labels": [
+  "1 · Calculs",
+  "2 · SI… SINON",
+  "3 · ET, OU",
+  "4 · Boucles",
+  "Devoir · 10 questions"
+ ],
+ "stages": [
+  {
+   "type": "ecrire",
+   "title": "Écrire un algorithme de calcul",
+   "lead": [
+    "**1. Les entrées** : qu’est-ce que l’algorithme doit LIRE ?",
+    "**2. Le traitement** : quels calculs ou quelles décisions (SI) ou répétitions (TANT QUE) faut-il ?",
+    "**3. La sortie** : qu’est-ce qu’il faut AFFICHER ?",
+    "**4. L’ordre** : LIRE avant de calculer, calculer avant d’AFFICHER. Quand le corrigé sera publié, compare."
+   ],
+   "tip": "Une séquence suffit : LIRE, calculer, AFFICHER.",
+   "exercices": [
+    {
+     "titre": "Convertir des heures en minutes",
+     "enonce": "Convertis une valeur lue en heures vers les minutes.",
+     "verif": [
+      "LIRE le nombre d’heures",
+      "multiplier par 60",
+      "AFFICHER les minutes"
+     ],
+     "modele": "LIRE heures\nminutes ← heures × 60\nAFFICHER minutes"
+    },
+    {
+     "titre": "Calculer un rabais",
+     "enonce": "Applique un rabais de 20 % sur un prix lu au clavier et affiche le nouveau prix.",
+     "verif": [
+      "LIRE le prix",
+      "calculer le rabais : prix × 20 ÷ 100",
+      "soustraire le rabais du prix",
+      "AFFICHER le nouveau prix"
+     ],
+     "modele": "LIRE prix\nrabais ← prix × 20 ÷ 100\nnouveau_prix ← prix − rabais\nAFFICHER nouveau_prix"
+    },
+    {
+     "titre": "Moyenne de trois notes",
+     "enonce": "Lis trois notes et affiche leur moyenne.",
+     "verif": [
+      "LIRE les trois notes",
+      "additionner, puis diviser par 3",
+      "AFFICHER la moyenne"
+     ],
+     "modele": "LIRE n1, n2, n3\nmoyenne ← (n1 + n2 + n3) ÷ 3\nAFFICHER moyenne"
+    }
+   ]
+  },
+  {
+   "type": "ecrire",
+   "title": "Écrire un algorithme avec une condition",
+   "lead": [
+    "**1. Les entrées** : qu’est-ce que l’algorithme doit LIRE ?",
+    "**2. Le traitement** : quels calculs ou quelles décisions (SI) ou répétitions (TANT QUE) faut-il ?",
+    "**3. La sortie** : qu’est-ce qu’il faut AFFICHER ?",
+    "**4. L’ordre** : LIRE avant de calculer, calculer avant d’AFFICHER. Quand le corrigé sera publié, compare."
+   ],
+   "tip": "SI la condition est vraie ALORS … SINON … FIN SI. Avec plus de deux cas, utilise SINON SI.",
+   "exercices": [
+    {
+     "titre": "Acheter un billet d’autobus",
+     "enonce": "Demande l’âge d’une personne. Affiche « rabais » si elle a moins de 12 ans, sinon affiche « prix régulier ».",
+     "verif": [
+      "LIRE l’âge",
+      "SI âge < 12",
+      "deux messages : un dans ALORS, un dans SINON"
+     ],
+     "modele": "LIRE age\nSI age < 12 ALORS\n    AFFICHER « rabais »\nSINON\n    AFFICHER « prix régulier »\nFIN SI"
+    },
+    {
+     "titre": "Vérifier la température",
+     "enonce": "Demande la température. Si elle est plus petite que 0, affiche « il fait froid », sinon « température acceptable ».",
+     "verif": [
+      "LIRE la température",
+      "SI temperature < 0",
+      "AFFICHER le bon message"
+     ],
+     "modele": "LIRE temperature\nSI temperature < 0 ALORS\n    AFFICHER « il fait froid »\nSINON\n    AFFICHER « température acceptable »\nFIN SI"
+    },
+    {
+     "titre": "Plus grand de deux nombres",
+     "enonce": "Demande deux nombres à l’utilisateur et affiche le plus grand.",
+     "verif": [
+      "LIRE deux nombres",
+      "comparer a et b",
+      "AFFICHER le plus grand"
+     ],
+     "modele": "LIRE a, b\nSI a > b ALORS\n    AFFICHER a\nSINON\n    AFFICHER b\nFIN SI"
+    },
+    {
+     "titre": "Pair ou impair",
+     "enonce": "Demande un nombre et dis s’il est pair ou impair. Aide : un nombre est pair si le reste de sa division par 2 est 0 ; on écrit « n mod 2 ».",
+     "verif": [
+      "LIRE le nombre",
+      "SI n mod 2 = 0",
+      "AFFICHER « pair » ou « impair »"
+     ],
+     "modele": "LIRE n\nSI n mod 2 = 0 ALORS\n    AFFICHER « pair »\nSINON\n    AFFICHER « impair »\nFIN SI"
+    },
+    {
+     "titre": "Classifier un nombre",
+     "enonce": "Dis si un nombre est négatif, nul ou positif.",
+     "verif": [
+      "LIRE le nombre",
+      "trois cas : SI… SINON SI… SINON",
+      "un message par cas"
+     ],
+     "modele": "LIRE n\nSI n < 0 ALORS\n    AFFICHER « négatif »\nSINON SI n = 0 ALORS\n    AFFICHER « nul »\nSINON\n    AFFICHER « positif »\nFIN SI"
+    },
+    {
+     "titre": "Moyenne et résultat",
+     "enonce": "Lis trois notes, calcule la moyenne et affiche « réussi » si elle est de 50 ou plus, sinon « échec ».",
+     "verif": [
+      "LIRE les trois notes",
+      "calculer la moyenne AVANT la condition",
+      "SI moyenne ≥ 50"
+     ],
+     "modele": "LIRE n1, n2, n3\nmoyenne ← (n1 + n2 + n3) ÷ 3\nAFFICHER moyenne\nSI moyenne ≥ 50 ALORS\n    AFFICHER « réussi »\nSINON\n    AFFICHER « échec »\nFIN SI"
+    }
+   ]
+  },
+  {
+   "type": "ecrire",
+   "title": "Combiner des conditions avec ET, OU",
+   "lead": [
+    "**1. Les entrées** : qu’est-ce que l’algorithme doit LIRE ?",
+    "**2. Le traitement** : quels calculs ou quelles décisions (SI) ou répétitions (TANT QUE) faut-il ?",
+    "**3. La sortie** : qu’est-ce qu’il faut AFFICHER ?",
+    "**4. L’ordre** : LIRE avant de calculer, calculer avant d’AFFICHER. Quand le corrigé sera publié, compare."
+   ],
+   "tip": "ET : toutes les conditions doivent être vraies. OU : une seule suffit.",
+   "exercices": [
+    {
+     "titre": "Admission à un programme",
+     "enonce": "Lis M (la moyenne générale de l’élève), P (possède une lettre de recommandation : oui ou non) et C (a déjà participé à un club sportif : oui ou non). L’élève est accepté si sa moyenne est plus grande ou égale à 75 ET s’il possède une lettre ET s’il a déjà participé à un club sportif. Affiche « vous êtes accepté » ou « vous n’êtes pas accepté ».",
+     "verif": [
+      "LIRE M, P et C",
+      "trois conditions reliées par ET",
+      "M ≥ 75 (pas M > 75)",
+      "deux messages"
+     ],
+     "modele": "LIRE M\nLIRE P\nLIRE C\nSI M ≥ 75 ET P = « oui » ET C = « oui » ALORS\n    AFFICHER « vous êtes accepté »\nSINON\n    AFFICHER « vous n’êtes pas accepté »\nFIN SI"
+    },
+    {
+     "titre": "Accès à un compte",
+     "enonce": "Lis l’âge de l’utilisateur, si le mot de passe est valide (oui ou non) et si le compte est désactivé (oui ou non). Affiche « Accès autorisé » si l’âge est plus grand que 13 ET le mot de passe est valide ET le compte n’est pas désactivé. Sinon, affiche « Accès refusé ».",
+     "verif": [
+      "LIRE les trois informations",
+      "age > 13 ET mdp_valide = « oui » ET desactive = « non »",
+      "AFFICHER le bon message"
+     ],
+     "modele": "LIRE age\nLIRE mdp_valide\nLIRE desactive\nSI age > 13 ET mdp_valide = « oui » ET desactive = « non » ALORS\n    AFFICHER « Accès autorisé »\nSINON\n    AFFICHER « Accès refusé »\nFIN SI"
+    },
+    {
+     "titre": "Vérifier un formulaire",
+     "enonce": "Lis email_fourni (le courriel est-il valide : oui ou non) et telephone_fourni (le numéro existe-t-il : oui ou non). Il y a un problème si le courriel n’est pas valide OU si le numéro n’existe pas. Affiche « Formulaire incomplet », sinon « Formulaire valide ».",
+     "verif": [
+      "LIRE les deux informations",
+      "une seule erreur suffit : OU",
+      "AFFICHER le bon message"
+     ],
+     "modele": "LIRE email_fourni\nLIRE telephone_fourni\nSI email_fourni = « non » OU telephone_fourni = « non » ALORS\n    AFFICHER « Formulaire incomplet »\nSINON\n    AFFICHER « Formulaire valide »\nFIN SI"
+    }
+   ]
+  },
+  {
+   "type": "ecrire",
+   "title": "Écrire un algorithme avec une boucle",
+   "lead": [
+    "**1. Les entrées** : qu’est-ce que l’algorithme doit LIRE ?",
+    "**2. Le traitement** : quels calculs ou quelles décisions (SI) ou répétitions (TANT QUE) faut-il ?",
+    "**3. La sortie** : qu’est-ce qu’il faut AFFICHER ?",
+    "**4. L’ordre** : LIRE avant de calculer, calculer avant d’AFFICHER. Quand le corrigé sera publié, compare."
+   ],
+   "tip": "Une boucle a besoin d’un départ (ex. : i ← 1), d’une condition d’arrêt et d’un changement à chaque tour (ex. : i ← i + 1).",
+   "exercices": [
+    {
+     "titre": "Compter jusqu’à 10",
+     "enonce": "Affiche les nombres de 1 à 10.",
+     "verif": [
+      "un compteur qui commence à 1",
+      "TANT QUE i ≤ 10",
+      "AFFICHER i, puis i ← i + 1"
+     ],
+     "modele": "i ← 1\nTANT QUE i ≤ 10 FAIRE\n    AFFICHER i\n    i ← i + 1\nFIN TANT QUE"
+    },
+    {
+     "titre": "Système de mot de passe",
+     "enonce": "Redemande le mot de passe jusqu’à ce que l’utilisateur entre « abc123 ».",
+     "verif": [
+      "LIRE le mot de passe une première fois",
+      "TANT QUE mdp ≠ « abc123 »",
+      "LIRE à nouveau dans la boucle"
+     ],
+     "modele": "LIRE mdp\nTANT QUE mdp ≠ « abc123 » FAIRE\n    AFFICHER « Mot de passe incorrect, recommence »\n    LIRE mdp\nFIN TANT QUE\nAFFICHER « Accès autorisé »"
+    },
+    {
+     "titre": "Les multiples de 3",
+     "enonce": "Lis un nombre N et affiche les multiples de 3 jusqu’à N.",
+     "verif": [
+      "LIRE N",
+      "commencer à 3",
+      "ajouter 3 à chaque tour, tant que m ≤ N"
+     ],
+     "modele": "LIRE N\nm ← 3\nTANT QUE m ≤ N FAIRE\n    AFFICHER m\n    m ← m + 3\nFIN TANT QUE"
+    },
+    {
+     "titre": "Somme et moyenne de 5 nombres",
+     "enonce": "Demande de donner 5 nombres, lis-les, calcule leur somme S et leur moyenne M. Si la moyenne est plus grande que la somme, affiche : « la moyenne des 5 nombres est M, elle est plus grande que S ».",
+     "verif": [
+      "S ← 0 avant la boucle",
+      "RÉPÉTER 5 FOIS : LIRE n et S ← S + n",
+      "M ← S ÷ 5 après la boucle",
+      "SI M > S"
+     ],
+     "modele": "S ← 0\nAFFICHER « Donne 5 nombres »\nRÉPÉTER 5 FOIS\n    LIRE n\n    S ← S + n\nFIN RÉPÉTER\nM ← S ÷ 5\nSI M > S ALORS\n    AFFICHER « la moyenne des 5 nombres est », M, « , elle est plus grande que », S\nFIN SI"
+    }
+   ]
+  }
+ ],
+ "questions": [
+  [
+   "Que fait cet algorithme ?",
+   [
+    "Il affiche les nombres de 1 à 3",
+    "Il redemande un nombre tant qu’il n’est pas entre 1 et 3",
+    "Il additionne les nombres entre 1 et 3",
+    "Il s’arrête si le nombre est entre 1 et 3, sans jamais rien afficher"
+   ],
+   1,
+   "N commence à 0, donc la boucle s’exécute au moins une fois. Elle redemande un nombre et affiche « Saisie erronée » tant que N est plus petit que 1 ou plus grand que 3. C’est une validation de la saisie.",
+   "N ← 0\nAFFICHER « Entrez un nombre entre 1 et 3 »\nTANT QUE N < 1 OU N > 3 FAIRE\n    LIRE N\n    SI N < 1 OU N > 3 ALORS\n        AFFICHER « Saisie erronée. Recommencez »\n    FIN SI\nFIN TANT QUE"
+  ],
+  [
+   "On entre 3, 7 et 12. Qu’affiche cet algorithme ?",
+   [
+    "« Le résultat est : 27 » puis « Votez pour Pedro »",
+    "« Le résultat est : 9 » puis « Votez pour Pedro »",
+    "« Le résultat est : 9 » puis « Hola! »",
+    "« Le résultat est : 31 » puis « Hola! »"
+   ],
+   1,
+   "a = 3, puis b ← 3 et c ← 3 (les valeurs lues pour b et c sont remplacées), puis a ← 3 + 3 × 2 = 9. Comme 9 ≥ 3 est vrai, on affiche « Votez pour Pedro » ; le SINON SI n’est pas testé.",
+   "LIRE a, b, c\nb ← a\nc ← a\na ← b + c × 2\nAFFICHER « Le résultat est : », a\nSI a = 8 OU a ≥ 3 ALORS\n    AFFICHER « Votez pour Pedro »\nSINON SI a ≥ 7 ALORS\n    AFFICHER « Hola! »\nFIN SI"
+  ],
+  [
+   "Quel pseudocode applique correctement un rabais de 20 % ?",
+   [
+    "LIRE prix · nouveau ← prix − 20 · AFFICHER nouveau",
+    "LIRE prix · rabais ← prix × 20 ÷ 100 · nouveau ← prix − rabais · AFFICHER nouveau",
+    "rabais ← prix × 20 ÷ 100 · LIRE prix · AFFICHER prix",
+    "LIRE prix · nouveau ← prix + prix × 20 ÷ 100 · AFFICHER nouveau"
+   ],
+   1,
+   "On calcule 20 % du prix, puis on le soustrait. Enlever 20 $ n’est pas un rabais de 20 %, et la dernière réponse ajoute au lieu d’enlever."
+  ],
+  [
+   "Un prix de 50 $ reçoit un rabais de 20 %. Quel est le nouveau prix ?",
+   [
+    "30 $",
+    "40 $",
+    "45 $",
+    "10 $"
+   ],
+   1,
+   "20 % de 50 $ = 10 $ ; 50 $ − 10 $ = 40 $."
+  ],
+  [
+   "Quelle condition vérifie qu’un nombre n est pair ?",
+   [
+    "n ÷ 2 = 0",
+    "n mod 2 = 0",
+    "n mod 2 = 1",
+    "n > 2"
+   ],
+   1,
+   "Un nombre est pair si le reste de sa division par 2 est 0 : n mod 2 = 0."
+  ],
+  [
+   "L’élève a une moyenne de 80, une lettre de recommandation, mais n’a jamais fait de club sportif. Avec « M ≥ 75 ET P = oui ET C = oui », est-il accepté ?",
+   [
+    "Oui, car sa moyenne est assez haute",
+    "Non, car avec ET les trois conditions doivent être vraies",
+    "Oui, car deux conditions sur trois suffisent",
+    "On ne peut pas savoir"
+   ],
+   1,
+   "Avec ET, une seule condition fausse rend tout faux. Il faudrait OU pour qu’une seule condition suffise."
+  ],
+  [
+   "Avec N = 10, qu’affiche l’algorithme des multiples de 3 ?",
+   [
+    "3, 6, 9",
+    "3, 6, 9, 12",
+    "0, 3, 6, 9",
+    "10, 20, 30"
+   ],
+   0,
+   "m prend les valeurs 3, 6 et 9. À 12, la condition m ≤ 10 est fausse : la boucle s’arrête.",
+   "LIRE N\nm ← 3\nTANT QUE m ≤ N FAIRE\n    AFFICHER m\n    m ← m + 3\nFIN TANT QUE"
+  ],
+  [
+   "L’utilisateur tape « abc123 » du premier coup. Que se passe-t-il ?",
+   [
+    "La boucle tourne une fois",
+    "La boucle ne tourne pas : on affiche tout de suite « Accès autorisé »",
+    "La boucle ne s’arrête jamais",
+    "Le programme affiche « Mot de passe incorrect »"
+   ],
+   1,
+   "La condition mdp ≠ « abc123 » est fausse dès le départ : la boucle ne tourne aucune fois.",
+   "LIRE mdp\nTANT QUE mdp ≠ « abc123 » FAIRE\n    AFFICHER « Mot de passe incorrect, recommence »\n    LIRE mdp\nFIN TANT QUE\nAFFICHER « Accès autorisé »"
+  ],
+  [
+   "Pour dire si un nombre est négatif, nul ou positif, de quoi a-t-on besoin ?",
+   [
+    "D’une boucle",
+    "D’une condition avec trois cas : SI… SINON SI… SINON",
+    "D’une seule condition SI… ALORS",
+    "D’aucune condition"
+   ],
+   1,
+   "Il y a trois résultats possibles : il faut trois cas, donc SI, SINON SI et SINON."
+  ],
+  [
+   "On entre 5 et 5 dans l’algorithme « plus grand de deux nombres ». Qu’affiche-t-il ?",
+   [
+    "5",
+    "Rien",
+    "10",
+    "Une erreur"
+   ],
+   0,
+   "5 > 5 est faux, donc on passe dans SINON et on affiche b, qui vaut 5. Les deux nombres sont égaux : afficher 5 est correct.",
+   "LIRE a, b\nSI a > b ALORS\n    AFFICHER a\nSINON\n    AFFICHER b\nFIN SI"
+  ]
+ ],
+ "ecrire": [
+  {
+   "titre": "Deviner le nombre secret",
+   "enonce": "Le nombre secret est 7. Demande un nombre jusqu’à ce que l’utilisateur trouve 7, puis affiche le nombre d’essais.",
+   "verif": [
+    "LIRE un premier nombre et compter 1 essai",
+    "TANT QUE n ≠ 7 : relire et ajouter 1 essai",
+    "AFFICHER le nombre d’essais après la boucle"
+   ],
+   "modele": "essais ← 1\nLIRE n\nTANT QUE n ≠ 7 FAIRE\n    AFFICHER « Ce n’est pas ça, recommence »\n    LIRE n\n    essais ← essais + 1\nFIN TANT QUE\nAFFICHER « Trouvé en », essais, « essais »"
+  },
+  {
+   "titre": "Somme de 1 à N",
+   "enonce": "Lis un nombre N et affiche la somme 1 + 2 + … + N. Par exemple, pour N = 4, l’algorithme affiche 10.",
+   "verif": [
+    "LIRE N",
+    "somme ← 0 et i ← 1 avant la boucle",
+    "TANT QUE i ≤ N : somme ← somme + i, puis i ← i + 1",
+    "AFFICHER somme après la boucle"
+   ],
+   "modele": "LIRE N\nsomme ← 0\ni ← 1\nTANT QUE i ≤ N FAIRE\n    somme ← somme + i\n    i ← i + 1\nFIN TANT QUE\nAFFICHER somme"
+  },
+  {
+   "titre": "Note en lettre",
+   "enonce": "Lis une note sur 100. Affiche « A » pour 80 et plus, « B » de 70 à 79, « C » de 60 à 69, « D » de 50 à 59, sinon « Échec ».",
+   "verif": [
+    "LIRE la note",
+    "tester du plus grand au plus petit : 80, 70, 60, 50",
+    "SINON SI pour chaque cas, SINON pour « Échec »"
+   ],
+   "modele": "LIRE note\nSI note ≥ 80 ALORS\n    AFFICHER « A »\nSINON SI note ≥ 70 ALORS\n    AFFICHER « B »\nSINON SI note ≥ 60 ALORS\n    AFFICHER « C »\nSINON SI note ≥ 50 ALORS\n    AFFICHER « D »\nSINON\n    AFFICHER « Échec »\nFIN SI"
+  }
+ ]
+};
+</script>
+<script src="../algo/python.js"></script>
+<script src="../algo/lecon.js"></script>
+<script>window.tej2oAccessReady=import('../access.js');</script><script type="module">try{await window.tej2oAccessReady;const c=window.TEJ2O?.corrige;if(c){openCorrige(c)}else if(new URLSearchParams(location.search).has("devoir")&&(window.TEJ2O?.teacher||window.TEJ2O?.homeworkOpen))go(4)}catch(err){console.error("Accès TEJ2O",err);const box=document.createElement("aside");box.style="padding:18px;margin:16px;border:2px solid #d5a83b;background:#163a2e;color:#fff";box.textContent="Impossible de vérifier l’accès à cette leçon. Vérifie Internet et ouvre le site depuis son adresse HTTPS.";document.body.prepend(box)}</script><script src="../telecharger.js"></script></body></html>

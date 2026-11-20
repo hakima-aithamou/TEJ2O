@@ -1,0 +1,425 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TEJ2O | Unité 5 · Leçon 8 — Python : les fonctions print et input</title>
+<link rel="stylesheet" href="../algo/lecon.css"></head><body data-activity="lesson14"><nav class="tej-nav" aria-label="Navigation principale"><a href="../site.html">← Accueil TEJ2O</a><span>Unité 5 · Algorithmes et Python</span></nav><main class="shell"><header class="top"><div><div class="brand">TEJ2O <span style="color:#fff;font-weight:400">| Algorithmes et Python</span></div><div class="small">Unité 5 · Leçon 8 — Python : les fonctions print et input</div></div><span class="pill">Unité 5</span></header><div class="intro"><div><h1>Afficher et demander</h1><div class="small">Quatre activités courtes, puis un devoir de dix questions.</div></div><div class="small" id="stepLabel"></div></div><div class="tabs" id="tabs"></div><div class="progress"><div class="fill" id="fill"></div></div><section id="content" aria-live="polite"></section><div class="nav"><button id="prev">← Précédent</button><span class="hint" id="navHint"></span><button id="next">Suivant →</button></div><div class="footer">TEJ2O · Unité 5 · Algorithmes et Python</div></main>
+<script>
+const LECON = {
+ "num": 14,
+ "aff": 8,
+ "titre": "Python : les fonctions print et input",
+ "labels": [
+  "1 · Écrire un print",
+  "2 · Afficher des variables",
+  "3 · Écrire un input",
+  "4 · input et les nombres",
+  "Devoir · 10 questions"
+ ],
+ "stages": [
+  {
+   "type": "code",
+   "title": "Afficher un message avec print",
+   "lead": [
+    "`print` est une **fonction** : un outil déjà prêt dans Python. On l’utilise avec son nom suivi de **parenthèses**.",
+    "Un texte s’écrit **entre guillemets** : `\"...\"`.",
+    "Chaque `print` affiche **une ligne**. `print()` sans rien affiche une ligne vide."
+   ],
+   "syntaxe": {
+    "code": "print(\"Bonjour\")",
+    "parties": [
+     [
+      "print",
+      "le nom de la fonction, en minuscules"
+     ],
+     [
+      "( )",
+      "les parenthèses, obligatoires"
+     ],
+     [
+      "\"Bonjour\"",
+      "le texte à afficher, entre guillemets"
+     ]
+    ]
+   },
+   "exemples": [
+    {
+     "t": "Deux lignes et une ligne vide",
+     "code": "print(\"Bonjour\")\nprint()\nprint(\"Bonne journée\")",
+     "sortie": "Bonjour\n\nBonne journée"
+    },
+    {
+     "t": "Erreurs fréquentes",
+     "fauxT": "Erreurs",
+     "faux": "Print(\"Bonjour\")\nprint(Bonjour)\nprint(\"Bonjour\"",
+     "bonT": "Correct",
+     "bon": "print(\"Bonjour\")",
+     "pourquoi": "Majuscule à Print, guillemets oubliés autour du texte, parenthèse fermante oubliée."
+    }
+   ],
+   "tip": "print, parenthèses, guillemets : print(\"ton texte\").",
+   "consigne": "Affiche ces trois lignes, exactement : « Club de robotique », « Réunion : mardi », « Local : 204 ».",
+   "starter": "# Affiche les trois lignes\n",
+   "tests": [
+    {
+     "in": [],
+     "out": "Club de robotique\nRéunion : mardi\nLocal : 204"
+    }
+   ],
+   "require": [
+    {
+     "re": "print\\s*\\(",
+     "msg": "Utilise `print(...)`."
+    }
+   ],
+   "hint": "Trois lignes de code, une par message : `print(\"Club de robotique\")`, puis les deux autres.",
+   "solution": "# Affiche les trois lignes\nprint(\"Club de robotique\")\nprint(\"Réunion : mardi\")\nprint(\"Local : 204\")",
+   "bravo": "Trois print, trois lignes, dans l’ordre du programme."
+  },
+  {
+   "type": "code",
+   "title": "Afficher la valeur d’une variable",
+   "lead": [
+    "**Sans guillemets**, print affiche la **valeur** de la variable : `print(nom)`.",
+    "**Avec des guillemets**, il affiche le texte tel quel : `print(\"nom\")` affiche le mot nom.",
+    "Pour afficher plusieurs choses, on les sépare par des **virgules**. Python met un espace entre elles.",
+    "On peut aussi afficher le résultat d’un calcul : `print(prix * 2)`."
+   ],
+   "syntaxe": {
+    "code": "print(\"Bonjour\", nom)",
+    "parties": [
+     [
+      "\"Bonjour\"",
+      "un texte, entre guillemets"
+     ],
+     [
+      ",",
+      "la virgule sépare les éléments et ajoute un espace"
+     ],
+     [
+      "nom",
+      "une variable, sans guillemets : sa valeur est affichée"
+     ]
+    ]
+   },
+   "exemples": [
+    {
+     "t": "Avec ou sans guillemets",
+     "code": "nom = \"Maya\"\nprint(nom)\nprint(\"nom\")",
+     "sortie": "Maya\nnom"
+    },
+    {
+     "t": "Texte, variable et calcul",
+     "code": "prix = 6\nprint(\"Prix :\", prix, \"$\")\nprint(\"Pour deux :\", prix * 2, \"$\")",
+     "sortie": "Prix : 6 $\nPour deux : 12 $"
+    }
+   ],
+   "tip": "Guillemets = texte affiché tel quel. Pas de guillemets = valeur de la variable.",
+   "consigne": "Les variables `prenom`, `points` et `bonus` sont données. Affiche « Maya a 55 points » en utilisant les variables et le calcul `points + bonus` (pas le nombre 55 écrit à la main).",
+   "starter": "prenom = \"Maya\"\npoints = 40\nbonus = 15\n# Affiche : Maya a 55 points\n",
+   "tests": [
+    {
+     "in": [],
+     "out": "Maya a 55 points"
+    }
+   ],
+   "require": [
+    {
+     "re": "print\\s*\\([^\\n]*\\bprenom\\b",
+     "msg": "Utilise la variable `prenom` dans le print (sans guillemets)."
+    },
+    {
+     "re": "points\\s*\\+\\s*bonus",
+     "msg": "Calcule `points + bonus` dans le print."
+    }
+   ],
+   "hint": "Sépare par des virgules : la variable prenom, le texte \"a\", le calcul points + bonus, puis le texte \"points\".",
+   "solution": "prenom = \"Maya\"\npoints = 40\nbonus = 15\n# Affiche : Maya a 55 points\nprint(prenom, \"a\", points + bonus, \"points\")",
+   "bravo": "Change bonus = 15 en bonus = 20 : le message se met à jour tout seul."
+  },
+  {
+   "type": "code",
+   "title": "Demander une réponse avec input",
+   "lead": [
+    "`input` est aussi une **fonction**. Elle affiche une question, puis **attend** que l’utilisateur tape sa réponse.",
+    "La réponse est rangée dans une **variable**, à gauche du =.",
+    "Laisse un **espace** à la fin de la question pour que la réponse ne soit pas collée.",
+    "Ici, l’utilisateur ne tape pas au clavier : ses réponses s’écrivent dans la case **Entrées**, une par ligne."
+   ],
+   "syntaxe": {
+    "code": "nom = input(\"Ton nom ? \")",
+    "parties": [
+     [
+      "nom",
+      "la variable qui reçoit la réponse"
+     ],
+     [
+      "=",
+      "range la réponse dans la variable"
+     ],
+     [
+      "input",
+      "la fonction qui attend la réponse"
+     ],
+     [
+      "\"Ton nom ? \"",
+      "la question affichée, avec un espace à la fin"
+     ]
+    ]
+   },
+   "exemples": [
+    {
+     "t": "Demander puis répondre",
+     "entrees": [
+      "Léo"
+     ],
+     "code": "nom = input(\"Ton nom ? \")\nprint(\"Bonjour\", nom)",
+     "sortie": "Ton nom ? Léo\nBonjour Léo"
+    },
+    {
+     "t": "Deux questions",
+     "entrees": [
+      "soccer",
+      "Ottawa"
+     ],
+     "code": "sport = input(\"Ton sport ? \")\nville = input(\"Ta ville ? \")\nprint(sport, \"à\", ville)",
+     "sortie": "Ton sport ? soccer\nTa ville ? Ottawa\nsoccer à Ottawa"
+    }
+   ],
+   "tip": "variable = input(\"question \") : la question s’affiche, la réponse va dans la variable.",
+   "consigne": "Demande le prénom, puis la ville. Affiche ensuite « Bonjour Maya de Toronto » (avec les réponses tapées).",
+   "starter": "prenom = input(\"Ton prénom ? \")\n# Demande la ville\n\n# Affiche le message\n",
+   "inputs": [
+    "Maya",
+    "Toronto"
+   ],
+   "tests": [
+    {
+     "in": [
+      "Maya",
+      "Toronto"
+     ],
+     "out": "Bonjour Maya de Toronto"
+    },
+    {
+     "in": [
+      "Sami",
+      "Sudbury"
+     ],
+     "out": "Bonjour Sami de Sudbury"
+    }
+   ],
+   "require": [
+    {
+     "re": "ville\\s*=\\s*input",
+     "msg": "Range la ville dans une variable : `ville = input(\"Ta ville ? \")`."
+    }
+   ],
+   "hint": "Copie le modèle de la ligne 1 pour la ville. Puis `print(\"Bonjour\", prenom, \"de\", ville)`.",
+   "solution": "prenom = input(\"Ton prénom ? \")\n# Demande la ville\nville = input(\"Ta ville ? \")\n# Affiche le message\nprint(\"Bonjour\", prenom, \"de\", ville)",
+   "bravo": "Ton programme répond à n’importe qui : c’est l’intérêt d’une entrée."
+  },
+  {
+   "type": "code",
+   "title": "input et les nombres : int et float",
+   "lead": [
+    "`input` donne **toujours du texte** (str), même si l’utilisateur tape un nombre.",
+    "Pour calculer, on transforme ce texte en nombre : `int(...)` pour un **entier**, `float(...)` pour un **décimal**.",
+    "On met input **à l’intérieur** de int : `int(input(\"...\"))`. Attention aux **deux** parenthèses fermantes."
+   ],
+   "syntaxe": {
+    "code": "age = int(input(\"Ton âge ? \"))",
+    "parties": [
+     [
+      "input(\"Ton âge ? \")",
+      "demande la réponse : du texte, par exemple \"15\""
+     ],
+     [
+      "int( ... )",
+      "transforme ce texte en nombre entier : 15"
+     ],
+     [
+      "))",
+      "une parenthèse ferme input, l’autre ferme int"
+     ]
+    ]
+   },
+   "exemples": [
+    {
+     "t": "Sans int : du texte collé",
+     "fauxT": "Résultat faux : 53",
+     "faux": "a = input(\"Nombre ? \")\nb = input(\"Nombre ? \")\nprint(a + b)",
+     "bonT": "Correct : 8",
+     "bon": "a = int(input(\"Nombre ? \"))\nb = int(input(\"Nombre ? \"))\nprint(a + b)",
+     "pourquoi": "Avec les entrées 5 et 3, sans int, a et b sont du texte : \"5\" + \"3\" colle les deux et donne 53."
+    },
+    {
+     "t": "Un nombre décimal avec float",
+     "entrees": [
+      "2.5"
+     ],
+     "code": "prix = float(input(\"Prix ? \"))\nprint(\"Double :\", prix * 2)",
+     "sortie": "Prix ? 2.5\nDouble : 5.0"
+    }
+   ],
+   "tip": "Un nombre lu avec input se transforme avec int(...) ou float(...) avant de calculer.",
+   "consigne": "Demande le prix d’un article (entier) et la quantité, puis affiche le total. Pour un prix de 12 et une quantité de 3, le programme affiche « Total : 36 ».",
+   "starter": "prix = int(input(\"Prix ? \"))\n# Demande la quantité\n\n# Calcule et affiche le total\n",
+   "inputs": [
+    "12",
+    "3"
+   ],
+   "tests": [
+    {
+     "in": [
+      "12",
+      "3"
+     ],
+     "out": "Total : 36"
+    },
+    {
+     "in": [
+      "5",
+      "4"
+     ],
+     "out": "Total : 20"
+    },
+    {
+     "in": [
+      "7",
+      "1"
+     ],
+     "out": "Total : 7"
+    }
+   ],
+   "require": [
+    {
+     "re": "int\\s*\\(\\s*input",
+     "msg": "Lis la quantité avec `int(input(...))`."
+    }
+   ],
+   "hint": "Copie la ligne 1 pour la quantité. Puis `total = prix * quantite` et `print(\"Total :\", total)`.",
+   "solution": "prix = int(input(\"Prix ? \"))\n# Demande la quantité\nquantite = int(input(\"Quantité ? \"))\n# Calcule et affiche le total\ntotal = prix * quantite\nprint(\"Total :\", total)",
+   "bravo": "ENTRÉE (input) → TRAITEMENT (calcul) → SORTIE (print) : tu as écrit un vrai algorithme en Python."
+  }
+ ],
+ "questions": [
+  [
+   "Quelle ligne affiche correctement Bonjour ?",
+   [
+    "Print(\"Bonjour\")",
+    "print(Bonjour)",
+    "print(\"Bonjour\")",
+    "print \"Bonjour\""
+   ],
+   2,
+   "Le nom en minuscules, des parenthèses et le texte entre guillemets."
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "Bonjour nom",
+    "Bonjour Sam",
+    "BonjourSam",
+    "Une erreur"
+   ],
+   1,
+   "nom n’est pas entre guillemets : Python affiche sa valeur. La virgule ajoute un espace.",
+   "nom = \"Sam\"\nprint(\"Bonjour\", nom)"
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "ville",
+    "Ottawa",
+    "\"ville\"",
+    "Une erreur"
+   ],
+   0,
+   "Avec des guillemets, print affiche le texte tel quel, pas la valeur de la variable.",
+   "ville = \"Ottawa\"\nprint(\"ville\")"
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "prix * 3",
+    "12",
+    "4 3",
+    "43"
+   ],
+   1,
+   "prix * 3 n’est pas entre guillemets : Python calcule 4 × 3 = 12.",
+   "prix = 4\nprint(prix * 3)"
+  ],
+  [
+   "Que fait input(\"Ton âge ? \") ?",
+   [
+    "Il affiche la question et attend la réponse",
+    "Il calcule l’âge",
+    "Il affiche seulement la question",
+    "Il crée une erreur"
+   ],
+   0,
+   "input affiche la question, puis attend que l’utilisateur tape sa réponse."
+  ],
+  [
+   "Pourquoi écrit-on int(input(...)) pour lire un âge ?",
+   [
+    "Pour que la question s’affiche",
+    "Parce que input donne du texte et qu’on veut un nombre pour calculer",
+    "Pour que l’âge soit positif",
+    "Ce n’est jamais nécessaire"
+   ],
+   1,
+   "input donne toujours du texte. int(...) le transforme en nombre entier."
+  ],
+  [
+   "L’utilisateur tape 5 puis 3. Qu’affiche ce programme ?",
+   [
+    "8",
+    "53",
+    "Une erreur",
+    "5 3"
+   ],
+   1,
+   "Sans int, a et b sont du texte : \"5\" + \"3\" colle les deux textes.",
+   "a = input()\nb = input()\nprint(a + b)"
+  ],
+  [
+   "Quelle ligne lit un nombre décimal, comme 1.75 ?",
+   [
+    "t = int(input(\"Taille ? \"))",
+    "t = float(input(\"Taille ? \"))",
+    "t = input(float(\"Taille ? \"))",
+    "t = decimal(\"Taille ? \")"
+   ],
+   1,
+   "float(...) transforme le texte en nombre décimal. int(\"1.75\") donnerait une erreur."
+  ],
+  [
+   "Il manque quelque chose dans cette ligne. Quoi ?",
+   [
+    "Une parenthèse fermante",
+    "Des guillemets",
+    "Un deux-points",
+    "Rien"
+   ],
+   0,
+   "Il faut deux parenthèses fermantes : une pour input, une pour int.",
+   "n = int(input(\"Nombre ? \")"
+  ],
+  [
+   "L’utilisateur tape 10. Qu’affiche ce programme ?",
+   [
+    "10",
+    "15",
+    "Total : 15",
+    "Total : 105"
+   ],
+   2,
+   "n vaut 10 (un nombre grâce à int). On affiche le texte \"Total :\" puis 10 + 5 = 15.",
+   "n = int(input(\"n ? \"))\nprint(\"Total :\", n + 5)"
+  ]
+ ],
+ "ecrire": []
+};
+</script>
+<script src="../algo/python.js"></script>
+<script src="../algo/lecon.js"></script>
+<script>window.tej2oAccessReady=import('../access.js');</script><script type="module">try{await window.tej2oAccessReady;const c=window.TEJ2O?.corrige;if(c){openCorrige(c)}else if(new URLSearchParams(location.search).has("devoir")&&(window.TEJ2O?.teacher||window.TEJ2O?.homeworkOpen))go(4)}catch(err){console.error("Accès TEJ2O",err);const box=document.createElement("aside");box.style="padding:18px;margin:16px;border:2px solid #d5a83b;background:#163a2e;color:#fff";box.textContent="Impossible de vérifier l’accès à cette leçon. Vérifie Internet et ouvre le site depuis son adresse HTTPS.";document.body.prepend(box)}</script><script src="../telecharger.js"></script></body></html>

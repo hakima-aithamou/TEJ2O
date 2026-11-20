@@ -1,0 +1,391 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TEJ2O | Unité 5 · Leçon 11 — Python : la boucle for et range</title>
+<link rel="stylesheet" href="../algo/lecon.css"></head><body data-activity="lesson17"><nav class="tej-nav" aria-label="Navigation principale"><a href="../site.html">← Accueil TEJ2O</a><span>Unité 5 · Algorithmes et Python</span></nav><main class="shell"><header class="top"><div><div class="brand">TEJ2O <span style="color:#fff;font-weight:400">| Algorithmes et Python</span></div><div class="small">Unité 5 · Leçon 11 — Python : la boucle for et range</div></div><span class="pill">Unité 5</span></header><div class="intro"><div><h1>Répéter sans tout réécrire</h1><div class="small">Quatre activités courtes, puis un devoir de dix questions.</div></div><div class="small" id="stepLabel"></div></div><div class="tabs" id="tabs"></div><div class="progress"><div class="fill" id="fill"></div></div><section id="content" aria-live="polite"></section><div class="nav"><button id="prev">← Précédent</button><span class="hint" id="navHint"></span><button id="next">Suivant →</button></div><div class="footer">TEJ2O · Unité 5 · Algorithmes et Python</div></main>
+<script>
+const LECON = {
+ "num": 17,
+ "aff": 11,
+ "titre": "Python : la boucle for et range",
+ "labels": [
+  "1 · Répéter avec for",
+  "2 · range(début, fin)",
+  "3 · range avec un pas",
+  "4 · Additionner avec for",
+  "Devoir · 10 questions"
+ ],
+ "stages": [
+  {
+   "type": "code",
+   "title": "Répéter avec for et range",
+   "lead": [
+    "Une **boucle** répète un bloc d’instructions. `for i in range(5):` répète le bloc **5 fois**.",
+    "La variable `i` change à chaque tour : elle vaut **0, puis 1, 2, 3, 4**. Elle commence à 0.",
+    "Comme pour if : **deux-points** à la fin, bloc **décalé de 4 espaces**. Ce qui revient à gauche s’exécute **après** la boucle, une seule fois."
+   ],
+   "syntaxe": {
+    "code": "for i in range(3):\n    print(\"Bonjour\")",
+    "parties": [
+     [
+      "for",
+      "le mot clé « pour »"
+     ],
+     [
+      "i",
+      "la variable de la boucle : elle change à chaque tour"
+     ],
+     [
+      "in range(3)",
+      "les valeurs de i : 0, 1, 2 (donc 3 tours)"
+     ],
+     [
+      ":",
+      "les deux-points"
+     ],
+     [
+      "    print(...)",
+      "le bloc répété, décalé de 4 espaces"
+     ]
+    ]
+   },
+   "exemples": [
+    {
+     "t": "Répéter un message",
+     "note": "« Fin » est hors de la boucle : affiché une seule fois.",
+     "code": "for i in range(3):\n    print(\"Bonjour\")\nprint(\"Fin\")",
+     "sortie": "Bonjour\nBonjour\nBonjour\nFin"
+    },
+    {
+     "t": "Afficher i",
+     "code": "for i in range(4):\n    print(\"Tour\", i)",
+     "sortie": "Tour 0\nTour 1\nTour 2\nTour 3"
+    }
+   ],
+   "tip": "range(n) donne n valeurs : de 0 à n − 1.",
+   "consigne": "Avec une boucle for, affiche 5 fois la ligne « Je révise mon Python », puis une seule fois « Terminé ! ».",
+   "starter": "# Ta boucle ici\n\n",
+   "tests": [
+    {
+     "in": [],
+     "out": "Je révise mon Python\nJe révise mon Python\nJe révise mon Python\nJe révise mon Python\nJe révise mon Python\nTerminé !"
+    }
+   ],
+   "require": [
+    {
+     "re": "\\bfor\\b[^\\n]*range",
+     "msg": "Utilise `for i in range(...)` : c’est le but de l’exercice."
+    }
+   ],
+   "hint": "`for i in range(5):` puis le print décalé. « Terminé ! » se place tout à gauche, après la boucle.",
+   "solution": "# Ta boucle ici\nfor i in range(5):\n    print(\"Je révise mon Python\")\nprint(\"Terminé !\")",
+   "bravo": "Si « Terminé ! » s’affichait 5 fois, c’est qu’il était décalé dans la boucle."
+  },
+  {
+   "type": "code",
+   "title": "range(début, fin)",
+   "lead": [
+    "`range(1, 6)` donne **1, 2, 3, 4, 5** : on commence au 1er nombre.",
+    "Le 2e nombre n’est **jamais inclus** : la boucle s’arrête **juste avant**.",
+    "Pour aller de 1 à 10, on écrit donc `range(1, 11)`."
+   ],
+   "syntaxe": {
+    "code": "for i in range(1, 6):",
+    "parties": [
+     [
+      "1",
+      "début : inclus"
+     ],
+     [
+      "6",
+      "fin : jamais incluse"
+     ],
+     [
+      "valeurs de i",
+      "1, 2, 3, 4, 5"
+     ]
+    ]
+   },
+   "exemples": [
+    {
+     "t": "De 1 à 5",
+     "code": "for i in range(1, 6):\n    print(i)",
+     "sortie": "1\n2\n3\n4\n5"
+    },
+    {
+     "t": "Utiliser i dans un calcul",
+     "code": "for i in range(1, 4):\n    print(i, \"x 2 =\", i * 2)",
+     "sortie": "1 x 2 = 2\n2 x 2 = 4\n3 x 2 = 6"
+    }
+   ],
+   "tip": "La fin de range n’est jamais incluse : pour finir à 10, écris 11.",
+   "consigne": "Affiche la table de multiplication de 7, de 7 × 1 à 7 × 10, une ligne par calcul, sous la forme « 7 x 1 = 7 ».",
+   "starter": "for i in range(1, 11):\n    print(...)\n",
+   "tests": [
+    {
+     "in": [],
+     "out": "7 x 1 = 7\n7 x 2 = 14\n7 x 3 = 21\n7 x 4 = 28\n7 x 5 = 35\n7 x 6 = 42\n7 x 7 = 49\n7 x 8 = 56\n7 x 9 = 63\n7 x 10 = 70"
+    }
+   ],
+   "require": [
+    {
+     "re": "\\bfor\\b",
+     "msg": "Utilise une boucle `for`."
+    }
+   ],
+   "hint": "Dans le print, sépare par des virgules : \"7 x\", puis i, puis \"=\", puis le calcul 7 * i.",
+   "solution": "for i in range(1, 11):\n    print(\"7 x\", i, \"=\", 7 * i)",
+   "bravo": "Deux lignes de code pour dix lignes affichées : voilà la force d’une boucle."
+  },
+  {
+   "type": "code",
+   "title": "range avec un pas",
+   "lead": [
+    "Un 3e nombre donne le **pas** : de combien on avance à chaque tour.",
+    "`range(0, 20, 5)` donne **0, 5, 10, 15**.",
+    "Avec un pas **négatif**, on compte à rebours : `range(5, 0, -1)` donne **5, 4, 3, 2, 1**."
+   ],
+   "syntaxe": {
+    "code": "for i in range(0, 20, 5):",
+    "parties": [
+     [
+      "0",
+      "début (inclus)"
+     ],
+     [
+      "20",
+      "fin (jamais incluse)"
+     ],
+     [
+      "5",
+      "le pas : on avance de 5"
+     ],
+     [
+      "valeurs de i",
+      "0, 5, 10, 15"
+     ]
+    ]
+   },
+   "exemples": [
+    {
+     "t": "Les nombres pairs",
+     "code": "for i in range(2, 11, 2):\n    print(i)",
+     "sortie": "2\n4\n6\n8\n10"
+    },
+    {
+     "t": "À rebours",
+     "code": "for i in range(3, 0, -1):\n    print(i)\nprint(\"Go !\")",
+     "sortie": "3\n2\n1\nGo !"
+    }
+   ],
+   "tip": "range(début, fin, pas). La fin n’est jamais incluse, même à rebours.",
+   "consigne": "Affiche un compte à rebours de 10 à 1 (un nombre par ligne), puis « Décollage ! ».",
+   "starter": "# Compte à rebours\n\n",
+   "tests": [
+    {
+     "in": [],
+     "out": "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\nDécollage !"
+    }
+   ],
+   "require": [
+    {
+     "re": "range\\s*\\([^)]*-\\s*1",
+     "msg": "Utilise un pas négatif : `range(10, 0, -1)`."
+    }
+   ],
+   "hint": "`for i in range(10, 0, -1):` puis `print(i)` décalé, puis « Décollage ! » tout à gauche.",
+   "solution": "# Compte à rebours\nfor i in range(10, 0, -1):\n    print(i)\nprint(\"Décollage !\")",
+   "bravo": "La fin 0 n’est pas incluse : la boucle s’arrête bien à 1."
+  },
+  {
+   "type": "code",
+   "title": "Additionner avec une boucle",
+   "lead": [
+    "Un **accumulateur** est une variable qui commence à **0** et à laquelle on **ajoute** une valeur à chaque tour.",
+    "`total = 0` **avant** la boucle, puis `total = total + ...` **dans** la boucle.",
+    "On affiche le total **après** la boucle, tout à gauche, sinon il s’affiche à chaque tour."
+   ],
+   "exemples": [
+    {
+     "t": "Somme de 1 à 4",
+     "note": "0 + 1 + 2 + 3 + 4 = 10.",
+     "code": "total = 0\nfor i in range(1, 5):\n    total = total + i\nprint(\"Somme :\", total)",
+     "sortie": "Somme : 10"
+    },
+    {
+     "t": "print mal placé",
+     "fauxT": "Affiche 4 lignes",
+     "faux": "total = 0\nfor i in range(1, 5):\n    total = total + i\n    print(total)",
+     "bonT": "Affiche seulement 10",
+     "bon": "total = 0\nfor i in range(1, 5):\n    total = total + i\nprint(total)",
+     "pourquoi": "Dans le premier, le print est décalé : il fait partie de la boucle."
+    }
+   ],
+   "tip": "Avant la boucle : total = 0. Dans la boucle : on ajoute. Après la boucle : on affiche.",
+   "consigne": "Le programme lit d’abord le nombre de notes, puis chaque note, et affiche la moyenne arrondie avec round(). Pour 3 notes (70, 80 et 95), il affiche « Moyenne : 82 ».",
+   "starter": "n = int(input(\"Combien de notes ? \"))\ntotal = 0\n\nfor i in range(n):\n    note = int(input(\"Note ? \"))\n    # ajoute la note au total\n\n# affiche la moyenne arrondie\n",
+   "inputs": [
+    "3",
+    "70",
+    "80",
+    "95"
+   ],
+   "tests": [
+    {
+     "in": [
+      "3",
+      "70",
+      "80",
+      "95"
+     ],
+     "out": "Moyenne : 82"
+    },
+    {
+     "in": [
+      "4",
+      "100",
+      "90",
+      "80",
+      "70"
+     ],
+     "out": "Moyenne : 85"
+    },
+    {
+     "in": [
+      "1",
+      "64"
+     ],
+     "out": "Moyenne : 64"
+    }
+   ],
+   "require": [
+    {
+     "re": "\\bfor\\b",
+     "msg": "Garde la boucle `for` pour lire les notes."
+    }
+   ],
+   "hint": "Dans la boucle : `total = total + note`. Après la boucle (tout à gauche) : `print(\"Moyenne :\", round(total / n))`.",
+   "solution": "n = int(input(\"Combien de notes ? \"))\ntotal = 0\n\nfor i in range(n):\n    note = int(input(\"Note ? \"))\n    # ajoute la note au total\n    total = total + note\n\n# affiche la moyenne arrondie\nprint(\"Moyenne :\", round(total / n))",
+   "bravo": "70 + 80 + 95 = 245 et 245 ÷ 3 ≈ 81,7, arrondi à 82."
+  }
+ ],
+ "questions": [
+  [
+   "Combien de fois « Salut » est-il affiché ?",
+   [
+    "3",
+    "4",
+    "5",
+    "6"
+   ],
+   2,
+   "range(5) donne 0, 1, 2, 3, 4 : cinq tours.",
+   "for i in range(5):\n    print(\"Salut\")"
+  ],
+  [
+   "Quelles valeurs prend i dans for i in range(4) ?",
+   [
+    "1, 2, 3, 4",
+    "0, 1, 2, 3",
+    "0, 1, 2, 3, 4",
+    "4"
+   ],
+   1,
+   "range commence à 0 et s’arrête juste avant 4."
+  ],
+  [
+   "Quelles valeurs donne range(2, 6) ?",
+   [
+    "2, 3, 4, 5, 6",
+    "2, 3, 4, 5",
+    "3, 4, 5, 6",
+    "2, 6"
+   ],
+   1,
+   "On commence à 2 ; la fin, 6, n’est jamais incluse."
+  ],
+  [
+   "Pour afficher les nombres de 1 à 10, quel range faut-il ?",
+   [
+    "range(10)",
+    "range(1, 10)",
+    "range(1, 11)",
+    "range(0, 10)"
+   ],
+   2,
+   "La fin n’est pas incluse : pour finir à 10, on écrit 11."
+  ],
+  [
+   "Quelles valeurs donne range(0, 15, 5) ?",
+   [
+    "0, 5, 10",
+    "0, 5, 10, 15",
+    "5, 10, 15",
+    "0, 15"
+   ],
+   0,
+   "Le pas est 5 et 15 n’est pas inclus : 0, 5, 10."
+  ],
+  [
+   "Quel range compte à rebours 3, 2, 1 ?",
+   [
+    "range(3, 0)",
+    "range(3, 1, -1)",
+    "range(3, 0, -1)",
+    "range(1, 4)"
+   ],
+   2,
+   "Pas négatif -1, et la fin 0 n’est pas incluse : 3, 2, 1."
+  ],
+  [
+   "Combien de fois « Fin » est-il affiché ?",
+   [
+    "0",
+    "1",
+    "3",
+    "4"
+   ],
+   1,
+   "print(\"Fin\") est tout à gauche, hors de la boucle : une seule fois, après les 3 tours.",
+   "for i in range(3):\n    print(i)\nprint(\"Fin\")"
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "6",
+    "3",
+    "0 1 2 3",
+    "10"
+   ],
+   0,
+   "total = 0 + 1 + 2 + 3 = 6, affiché une fois après la boucle.",
+   "total = 0\nfor i in range(4):\n    total = total + i\nprint(total)"
+  ],
+  [
+   "Ce programme affiche le total à chaque tour. Comment le corriger ?",
+   [
+    "Enlever le décalage de la ligne print",
+    "Ajouter un deux-points",
+    "Mettre total = 0 dans la boucle",
+    "Changer range(3) en range(1)"
+   ],
+   0,
+   "Le print est décalé : il fait partie de la boucle. Tout à gauche, il s’exécute une seule fois, à la fin.",
+   "total = 0\nfor i in range(3):\n    total = total + 5\n    print(total)"
+  ],
+  [
+   "Qu’affiche la dernière ligne de ce programme ?",
+   [
+    "2 x 3 = 6",
+    "3 x 3 = 9",
+    "4 x 3 = 12",
+    "0 x 3 = 0"
+   ],
+   1,
+   "range(1, 4) donne 1, 2, 3 : le dernier tour affiche 3 x 3 = 9.",
+   "for i in range(1, 4):\n    print(i, \"x 3 =\", i * 3)"
+  ]
+ ],
+ "ecrire": []
+};
+</script>
+<script src="../algo/python.js"></script>
+<script src="../algo/lecon.js"></script>
+<script>window.tej2oAccessReady=import('../access.js');</script><script type="module">try{await window.tej2oAccessReady;const c=window.TEJ2O?.corrige;if(c){openCorrige(c)}else if(new URLSearchParams(location.search).has("devoir")&&(window.TEJ2O?.teacher||window.TEJ2O?.homeworkOpen))go(4)}catch(err){console.error("Accès TEJ2O",err);const box=document.createElement("aside");box.style="padding:18px;margin:16px;border:2px solid #d5a83b;background:#163a2e;color:#fff";box.textContent="Impossible de vérifier l’accès à cette leçon. Vérifie Internet et ouvre le site depuis son adresse HTTPS.";document.body.prepend(box)}</script><script src="../telecharger.js"></script></body></html>

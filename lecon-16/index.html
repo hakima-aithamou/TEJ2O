@@ -1,0 +1,422 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TEJ2O | Unité 5 · Leçon 10 — Python : and et or</title>
+<link rel="stylesheet" href="../algo/lecon.css"></head><body data-activity="lesson16"><nav class="tej-nav" aria-label="Navigation principale"><a href="../site.html">← Accueil TEJ2O</a><span>Unité 5 · Algorithmes et Python</span></nav><main class="shell"><header class="top"><div><div class="brand">TEJ2O <span style="color:#fff;font-weight:400">| Algorithmes et Python</span></div><div class="small">Unité 5 · Leçon 10 — Python : and et or</div></div><span class="pill">Unité 5</span></header><div class="intro"><div><h1>Combiner des conditions</h1><div class="small">Quatre activités courtes, puis un devoir de dix questions.</div></div><div class="small" id="stepLabel"></div></div><div class="tabs" id="tabs"></div><div class="progress"><div class="fill" id="fill"></div></div><section id="content" aria-live="polite"></section><div class="nav"><button id="prev">← Précédent</button><span class="hint" id="navHint"></span><button id="next">Suivant →</button></div><div class="footer">TEJ2O · Unité 5 · Algorithmes et Python</div></main>
+<script>
+const LECON = {
+ "num": 16,
+ "aff": 10,
+ "titre": "Python : and et or",
+ "labels": [
+  "1 · and",
+  "2 · or",
+  "3 · and ou or ?",
+  "4 · Défi mot de passe",
+  "Devoir · 10 questions"
+ ],
+ "stages": [
+  {
+   "type": "code",
+   "title": "and : les deux conditions doivent être vraies",
+   "lead": [
+    "`and` veut dire **et** : la condition entière est vraie **seulement si les deux** sont vraies.",
+    "Si une seule est fausse, tout est faux.",
+    "Il faut écrire la variable **dans chaque condition** : `age >= 10 and age <= 15`."
+   ],
+   "syntaxe": {
+    "code": "if age >= 10 and taille >= 120:",
+    "parties": [
+     [
+      "age >= 10",
+      "1re condition"
+     ],
+     [
+      "and",
+      "« et » : les deux doivent être vraies"
+     ],
+     [
+      "taille >= 120",
+      "2e condition"
+     ]
+    ]
+   },
+   "exemples": [
+    {
+     "t": "Table de and",
+     "lignes": [
+      "vrai **and** vrai → **vrai**",
+      "vrai **and** faux → faux",
+      "faux **and** vrai → faux",
+      "faux **and** faux → faux"
+     ]
+    },
+    {
+     "t": "Une seule condition vraie ne suffit pas",
+     "note": "L’âge est bon, mais pas la taille.",
+     "code": "age = 12\ntaille = 110\nif age >= 10 and taille >= 120:\n    print(\"Accès\")\nelse:\n    print(\"Refusé\")",
+     "sortie": "Refusé"
+    }
+   ],
+   "tip": "and : il faut que tout soit vrai.",
+   "consigne": "Le programme lit l’âge puis la taille (en cm). Il affiche « Accès au manège » si la personne a au moins 10 ans ET mesure au moins 120 cm, sinon « Accès refusé ».",
+   "starter": "age = int(input(\"Âge ? \"))\ntaille = int(input(\"Taille ? \"))\n\n",
+   "inputs": [
+    "12",
+    "130"
+   ],
+   "tests": [
+    {
+     "in": [
+      "12",
+      "130"
+     ],
+     "out": "Accès au manège"
+    },
+    {
+     "in": [
+      "12",
+      "110"
+     ],
+     "out": "Accès refusé"
+    },
+    {
+     "in": [
+      "8",
+      "130"
+     ],
+     "out": "Accès refusé"
+    },
+    {
+     "in": [
+      "10",
+      "120"
+     ],
+     "out": "Accès au manège"
+    }
+   ],
+   "require": [
+    {
+     "re": "\\band\\b",
+     "msg": "Utilise `and` pour combiner les deux conditions."
+    }
+   ],
+   "hint": "`if age >= 10 and taille >= 120:` puis un print décalé, puis `else:` et l’autre print.",
+   "solution": "age = int(input(\"Âge ? \"))\ntaille = int(input(\"Taille ? \"))\n\nif age >= 10 and taille >= 120:\n    print(\"Accès au manège\")\nelse:\n    print(\"Accès refusé\")",
+   "bravo": "10 ans et 120 cm pile : accès accordé, car « au moins » s’écrit >=."
+  },
+  {
+   "type": "code",
+   "title": "or : au moins une condition doit être vraie",
+   "lead": [
+    "`or` veut dire **ou** : la condition entière est vraie si **au moins une** des deux est vraie.",
+    "Elle est fausse seulement quand **les deux** sont fausses."
+   ],
+   "syntaxe": {
+    "code": "if t < 0 or t > 35:",
+    "parties": [
+     [
+      "t < 0",
+      "1re condition"
+     ],
+     [
+      "or",
+      "« ou » : une seule vraie suffit"
+     ],
+     [
+      "t > 35",
+      "2e condition"
+     ]
+    ]
+   },
+   "exemples": [
+    {
+     "t": "Table de or",
+     "lignes": [
+      "vrai **or** vrai → vrai",
+      "vrai **or** faux → **vrai**",
+      "faux **or** vrai → **vrai**",
+      "faux **or** faux → faux"
+     ]
+    },
+    {
+     "t": "Fin de semaine",
+     "code": "jour = \"dimanche\"\nif jour == \"samedi\" or jour == \"dimanche\":\n    print(\"Congé\")\nelse:\n    print(\"École\")",
+     "sortie": "Congé"
+    }
+   ],
+   "tip": "or : il suffit qu’une condition soit vraie.",
+   "consigne": "Le programme lit une température. Il affiche « Alerte » si elle est plus petite que 0 OU plus grande que 35, sinon « Normal ».",
+   "starter": "t = int(input(\"Température ? \"))\n\n",
+   "inputs": [
+    "36"
+   ],
+   "tests": [
+    {
+     "in": [
+      "36"
+     ],
+     "out": "Alerte"
+    },
+    {
+     "in": [
+      "-5"
+     ],
+     "out": "Alerte"
+    },
+    {
+     "in": [
+      "20"
+     ],
+     "out": "Normal"
+    },
+    {
+     "in": [
+      "0"
+     ],
+     "out": "Normal"
+    },
+    {
+     "in": [
+      "35"
+     ],
+     "out": "Normal"
+    }
+   ],
+   "require": [
+    {
+     "re": "\\bor\\b",
+     "msg": "Utilise `or` pour combiner les deux conditions."
+    }
+   ],
+   "hint": "`if t < 0 or t > 35:` puis « Alerte », sinon « Normal ».",
+   "solution": "t = int(input(\"Température ? \"))\n\nif t < 0 or t > 35:\n    print(\"Alerte\")\nelse:\n    print(\"Normal\")",
+   "bravo": "0 et 35 donnent « Normal » : ni l’une ni l’autre condition n’est vraie."
+  },
+  {
+   "type": "qcm",
+   "title": "and ou or : lequel choisir ?",
+   "lead": [
+    "Lis la phrase en français : **« et »** → `and`, **« ou »** → `or`.",
+    "Si **toutes** les règles doivent être respectées → `and`.",
+    "Si **une seule** situation suffit → `or`."
+   ],
+   "exemples": [
+    {
+     "t": "Avec and",
+     "lignes": [
+      "Note entre 0 et 100 : `note >= 0 and note <= 100`",
+      "Billet ET pièce d’identité : `billet == \"oui\" and id == \"oui\"`"
+     ]
+    },
+    {
+     "t": "Avec or",
+     "lignes": [
+      "Rabais pour enfants ou aînés : `age < 12 or age >= 65`",
+      "Choix invalide : `choix < 1 or choix > 3`"
+     ]
+    }
+   ],
+   "tip": "Une seule condition suffit ? or. Toutes les conditions ? and.",
+   "doc": "Situation à analyser",
+   "sample": [
+    "Un club accepte un élève s’il est en 10e année ou en 11e année.",
+    "La variable annee contient l’année de l’élève."
+   ],
+   "consigne": "Quelle condition est correcte ?",
+   "opts": [
+    "annee == 10 or annee == 11",
+    "annee == 10 and annee == 11",
+    "annee == 10 or 11",
+    "annee == (10 and 11)"
+   ],
+   "correct": 0,
+   "why": "Une seule des deux suffit : or. Avec and, il faudrait être en 10e et en 11e en même temps, ce qui est impossible. Il faut répéter « annee == » dans chaque condition."
+  },
+  {
+   "type": "code",
+   "title": "Défi : vérifier un mot de passe",
+   "lead": [
+    "`len(texte)` donne le nombre de caractères d’un texte : `len(\"chat\")` vaut 4.",
+    "Un mot de passe est du texte : pas besoin de int().",
+    "Un bon mot de passe a **au moins 12 caractères** et n’est **pas** le nom d’utilisateur."
+   ],
+   "exemples": [
+    {
+     "t": "len compte les caractères",
+     "code": "mot = \"soleil\"\nprint(len(mot))",
+     "sortie": "6"
+    }
+   ],
+   "tip": "Teste avec un mot de passe trop court, un de 12 caractères pile et un égal au nom d’utilisateur.",
+   "consigne": "Le programme lit le nom d’utilisateur, puis le mot de passe. Il affiche « Accepté » si le mot de passe a au moins 12 caractères ET est différent du nom d’utilisateur, sinon « Refusé ».",
+   "starter": "nom = input(\"Nom d’utilisateur ? \")\nmdp = input(\"Mot de passe ? \")\n\n",
+   "inputs": [
+    "maya2010",
+    "MonChat2026!"
+   ],
+   "tests": [
+    {
+     "in": [
+      "maya2010",
+      "MonChat2026!"
+     ],
+     "out": "Accepté"
+    },
+    {
+     "in": [
+      "maya2010",
+      "soleil"
+     ],
+     "out": "Refusé"
+    },
+    {
+     "in": [
+      "maya20102010",
+      "maya20102010"
+     ],
+     "out": "Refusé"
+    },
+    {
+     "in": [
+      "leo",
+      "DesFrites&Ketchup"
+     ],
+     "out": "Accepté"
+    }
+   ],
+   "require": [
+    {
+     "re": "\\band\\b",
+     "msg": "Combine les deux règles avec `and`."
+    },
+    {
+     "re": "len\\s*\\(",
+     "msg": "Utilise `len(mdp)` pour compter les caractères."
+    }
+   ],
+   "hint": "`if len(mdp) >= 12 and mdp != nom:` → Accepté, sinon Refusé.",
+   "solution": "nom = input(\"Nom d’utilisateur ? \")\nmdp = input(\"Mot de passe ? \")\n\nif len(mdp) >= 12 and mdp != nom:\n    print(\"Accepté\")\nelse:\n    print(\"Refusé\")",
+   "bravo": "« maya20102010 » a 12 caractères, mais c’est le nom d’utilisateur : refusé grâce au and."
+  }
+ ],
+ "questions": [
+  [
+   "Quand la condition A and B est-elle vraie ?",
+   [
+    "Quand A est vraie",
+    "Quand A et B sont vraies toutes les deux",
+    "Quand au moins une est vraie",
+    "Jamais"
+   ],
+   1,
+   "and demande que les deux conditions soient vraies."
+  ],
+  [
+   "Quand la condition A or B est-elle fausse ?",
+   [
+    "Quand A est fausse",
+    "Quand B est fausse",
+    "Quand A et B sont fausses toutes les deux",
+    "Jamais"
+   ],
+   2,
+   "Avec or, une seule vraie suffit. C’est faux seulement si les deux sont fausses."
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "Oui",
+    "Non",
+    "Oui puis Non",
+    "Une erreur"
+   ],
+   1,
+   "15 > 10 est vrai, mais 15 < 12 est faux. Avec and, tout est faux.",
+   "n = 15\nif n > 10 and n < 12:\n    print(\"Oui\")\nelse:\n    print(\"Non\")"
+  ],
+  [
+   "L’utilisateur entre 36. Qu’affiche ce programme ?",
+   [
+    "Normal",
+    "Alerte",
+    "Les deux",
+    "Une erreur"
+   ],
+   1,
+   "36 > 35 est vrai. Avec or, une seule condition vraie suffit.",
+   "t = int(input())\nif t < 0 or t > 35:\n    print(\"Alerte\")\nelse:\n    print(\"Normal\")"
+  ],
+  [
+   "Quelle condition vérifie qu’une note est entre 0 et 100 ?",
+   [
+    "note >= 0 or note <= 100",
+    "note >= 0 and note <= 100",
+    "note >= 0 and <= 100",
+    "0 and 100"
+   ],
+   1,
+   "Les deux règles doivent être vraies : and. Il faut répéter note dans chaque condition."
+  ],
+  [
+   "Un rabais est donné aux moins de 12 ans et aux 65 ans et plus. Quelle condition ?",
+   [
+    "age < 12 and age >= 65",
+    "age < 12 or age >= 65",
+    "age >= 12 and age < 65",
+    "age < 12 or >= 65"
+   ],
+   1,
+   "Une seule des deux situations suffit : or. Personne n’a moins de 12 ans et 65 ans ou plus en même temps."
+  ],
+  [
+   "Pourquoi cette condition est-elle mal écrite ?",
+   [
+    "Il faut répéter jour == après or",
+    "or ne marche pas avec du texte",
+    "Il manque des parenthèses",
+    "Elle est correcte"
+   ],
+   0,
+   "Python lit « or \"dimanche\" » tout seul, ce qui est toujours considéré comme vrai. Il faut écrire jour == \"samedi\" or jour == \"dimanche\".",
+   "if jour == \"samedi\" or \"dimanche\":"
+  ],
+  [
+   "Qu’affiche print(len(\"cyber\")) ?",
+   [
+    "5",
+    "cyber",
+    "1",
+    "6"
+   ],
+   0,
+   "len compte les caractères : c, y, b, e, r, donc 5."
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "Entrée",
+    "Refus",
+    "Rien",
+    "Une erreur"
+   ],
+   0,
+   "billet vaut \"oui\" : la première condition est vraie. Avec or, cela suffit.",
+   "billet = \"oui\"\ninvite = \"non\"\nif billet == \"oui\" or invite == \"oui\":\n    print(\"Entrée\")\nelse:\n    print(\"Refus\")"
+  ],
+  [
+   "Le mot de passe \"tigre\" et le nom \"leo\". Qu’affiche ce programme ?",
+   [
+    "Accepté",
+    "Refusé",
+    "5",
+    "Une erreur"
+   ],
+   1,
+   "len(\"tigre\") vaut 5 : 5 >= 12 est faux. Avec and, tout est faux.",
+   "if len(mdp) >= 12 and mdp != nom:\n    print(\"Accepté\")\nelse:\n    print(\"Refusé\")"
+  ]
+ ],
+ "ecrire": []
+};
+</script>
+<script src="../algo/python.js"></script>
+<script src="../algo/lecon.js"></script>
+<script>window.tej2oAccessReady=import('../access.js');</script><script type="module">try{await window.tej2oAccessReady;const c=window.TEJ2O?.corrige;if(c){openCorrige(c)}else if(new URLSearchParams(location.search).has("devoir")&&(window.TEJ2O?.teacher||window.TEJ2O?.homeworkOpen))go(4)}catch(err){console.error("Accès TEJ2O",err);const box=document.createElement("aside");box.style="padding:18px;margin:16px;border:2px solid #d5a83b;background:#163a2e;color:#fff";box.textContent="Impossible de vérifier l’accès à cette leçon. Vérifie Internet et ouvre le site depuis son adresse HTTPS.";document.body.prepend(box)}</script><script src="../telecharger.js"></script></body></html>

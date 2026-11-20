@@ -1,0 +1,425 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TEJ2O | Unité 5 · Leçon 9 — Python : if, elif et else</title>
+<link rel="stylesheet" href="../algo/lecon.css"></head><body data-activity="lesson15"><nav class="tej-nav" aria-label="Navigation principale"><a href="../site.html">← Accueil TEJ2O</a><span>Unité 5 · Algorithmes et Python</span></nav><main class="shell"><header class="top"><div><div class="brand">TEJ2O <span style="color:#fff;font-weight:400">| Algorithmes et Python</span></div><div class="small">Unité 5 · Leçon 9 — Python : if, elif et else</div></div><span class="pill">Unité 5</span></header><div class="intro"><div><h1>Prendre une décision</h1><div class="small">Quatre activités courtes, puis un devoir de dix questions.</div></div><div class="small" id="stepLabel"></div></div><div class="tabs" id="tabs"></div><div class="progress"><div class="fill" id="fill"></div></div><section id="content" aria-live="polite"></section><div class="nav"><button id="prev">← Précédent</button><span class="hint" id="navHint"></span><button id="next">Suivant →</button></div><div class="footer">TEJ2O · Unité 5 · Algorithmes et Python</div></main>
+<script>
+const LECON = {
+ "num": 15,
+ "aff": 9,
+ "titre": "Python : if, elif et else",
+ "labels": [
+  "1 · Comparer",
+  "2 · Écrire un if",
+  "3 · if et else",
+  "4 · elif",
+  "Devoir · 10 questions"
+ ],
+ "stages": [
+  {
+   "type": "qcm",
+   "title": "Comparer deux valeurs",
+   "lead": [
+    "Une **comparaison** donne une réponse vraie (**True**) ou fausse (**False**).",
+    "Les signes : `==` égal · `!=` différent · `<` plus petit · `>` plus grand · `<=` plus petit ou égal · `>=` plus grand ou égal.",
+    "Attention : **=** donne une valeur à une variable ; **==** compare deux valeurs."
+   ],
+   "exemples": [
+    {
+     "t": "Des comparaisons",
+     "code": "print(5 > 3)\nprint(5 == 3)\nprint(5 != 3)",
+     "sortie": "True\nFalse\nTrue"
+    },
+    {
+     "t": "« au moins » et « au plus »",
+     "lignes": [
+      "au moins 16 ans : `age >= 16`",
+      "au plus 30 élèves : `eleves <= 30`",
+      "plus petit que 12 : `age < 12`"
+     ]
+    }
+   ],
+   "tip": "Pour comparer, on écrit == (deux signes égal).",
+   "doc": "Comparaison à analyser",
+   "code": "note = 50\nprint(note >= 50)",
+   "consigne": "Qu’affiche ce programme ?",
+   "opts": [
+    "True",
+    "False",
+    "50",
+    "Une erreur"
+   ],
+   "correct": 0,
+   "why": "50 >= 50 veut dire « 50 est plus grand ou égal à 50 » : c’est vrai, donc True."
+  },
+  {
+   "type": "code",
+   "title": "Écrire un if",
+   "lead": [
+    "`if` veut dire **si**. Le bloc décalé s’exécute **seulement si** la condition est vraie.",
+    "La ligne if se termine par **deux-points**, et le bloc est décalé de **4 espaces**.",
+    "Après le bloc, on revient **tout à gauche** : ces lignes s’exécutent toujours."
+   ],
+   "syntaxe": {
+    "code": "if temperature > 30:\n    print(\"Il fait chaud\")",
+    "parties": [
+     [
+      "if",
+      "le mot clé « si »"
+     ],
+     [
+      "temperature > 30",
+      "la condition : vraie ou fausse"
+     ],
+     [
+      ":",
+      "les deux-points, obligatoires"
+     ],
+     [
+      "    print(...)",
+      "le bloc, décalé de 4 espaces"
+     ]
+    ]
+   },
+   "exemples": [
+    {
+     "t": "Condition vraie",
+     "code": "t = 35\nif t > 30:\n    print(\"Il fait chaud\")\nprint(\"Bonne journée\")",
+     "sortie": "Il fait chaud\nBonne journée"
+    },
+    {
+     "t": "Condition fausse",
+     "note": "Le bloc est sauté ; la dernière ligne s’affiche quand même.",
+     "code": "t = 20\nif t > 30:\n    print(\"Il fait chaud\")\nprint(\"Bonne journée\")",
+     "sortie": "Bonne journée"
+    }
+   ],
+   "tip": "if condition: puis le bloc décalé. Revenir à gauche = sortir du bloc.",
+   "consigne": "Le programme lit une vitesse. Si elle est plus grande que 50, il affiche « Ralentis ». Ensuite, dans tous les cas, il affiche « Bonne route ».",
+   "starter": "vitesse = int(input(\"Vitesse ? \"))\n\n# Écris le if ici\n\nprint(\"Bonne route\")\n",
+   "inputs": [
+    "65"
+   ],
+   "tests": [
+    {
+     "in": [
+      "65"
+     ],
+     "out": "Ralentis\nBonne route"
+    },
+    {
+     "in": [
+      "40"
+     ],
+     "out": "Bonne route"
+    },
+    {
+     "in": [
+      "50"
+     ],
+     "out": "Bonne route"
+    }
+   ],
+   "require": [
+    {
+     "re": "\\bif\\b",
+     "msg": "Utilise une condition `if`."
+    }
+   ],
+   "hint": "`if vitesse > 50:` puis, à la ligne suivante, décalé de 4 espaces : `print(\"Ralentis\")`.",
+   "solution": "vitesse = int(input(\"Vitesse ? \"))\n\n# Écris le if ici\nif vitesse > 50:\n    print(\"Ralentis\")\n\nprint(\"Bonne route\")",
+   "bravo": "Le test avec 50 compte : 50 n’est pas plus grand que 50, donc pas de « Ralentis »."
+  },
+  {
+   "type": "code",
+   "title": "Deux chemins : if et else",
+   "lead": [
+    "`else` veut dire **sinon** : son bloc s’exécute quand la condition du if est **fausse**.",
+    "`else` est **aligné avec if**, n’a **pas de condition**, et se termine aussi par deux-points.",
+    "Un seul des deux blocs s’exécute, jamais les deux."
+   ],
+   "syntaxe": {
+    "code": "if note >= 50:\n    print(\"Réussi\")\nelse:\n    print(\"À reprendre\")",
+    "parties": [
+     [
+      "if note >= 50:",
+      "si la condition est vraie…"
+     ],
+     [
+      "else:",
+      "…sinon : aligné avec if, sans condition"
+     ],
+     [
+      "    print(...)",
+      "chaque bloc est décalé de 4 espaces"
+     ]
+    ]
+   },
+   "exemples": [
+    {
+     "t": "Pair ou impair",
+     "note": "% donne le reste de la division : 7 % 2 vaut 1.",
+     "code": "n = 7\nif n % 2 == 0:\n    print(\"pair\")\nelse:\n    print(\"impair\")",
+     "sortie": "impair"
+    },
+    {
+     "t": "else mal placé",
+     "fauxT": "Erreur",
+     "faux": "if age >= 16:\n    print(\"Oui\")\n    else:\n    print(\"Non\")",
+     "bonT": "Correct",
+     "bon": "if age >= 16:\n    print(\"Oui\")\nelse:\n    print(\"Non\")",
+     "pourquoi": "else doit être aligné avec if, et son bloc décalé."
+    }
+   ],
+   "tip": "else n’a pas de condition : il prend tous les autres cas.",
+   "consigne": "Le programme lit une note sur 100. Il affiche « Réussi » si la note est de 50 ou plus, sinon « À reprendre ».",
+   "starter": "note = int(input(\"Note ? \"))\n\nif note >= 50:\n    print(\"...\")\nelse:\n    print(\"...\")\n",
+   "inputs": [
+    "75"
+   ],
+   "tests": [
+    {
+     "in": [
+      "75"
+     ],
+     "out": "Réussi"
+    },
+    {
+     "in": [
+      "50"
+     ],
+     "out": "Réussi"
+    },
+    {
+     "in": [
+      "49"
+     ],
+     "out": "À reprendre"
+    },
+    {
+     "in": [
+      "0"
+     ],
+     "out": "À reprendre"
+    }
+   ],
+   "require": [
+    {
+     "re": "\\belse\\b",
+     "msg": "Garde le `else`."
+    }
+   ],
+   "hint": "Remplace les trois points : le premier print affiche « Réussi », le deuxième « À reprendre ».",
+   "solution": "note = int(input(\"Note ? \"))\n\nif note >= 50:\n    print(\"Réussi\")\nelse:\n    print(\"À reprendre\")",
+   "bravo": "Teste toujours la valeur limite (ici 50) : c’est là que se cachent les erreurs."
+  },
+  {
+   "type": "code",
+   "title": "Plusieurs cas : elif",
+   "lead": [
+    "`elif` veut dire **sinon si** : il ajoute un autre cas avec sa propre condition.",
+    "Python teste les conditions **de haut en bas** et exécute **le premier bloc vrai**, puis ignore les autres.",
+    "On peut mettre plusieurs elif. Le else final, s’il y en a un, prend tout ce qui reste."
+   ],
+   "syntaxe": {
+    "code": "if age < 12:\n    print(\"enfant\")\nelif age >= 65:\n    print(\"aîné\")\nelse:\n    print(\"régulier\")",
+    "parties": [
+     [
+      "if",
+      "1er cas"
+     ],
+     [
+      "elif",
+      "2e cas, testé seulement si le 1er est faux"
+     ],
+     [
+      "else",
+      "tous les autres cas"
+     ]
+    ]
+   },
+   "exemples": [
+    {
+     "t": "Un seul bloc s’exécute",
+     "note": "85 >= 70 est aussi vrai, mais Python s’arrête au premier cas vrai.",
+     "code": "note = 85\nif note >= 80:\n    print(\"A\")\nelif note >= 70:\n    print(\"B\")\nelse:\n    print(\"C\")",
+     "sortie": "A"
+    },
+    {
+     "t": "L’ordre compte",
+     "fauxT": "Mauvais ordre",
+     "faux": "if note >= 70:\n    print(\"B\")\nelif note >= 80:\n    print(\"A\")",
+     "bonT": "Bon ordre",
+     "bon": "if note >= 80:\n    print(\"A\")\nelif note >= 70:\n    print(\"B\")",
+     "pourquoi": "Avec 85, le premier programme affiche B : le cas >= 80 n’est jamais atteint."
+    }
+   ],
+   "tip": "Avec elif, place les conditions de la plus précise à la plus large.",
+   "consigne": "Le programme lit l’âge. Il affiche « Tarif enfant » si l’âge est plus petit que 12, « Tarif aîné » s’il est de 65 ou plus, sinon « Tarif régulier ».",
+   "starter": "age = int(input(\"Âge ? \"))\n\n# if, elif, else\n",
+   "inputs": [
+    "8"
+   ],
+   "tests": [
+    {
+     "in": [
+      "8"
+     ],
+     "out": "Tarif enfant"
+    },
+    {
+     "in": [
+      "12"
+     ],
+     "out": "Tarif régulier"
+    },
+    {
+     "in": [
+      "40"
+     ],
+     "out": "Tarif régulier"
+    },
+    {
+     "in": [
+      "65"
+     ],
+     "out": "Tarif aîné"
+    },
+    {
+     "in": [
+      "80"
+     ],
+     "out": "Tarif aîné"
+    }
+   ],
+   "require": [
+    {
+     "re": "\\belif\\b",
+     "msg": "Utilise `elif` pour le deuxième cas."
+    }
+   ],
+   "hint": "`if age < 12:` → Tarif enfant · `elif age >= 65:` → Tarif aîné · `else:` → Tarif régulier.",
+   "solution": "age = int(input(\"Âge ? \"))\n\n# if, elif, else\nif age < 12:\n    print(\"Tarif enfant\")\nelif age >= 65:\n    print(\"Tarif aîné\")\nelse:\n    print(\"Tarif régulier\")",
+   "bravo": "Trois cas, un seul message à chaque fois : c’est le rôle de if, elif et else."
+  }
+ ],
+ "questions": [
+  [
+   "Quelle ligne vérifie si score est égal à 100 ?",
+   [
+    "if score = 100:",
+    "if score == 100:",
+    "if score => 100",
+    "if score égal 100:"
+   ],
+   1,
+   "Pour comparer, on écrit ==, et la ligne se termine par deux-points."
+  ],
+  [
+   "Qu’affiche print(7 != 7) ?",
+   [
+    "True",
+    "False",
+    "7",
+    "Une erreur"
+   ],
+   1,
+   "!= veut dire « différent ». 7 n’est pas différent de 7 : c’est faux."
+  ],
+  [
+   "Quelle condition veut dire « au moins 18 ans » ?",
+   [
+    "age > 18",
+    "age >= 18",
+    "age <= 18",
+    "age == 18"
+   ],
+   1,
+   "« Au moins 18 » inclut 18 : on écrit >=."
+  ],
+  [
+   "Ce programme donne une erreur. Pourquoi ?",
+   [
+    "Il manque les deux-points à la fin de la ligne if",
+    "age doit être entre guillemets",
+    "print doit être en majuscules",
+    "Il faut un espace dans >="
+   ],
+   0,
+   "Une ligne if doit se terminer par deux-points.",
+   "age = 15\nif age >= 16\n    print(\"Permis possible\")"
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "Gagné puis Fin",
+    "Fin",
+    "Gagné",
+    "Rien"
+   ],
+   1,
+   "3 > 5 est faux : le bloc est sauté. print(\"Fin\") est hors du bloc.",
+   "n = 3\nif n > 5:\n    print(\"Gagné\")\nprint(\"Fin\")"
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "A",
+    "B",
+    "C",
+    "A puis B"
+   ],
+   1,
+   "50 > 50 est faux ; elif note == 50 est vrai : on affiche B. Un seul bloc est exécuté.",
+   "note = 50\nif note > 50:\n    print(\"A\")\nelif note == 50:\n    print(\"B\")\nelse:\n    print(\"C\")"
+  ],
+  [
+   "Où doit-on placer else ?",
+   [
+    "Décalé de 4 espaces sous le if",
+    "Aligné avec le if, avec deux-points",
+    "Avant le if",
+    "N’importe où"
+   ],
+   1,
+   "else est aligné avec if et se termine par deux-points ; son bloc est décalé."
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "froid",
+    "doux",
+    "chaud",
+    "doux puis chaud"
+   ],
+   1,
+   "18 < 10 est faux ; 18 < 25 est vrai : on affiche doux et on s’arrête.",
+   "t = 18\nif t < 10:\n    print(\"froid\")\nelif t < 25:\n    print(\"doux\")\nelse:\n    print(\"chaud\")"
+  ],
+  [
+   "Pourquoi ce programme affiche-t-il B pour une note de 95 ?",
+   [
+    "Les conditions sont dans le mauvais ordre",
+    "Il manque un else",
+    "95 n’est pas un entier",
+    "elif ne marche pas avec >="
+   ],
+   0,
+   "95 >= 70 est vrai en premier : Python affiche B et ignore la suite. Il faut tester >= 90 d’abord.",
+   "if note >= 70:\n    print(\"B\")\nelif note >= 90:\n    print(\"A\")"
+  ],
+  [
+   "Combien de blocs peuvent s’exécuter dans un if / elif / else ?",
+   [
+    "Aucun ou un seul",
+    "Toujours tous",
+    "Exactement deux",
+    "Autant que de conditions vraies"
+   ],
+   0,
+   "Python exécute le premier bloc dont la condition est vraie, puis saute les autres. Sans else, il peut n’y en avoir aucun."
+  ]
+ ],
+ "ecrire": []
+};
+</script>
+<script src="../algo/python.js"></script>
+<script src="../algo/lecon.js"></script>
+<script>window.tej2oAccessReady=import('../access.js');</script><script type="module">try{await window.tej2oAccessReady;const c=window.TEJ2O?.corrige;if(c){openCorrige(c)}else if(new URLSearchParams(location.search).has("devoir")&&(window.TEJ2O?.teacher||window.TEJ2O?.homeworkOpen))go(4)}catch(err){console.error("Accès TEJ2O",err);const box=document.createElement("aside");box.style="padding:18px;margin:16px;border:2px solid #d5a83b;background:#163a2e;color:#fff";box.textContent="Impossible de vérifier l’accès à cette leçon. Vérifie Internet et ouvre le site depuis son adresse HTTPS.";document.body.prepend(box)}</script><script src="../telecharger.js"></script></body></html>

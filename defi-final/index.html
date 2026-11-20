@@ -1,0 +1,277 @@
+<!doctype html><html lang="fr"><head><style>html{visibility:visible}</style><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TEJ2O — Défi final</title><style>
+:root{--bg:#071f1b;--panel:#10352c;--panel2:#164338;--gold:#eac879;--txt:#f3f5e9;--muted:#b9ccc2;--good:#8ce1a4;--bad:#ffc4a9}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 0,#1b4b3b,transparent 40%),var(--bg);font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--txt)}.shell{max-width:1040px;margin:auto;padding:22px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #426455;padding-bottom:14px}.brand{font-weight:800;letter-spacing:.08em;color:var(--gold)}.tag{font-size:.78rem;color:var(--muted)}h1{font-family:Georgia,serif;color:var(--gold);font-size:clamp(1.6rem,4vw,2.5rem);line-height:1.1;margin:14px 0}.lead{color:var(--muted);max-width:760px}.card{background:linear-gradient(145deg,var(--panel),#0d2c25);border:1px solid #416454;border-radius:19px;padding:clamp(16px,3vw,28px);box-shadow:0 12px 30px #0002}.hero{display:grid;grid-template-columns:1fr 160px;align-items:center;gap:16px}.art{width:150px;height:150px;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle,#406a51,#153b30 68%);font-size:75px;border:2px solid #a78d4d}button{font:inherit;cursor:pointer;border-radius:10px;padding:11px 17px;font-weight:700;border:1px solid #bca36b;background:var(--gold);color:#172b20}button.secondary{background:transparent;color:var(--gold)}button:disabled{opacity:.4;cursor:not-allowed}.controls{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;margin-top:22px}.hidden{display:none!important}.progress{height:8px;background:#24493d;border-radius:12px;overflow:hidden;margin:14px 0 24px}.bar{height:100%;background:var(--gold);transition:width .25s}.eyebrow{color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-weight:800}.case{background:#eaf0e8;color:#142f27;border-radius:14px;padding:20px;margin:17px 0;max-width:790px;box-shadow:inset 0 0 0 1px #d2e1d5}.case small{color:#52645d}.case strong{color:#173e31}.case p{margin:9px 0}.case .btnfake{display:inline-block;background:#1f5fa8;color:#fff;border-radius:6px;padding:6px 12px;font-weight:700}.case .hover{display:block;margin-top:6px;font:13px ui-monospace,Consolas,monospace;background:#d9e3dc;border-radius:6px;padding:5px 8px;color:#33483f}.case .addr{display:block;font:15px ui-monospace,Consolas,monospace;background:#fff;border:1px solid #b9cbbf;border-radius:8px;padding:8px 10px;overflow-wrap:anywhere}.link{color:#005f9b;text-decoration:underline;overflow-wrap:anywhere}.options{display:grid;gap:9px}.option{width:100%;text-align:left;background:#174438;border:1px solid #507364;color:var(--txt);font-weight:500;padding:14px}.option:hover:not(:disabled){border-color:var(--gold)}.option.selected{border:2px solid var(--gold);background:#245a48}.option .box{display:inline-grid;place-items:center;width:22px;height:22px;border:2px solid var(--gold);border-radius:5px;margin-right:10px;vertical-align:-5px;font-size:14px;color:#172b20}.option.selected .box{background:var(--gold)}.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}.fact{background:#174035;border-radius:12px;padding:14px}.fact strong{display:block;color:var(--gold);font-size:1.3rem}.fact span{font-size:.8rem;color:var(--muted)}.rules{background:#0b2a23;border:1px solid #6f5d33;border-radius:14px;padding:14px 18px;margin:0 0 20px}.rules h2{margin:0 0 6px;font-size:1.05rem;color:var(--gold)}.rules li{margin:4px 0}.score{font-size:3rem;font-weight:800;color:var(--gold)}.review{border-top:1px solid #45685a;padding:14px 0}.review p{margin:5px 0}.footer{margin:25px 0 5px;color:var(--muted);font-size:.8rem}.msg{background:#3b2a12;border:1px solid #b8893b;border-radius:12px;padding:12px 16px;margin:12px 0}.recap{display:grid;grid-template-columns:repeat(auto-fill,minmax(56px,1fr));gap:8px;margin:16px 0}.recap button{padding:10px 0;background:#174438;color:var(--txt);border-color:#507364}.recap button.ok{background:#2f6b4e;border-color:var(--good)}.watch{position:fixed;right:14px;bottom:14px;background:#0b2a23ee;border:1px solid #6f5d33;color:var(--muted);border-radius:12px;padding:8px 12px;font-size:.82rem;z-index:50}.watch b{color:var(--gold)}
+.garde{position:fixed;inset:0;z-index:10000;background:#03110ef7;display:grid;place-items:center;padding:20px}.garde .card{max-width:560px;text-align:center;border-color:#b8893b}.garde h2{color:var(--bad);font-family:Georgia,serif;font-size:1.8rem;margin:6px 0}
+body.examen{user-select:none;-webkit-user-select:none}body.examen .tej-nav{display:none}
+@media print{.tej-nav,#apercu .controls,.footer,.watch{display:none!important}body{background:#fff!important;color:#000!important}#apercu,.apercu-item{background:#fff!important;border:0!important;box-shadow:none!important;color:#000!important}#apercu h1,#apercu h2,#apercu .eyebrow,#apercu li,#apercu .lead{color:#000!important;opacity:1!important}.apercu-item{break-inside:avoid;border-top:1px solid #999!important}}@media print{body.examen *{display:none!important}}
+@media(max-width:600px){.hero{grid-template-columns:1fr}.art{width:90px;height:90px;font-size:45px}.facts{grid-template-columns:1fr}.shell{padding:12px}.controls button{flex:1}}
+</style><style id="tej2o-nav-style">.tej-nav{position:sticky;top:0;z-index:9999;background:#071d18;border-bottom:1px solid #416b59;padding:11px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;font:600 14px system-ui, sans-serif;color:#f7f3e6}.tej-nav a{color:#f2d28a;text-decoration:none;border:1px solid #9a8050;border-radius:9px;padding:7px 12px}.tej-nav a:focus-visible{outline:3px solid white}.tej-nav span{font-weight:400;font-size:12px;color:#bfd2c9}@media(max-width:600px){.tej-nav span{display:none}.tej-nav{font-size:12px}}</style></head><body data-activity="final"><nav class="tej-nav" aria-label="Navigation principale"><a href="../index.html">← Accueil TEJ2O</a><span>Cyberdétectives · Parcours interactif</span><a href="../mini-projet/index.html">Mini-projet</a></nav><main class="shell"><header class="top"><div><div class="brand">TEJ2O · CYBERSÉCURITÉ</div><div class="tag">Évaluation de synthèse · Leçons 1 à 6</div></div><span aria-hidden="true">🛡️</span></header>
+
+<section id="intro" class="card" style="margin-top:25px"><div class="hero"><div><div class="eyebrow">Mission finale</div><h1>Défi final : enquête sur 14 situations</h1><p class="lead">Chaque situation reprend une notion des leçons 1 à 6. Les pièges sont discrets : lis l’adresse complète, la demande, le contexte et ce qui manque. Certains messages sont légitimes.</p></div><div class="art" aria-hidden="true">🔎</div></div>
+<div class="facts"><div class="fact"><strong>14</strong><span>situations</span></div><div class="fact"><strong>≈ 30 min</strong><span>durée prévue</span></div><div class="fact"><strong>1</strong><span>seule tentative</span></div></div>
+<div class="rules"><h2>🔒 Règles du mode examen</h2><ul>
+<li>Le défi s’ouvre en <b>plein écran</b>. Reste sur cette page jusqu’à l’envoi.</li>
+<li>Chaque fois que tu changes d’onglet, de fenêtre ou que tu quittes le plein écran, c’est une <b>sortie</b>. Elle est enregistrée avec l’heure et ton enseignant(e) la voit.</li>
+<li>À la <b>3<sup>e</sup> sortie</b>, ton défi est <b>envoyé automatiquement</b> avec les réponses déjà choisies.</li>
+<li>Tu peux revenir aux situations précédentes et changer tes réponses avant d’envoyer.</li>
+<li>Les explications seront revues en classe après la correction.</li></ul></div>
+<p style="color:var(--muted);font-size:.9rem">Les messages sont fictifs. Aucun lien présenté dans les exemples n’est cliquable.</p>
+<div id="introMsg" class="msg hidden"></div>
+<button id="voirTout" class="secondary hidden" style="margin-right:10px">📋 Voir tout le défi (corrigé)</button><button id="start" disabled>Vérification de ton compte…</button></section>
+
+<section id="play" class="hidden" style="margin-top:25px"><div class="eyebrow" id="count"></div><div class="progress" role="progressbar" aria-label="Progression" aria-valuemin="0" aria-valuemax="14" aria-valuenow="0"><div class="bar" id="bar"></div></div><div class="card"><h1 id="title"></h1><p class="lead" id="context"></p><div class="case" id="example"></div><h2 style="font-size:1.12rem" id="question"></h2><p id="hint" style="color:var(--muted);margin-top:-6px"></p><div class="options" id="options"></div><div class="controls"><button class="secondary" id="back">← Précédent</button><button id="next">Suivant →</button></div></div></section>
+
+<section id="review" class="card hidden" style="margin-top:25px"><div class="eyebrow">Avant d’envoyer</div><h1>Vérifie tes réponses</h1><p id="recapTxt"></p><div class="recap" id="recap"></div><div class="controls"><button class="secondary" id="revoir">← Revenir aux situations</button><button id="send">Envoyer mon défi</button></div></section>
+
+<section id="apercu" class="card hidden" style="margin-top:25px"><div class="eyebrow">Version enseignante</div><h1>Défi final — corrigé complet</h1><p class="lead">Les 14 situations dans l’ordre du fichier, avec la bonne réponse et l’explication. Chez les élèves, l’ordre des situations et des choix est mélangé.</p><div class="controls"><button class="secondary" id="apercuRetour">← Retour</button><button id="apercuPrint">🖨️ Imprimer le corrigé</button></div><div id="apercuListe"></div></section><section id="corrigeEl" class="card hidden" style="margin-top:25px"><div class="eyebrow">Corrigé</div><h1>Défi final — ton corrigé</h1><div class="score" id="corScore"></div><p id="corInfo" class="lead"></p><div id="corListe"></div><div class="controls"><a href="../index.html?compte"><button>Retour à mon compte</button></a></div></section><section id="end" class="card hidden" style="margin-top:25px"><div class="eyebrow">Mission terminée</div><h1>Résultat du Défi final</h1><div class="score" id="score"></div><p id="summary"></p><div id="reviews"></div><div class="controls"><a id="homeLink" href="../index.html?compte"><button>Retour à mon compte</button></a><button class="secondary hidden" id="restart">Recommencer (aperçu enseignant)</button></div><p class="footer">TEJ2O · Cyberdétectives</p></section>
+<p class="footer">TEJ2O · Activité pédagogique de cybersécurité · Messages simulés</p></main>
+
+<div id="garde" class="garde hidden" role="alertdialog" aria-modal="true" aria-labelledby="gardeTitre"><div class="card"><div style="font-size:52px" aria-hidden="true">⚠️</div><h2 id="gardeTitre">Tu as quitté le défi</h2><p id="gardeTxt"></p><button id="retour">Revenir au défi en plein écran</button></div></div>
+<div id="watch" class="watch hidden">Mode examen · sorties : <b id="watchN">0</b> / 3</div>
+
+<script>
+/* Final challenge: 14 scenarios built from lessons 1-6.
+   type 'choix'  : one answer among four (1 point)
+   type 'indices': select every suspicious clue (2 points, wrong picks subtract) */
+const data=[
+{id:'s1',type:'indices',kind:'Leçon 3 · Indices d’un courriel',title:'Ton bulletin est disponible',context:'Ce courriel arrive dans ta boîte scolaire un mardi matin. Il est bien écrit et contient le logo de l’école.',
+ example:'<small>De : Direction de l’école &lt;direction@ecole-exemple.ca.avis-eleves.example&gt;</small><p><strong>Objet : Ton bulletin de mi-session est disponible</strong></p><p>Bonjour élève,</p><p>Ton bulletin peut être consulté jusqu’à vendredi. Après cette date, il sera archivé et il faudra en faire la demande au secrétariat.</p><p><span class="btnfake">Consulter mon bulletin</span><span class="hover">Au survol du bouton : http://avis-eleves.example/bulletin/login.php</span></p>',
+ q:'Coche TOUS les vrais indices d’hameçonnage.',items:[
+ {t:'Le domaine réel de l’expéditeur se termine par « avis-eleves.example ».',bad:true},
+ {t:'Le message mentionne le secrétariat de l’école.',bad:false},
+ {t:'La salutation « Bonjour élève » ne te nomme pas.',bad:true},
+ {t:'Le message ne contient aucune faute d’orthographe.',bad:false},
+ {t:'Le bouton mène à un domaine qui n’est pas celui de l’école.',bad:true},
+ {t:'Une date limite (vendredi) pousse à agir sans tarder.',bad:true},
+ {t:'Le message parle d’un bulletin de mi-session.',bad:false}],
+ why:'Le vrai domaine se lit à la fin de l’adresse : « avis-eleves.example ». La salutation générale, la date limite et la destination réelle du bouton s’ajoutent. Un texte sans faute, le secrétariat ou le bulletin ne prouvent rien dans un sens ou dans l’autre.'},
+{id:'s2',type:'choix',kind:'Leçon 3 · Lire un domaine',title:'Quatre adresses presque pareilles',context:'Le vrai domaine de ton école est « ecole-exemple.ca ». Tu cherches la page de connexion du portail.',
+ example:'<small>Adresses trouvées dans quatre messages différents</small><span class="addr">1. https://ecole-exemple.ca.portail-acces.example/connexion</span><span class="addr" style="margin-top:6px">2. https://portail.ecole-exemple.ca/connexion</span><span class="addr" style="margin-top:6px">3. https://ecole-exernple.ca/connexion</span><span class="addr" style="margin-top:6px">4. https://ecole-exemple-ca.example/connexion</span>',
+ q:'Laquelle appartient vraiment à ton école ?',opts:['L’adresse 1, car elle commence par « ecole-exemple.ca ».','L’adresse 2, car son domaine se termine par « ecole-exemple.ca ».','L’adresse 3, car le nom de l’école y est écrit en entier.','L’adresse 4, car elle contient « ecole-exemple » et « ca ».'],correct:1,
+ why:'On lit le domaine à la fin, juste avant le premier « / ». « portail. » est une partie de l’adresse de l’école. L’adresse 1 se termine par « portail-acces.example », la 3 remplace le m par « rn » et la 4 remplace le point par un tiret.'},
+{id:'s3',type:'choix',kind:'Leçon 3 · Vrai ou faux ?',title:'Un rappel de la bibliothèque',context:'Tu as bien emprunté ce livre il y a trois semaines.',
+ example:'<small>De : Bibliothèque &lt;bibliotheque@ecole-exemple.ca&gt;</small><p><strong>Objet : Rappel — livre à rapporter</strong></p><p>Bonjour Maya,</p><p>Le livre « Les cœurs de ferraille », emprunté le 13 octobre, est à rapporter vendredi. Tu peux vérifier la date dans ton compte de bibliothèque habituel ou au comptoir.</p><p>Merci !</p><small>Aucun lien · Aucune pièce jointe</small>',
+ q:'Quelle conclusion est la plus juste ?',opts:['Il est suspect : une date limite est une technique d’urgence, il faut le signaler.','Aucun signal d’alerte majeur; en cas de doute, on vérifie dans son compte habituel.','Il est authentique puisqu’il connaît ton prénom et le titre du livre emprunté.','Il faut répondre avec ton numéro d’élève pour confirmer la réception du rappel.'],correct:1,
+ why:'Le domaine est celui de l’école, le message ne demande aucun secret et propose de vérifier par un canal que tu connais. On évite les conclusions automatiques : connaître ton prénom ne prouve rien, et un message légitime ne demande pas de renseignement à renvoyer.'},
+{id:'s4',type:'choix',kind:'Leçon 4 · Authentification multifacteur',title:'Deux étapes, deux facteurs ?',context:'Ton club de jeux vidéo ajoute une deuxième étape de connexion.',
+ example:'<small>Écran de connexion</small><p>Étape 1 : ton mot de passe</p><p>Étape 2 : « Entre le NIP à 4 chiffres que tu as choisi à l’inscription. »</p>',
+ q:'Que penses-tu de cette protection ?',opts:['C’est une vraie AMF, car il y a deux étapes séparées.','Ce n’est pas une vraie AMF : le mot de passe et le NIP sont deux choses que tu sais.','C’est une vraie AMF, car un NIP est plus difficile à deviner qu’un mot de passe.','Ce n’est pas une vraie AMF, car l’AMF demande toujours une empreinte digitale.'],correct:1,
+ why:'L’AMF demande deux preuves de types différents (ce que tu sais, ce que tu as, ce que tu es). Un NIP est une autre chose que tu sais : si ton mot de passe est volé par hameçonnage, le NIP peut l’être de la même façon.'},
+{id:'s5',type:'choix',kind:'Leçon 3 · Pièce jointe',title:'Le nouvel horaire des examens',context:'L’adresse est exactement celle de ton enseignant. Tu reçois ce message à 21 h.',
+ example:'<small>De : Marc Tremblay &lt;tremblay.marc@ecole-exemple.ca&gt;</small><p><strong>Objet : Nouvel horaire des examens</strong></p><p>Salut, l’horaire change demain matin. Ouvre-le ce soir pour te préparer.</p><p>📎 horaire_examens.pdf.exe (412 Ko)</p>',
+ q:'Que fais-tu ?',opts:['L’adresse est exacte : la pièce jointe peut être ouverte sans risque.','L’ouvrir sur un ordinateur de la bibliothèque pour ne pas exposer le tien.','Ne pas l’ouvrir et vérifier auprès de l’enseignant par un autre moyen.','Renommer le fichier en « .pdf » avant de l’ouvrir pour le rendre inoffensif.'],correct:2,
+ why:'La vraie extension est la dernière : « .exe », un programme déguisé en PDF. Une adresse exacte ne suffit pas, car le compte de l’enseignant peut être piraté. L’ouvrir ailleurs expose un autre appareil, et renommer ne change pas ce que contient le fichier.'},
+{id:'s6',type:'choix',kind:'Leçon 5 · Réagir',title:'Cinq minutes trop tard',context:'Tu viens d’entrer ton mot de passe scolaire sur une fausse page. Tu utilises le même mot de passe pour Instagram.',
+ example:'<small>Ce qui vient d’arriver</small><p>Tu as saisi ton mot de passe sur une page qui imitait le portail.</p><p>Ton compte scolaire fonctionne encore normalement.</p>',
+ q:'Quelle réaction est la plus complète ?',opts:['Changer le mot de passe scolaire seulement, puis attendre de voir si quelque chose arrive.','Signaler au soutien informatique, puis attendre sa réponse avant de changer quoi que ce soit.','Changer le mot de passe sur le vrai portail, déconnecter les autres appareils, changer celui d’Instagram et signaler sans attendre.','Supprimer le courriel qui menait à la fausse page et vider l’historique du navigateur.'],correct:2,
+ why:'Le mot de passe doit être considéré comme volé : on reprend le contrôle tout de suite, on ferme les sessions du fraudeur, on protège l’autre compte qui utilisait le même mot de passe, et on signale sans attendre.'},
+{id:'s7',type:'choix',kind:'Leçon 2 · Hameçonnage vocal',title:'Un message vocal menaçant',context:'Un message vocal automatique est laissé sur le téléphone de la maison.',
+ example:'<small>Message vocal</small><p>« Ici le service des impôts. Une poursuite judiciaire est ouverte contre votre famille. Pour éviter une arrestation aujourd’hui, appuyez sur 1 pour parler à un agent. »</p>',
+ q:'Quelle est la meilleure réaction ?',opts:['Appuyer sur 1 pour comprendre le problème avant qu’il soit trop tard.','Rappeler le numéro qui a laissé le message pour demander des détails.','Ne pas rappeler, en parler à un adulte, qui pourra vérifier au numéro officiel du service.','Supprimer le message et ne jamais en parler, puisque c’est sûrement une erreur.'],correct:2,
+ why:'Autorité (« service des impôts »), peur (« arrestation ») et urgence (« aujourd’hui ») : c’est de l’hameçonnage vocal. On ne rappelle jamais le numéro du message ; un adulte vérifie par le numéro officiel, et en parler permet de protéger la famille.'},
+{id:'s8',type:'choix',kind:'Leçon 1 · Les trois piliers',title:'Trois incidents à l’école',context:'Associe chaque incident au pilier de la cybersécurité touché en premier.',
+ example:'<p><strong>X)</strong> Une liste avec les adresses de tous les élèves est envoyée par erreur à un groupe public.</p><p><strong>Y)</strong> Quelqu’un modifie des notes dans un fichier partagé; personne ne remarque rien pendant une semaine.</p><p><strong>Z)</strong> Le portail scolaire est en panne le soir de la remise d’un projet.</p>',
+ q:'Quelle association est correcte ?',opts:['X : intégrité · Y : confidentialité · Z : disponibilité','X : confidentialité · Y : intégrité · Z : disponibilité','X : confidentialité · Y : disponibilité · Z : intégrité','X : disponibilité · Y : intégrité · Z : confidentialité'],correct:1,
+ why:'Des données vues par des personnes non autorisées touchent la confidentialité. Des données modifiées sans autorisation touchent l’intégrité. Un service inaccessible au moment voulu touche la disponibilité.'},
+{id:'s9',type:'indices',kind:'Leçon 1 · Tes données',title:'Une publication de vacances',context:'Léa publie ce message sur son compte public, juste avant de partir.',
+ example:'<small>Publication publique — Léa</small><p><strong>« Enfin 2 semaines au Mexique avec toute la famille ✈️☀️ On part ce soir ! »</strong></p><p>📷 Photo : Léa tient sa carte d’embarquement, code-barres bien visible. Elle porte le chandail de l’équipe de son école, avec son nom au dos.</p><p>📍 Localisation : rue des Érables, Ottawa (visible par tout le monde)</p><p>❤️ 124 mentions J’aime</p>',
+ q:'Coche TOUS les éléments qui exposent Léa ou sa famille.',items:[
+ {t:'Le code-barres de la carte d’embarquement.',bad:true},
+ {t:'Les émojis d’avion et de soleil.',bad:false},
+ {t:'L’annonce que la maison sera vide pendant deux semaines.',bad:true},
+ {t:'La localisation publique de sa rue.',bad:true},
+ {t:'Le nombre de mentions J’aime.',bad:false},
+ {t:'Le chandail avec son nom et son école.',bad:true},
+ {t:'La photo est prise en plein jour.',bad:false}],
+ why:'Le code-barres peut donner accès à la réservation, l’absence annoncée et la rue indiquent une maison vide, et le chandail permet de retrouver Léa à l’école. Avant de publier, on vérifie les détails visibles et qui peut voir la publication.'},
+{id:'s10',type:'choix',kind:'Leçon 5 · Compte d’un ami',title:'« Oui c’est moi lol »',context:'Tu as répondu dans la même conversation pour vérifier.',
+ example:'<small>Message privé — Compte de Sam (ton ami)</small><p>« Vote pour moi au concours de dessin stp 🙏 il faut se connecter avec Instagram »</p><p><span class="link">concours-dessin-vote.example</span></p><p style="text-align:right"><em>Toi : « C’est vraiment toi ? »</em></p><p>« Oui c’est moi lol, vite ça ferme à 20 h ! »</p>',
+ q:'Que fais-tu ?',opts:['Sam a confirmé dans la conversation : tu peux voter sans crainte.','Voter, puis changer ton mot de passe Instagram juste après par précaution.','Contacter Sam par un autre moyen avant de faire quoi que ce soit.','Publier le lien dans le groupe de la classe pour avertir tout le monde.'],correct:2,
+ why:'Si le compte de Sam est piraté, le fraudeur répond lui-même dans la conversation : cette « confirmation » ne prouve rien. Il faut un autre canal (en personne, par téléphone). Republier le lien expose d’autres élèves.'},
+{id:'s11',type:'choix',kind:'Leçon 3 · Lire un lien',title:'Un document partagé',context:'Un camarade de ton équipe t’envoie un lien vers votre projet.',
+ example:'<small>Lien survolé</small><span class="addr">https://docs-partage.example/ecole-exemple.ca/projet-final</span>',
+ q:'À quel domaine appartient ce lien ?',opts:['ecole-exemple.ca, car le nom de l’école apparaît dans l’adresse','docs-partage.example, car c’est la partie avant le premier « / »','projet-final, car c’est le dernier mot de l’adresse','On ne peut pas le savoir sans ouvrir la page'],correct:1,
+ why:'Le domaine est juste avant le premier « / » : « docs-partage.example ». Ce qui vient après le « / » (le chemin) peut contenir n’importe quel mot, même le nom de l’école. Ça ne veut pas dire que le lien est dangereux, mais il n’appartient pas à l’école.'},
+{id:'s12',type:'choix',kind:'Leçons 2 et 5 · Hameçonnage par texto',title:'Il connaît ton adresse',context:'Ton prénom et ton adresse sont exacts. Tu attends justement un colis.',
+ example:'<small>SMS — Numéro inconnu</small><p>« Bonjour Maya, votre colis pour le 48, rue des Pins est retenu. Frais de 2,49 $ à payer avant 18 h : <span class="link">bit.ly/pins-48</span> »</p>',
+ q:'Quelle est la meilleure décision ?',opts:['Le message connaît ton prénom et ton adresse : il vient forcément du transporteur.','Payer seulement si le montant est inférieur à 5 $, car le risque reste limité.','Vérifier le suivi dans l’application officielle du transporteur, sans utiliser le lien.','Ouvrir le lien raccourci pour voir où il mène, sans entrer de carte bancaire.'],correct:2,
+ why:'Tes renseignements ont pu fuiter : ils rendent l’arnaque crédible sans la prouver vraie. Le petit montant vise surtout tes données bancaires. Un lien raccourci cache sa destination, et l’ouvrir est déjà un risque.'},
+{id:'s13',type:'choix',kind:'Leçon 5 · Signaler sans propager',title:'Prévenir la classe',context:'Un faux courriel circule à l’école. Tu veux avertir le groupe de ta classe.',
+ example:'<small>Faux courriel reçu par plusieurs élèves</small><p>De : « Direction » &lt;direction@ecole-avis.example&gt; — « Confirmez votre mot de passe avant ce soir. »</p>',
+ q:'Quel message est le meilleur à publier dans le groupe ?',opts:['« Attention, voici le lien du faux courriel pour que vous le reconnaissiez : … »','« Répondez tous au courriel pour dire au fraudeur qu’on l’a démasqué. »','« Un faux courriel “Direction” demande votre mot de passe : ne cliquez pas, prévenez le prof. »','« Tout le monde a été piraté : changez vite tous vos mots de passe partout ! »'],correct:2,
+ why:'Un bon avertissement décrit le piège et donne la bonne action, sans republier le lien et sans créer de panique. Répondre au fraudeur confirme que l’adresse est active.'},
+{id:'s14',type:'choix',kind:'Leçon 4 · Autorisations',title:'Une application de lampe de poche',context:'Tu installes une application de lampe de poche gratuite.',
+ example:'<small>Demande d’autorisations</small><p>« Lampe Super Brillante » veut accéder à :</p><p>📷 Appareil photo (pour le flash) · 👥 Contacts · 📍 Position précise · 🎤 Microphone</p>',
+ q:'Que fais-tu ?',opts:['J’accepte tout, sinon la lampe risque de ne pas fonctionner.','J’accepte seulement la position, car elle sert souvent aux applications gratuites.','Je n’accepte que l’accès au flash et je refuse les contacts, la position et le micro.','Je refuse tout, puis j’accepte tout si l’application ne s’ouvre pas.'],correct:2,
+ why:'Une lampe a besoin du flash (souvent rangé sous « appareil photo »), pas de tes contacts, de ta position ni de ton micro. Des demandes sans lien avec la fonction sont un signal d’alerte.'},
+];
+const POINTS=d=>d.type==='indices'?2:1, TOTAL=data.reduce((t,d)=>t+POINTS(d),0), MAX_SORTIES=3;
+const $=id=>document.getElementById(id);
+
+// Each student gets a shuffled scenario order and shuffled options; answers are stored with the original indices.
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+let ordre,vues,index=0,answers={},sorties=[],debut=null,away=null,envoye=false,started=false;
+function prepare(){ordre=shuffle(data.map(d=>d.id));vues={};data.forEach(d=>vues[d.id]=shuffle([...(d.type==='indices'?d.items:d.opts).keys()]));answers={};index=0;sorties=[];away=null;envoye=false}
+const byId=id=>data.find(d=>d.id===id);
+const answered=d=>d.type==='indices'?Array.isArray(answers[d.id]):answers[d.id]!=null;
+
+function pointsFor(d){
+ const a=answers[d.id];
+ if(d.type==='choix')return a===d.correct?1:0;
+ if(!Array.isArray(a))return 0;
+ const vrais=d.items.filter(x=>x.bad).length,ok=a.filter(i=>d.items[i].bad).length,faux=a.length-ok;
+ return Math.max(0,(ok-faux)/vrais)*2;
+}
+
+function render(){
+ const d=byId(ordre[index]);
+ $('count').textContent=`SITUATION ${index+1} SUR ${data.length}`;$('bar').style.width=`${(index+1)/data.length*100}%`;
+ document.querySelector('.progress').setAttribute('aria-valuenow',index+1);
+ $('title').textContent=d.title;$('context').textContent=d.context;$('example').innerHTML=d.example;$('question').textContent=d.q;
+ $('hint').textContent=d.type==='indices'?'Plusieurs réponses possibles. Attention : une case cochée à tort enlève des points.':'';
+ $('options').innerHTML='';
+ vues[d.id].forEach((orig,pos)=>{
+  const b=document.createElement('button');b.type='button';
+  if(d.type==='indices'){
+   const sel=(answers[d.id]||[]).includes(orig);
+   b.className='option'+(sel?' selected':'');b.setAttribute('aria-pressed',sel);
+   b.innerHTML='<span class="box" aria-hidden="true">'+(sel?'✓':'')+'</span>';b.append(document.createTextNode(d.items[orig].t));
+   b.onclick=()=>{const cur=new Set(answers[d.id]||[]);cur.has(orig)?cur.delete(orig):cur.add(orig);answers[d.id]=[...cur];render()};
+  }else{
+   const sel=answers[d.id]===orig;
+   b.className='option'+(sel?' selected':'');b.setAttribute('aria-pressed',sel);
+   b.textContent=String.fromCharCode(65+pos)+'. '+d.opts[orig];
+   b.onclick=()=>{answers[d.id]=orig;render()};
+  }
+  $('options').append(b);
+ });
+ $('back').disabled=index===0;
+ $('next').textContent=index===data.length-1?'Vérifier mes réponses →':'Suivant →';
+}
+
+function showReview(){
+ $('play').classList.add('hidden');$('review').classList.remove('hidden');
+ const faits=data.filter(answered).length;
+ $('recapTxt').textContent=faits===data.length?'Tu as répondu aux 14 situations. Clique sur un numéro pour revoir une situation, ou envoie ton défi.':`Tu as répondu à ${faits} situation${faits>1?'s':''} sur ${data.length}. Les cases grises n’ont pas de réponse.`;
+ $('recap').innerHTML='';
+ ordre.forEach((id,i)=>{const b=document.createElement('button');b.type='button';b.textContent=i+1;if(answered(byId(id)))b.className='ok';b.onclick=()=>{index=i;$('review').classList.add('hidden');$('play').classList.remove('hidden');render();window.scrollTo(0,0)};$('recap').append(b)});
+ $('send').textContent='Envoyer mon défi';$('send').dataset.confirm='';
+ window.scrollTo(0,0);
+}
+
+async function finish(auto){
+ if(envoye)return;envoye=true;started=false;
+ const pts=data.reduce((t,d)=>t+pointsFor(d),0),score=Math.round(pts/TOTAL*100);
+ const payload={version:2,reponses:answers,ordre,sorties,nbSorties:sorties.length,envoiAuto:!!auto,duree:Math.round((Date.now()-debut)/1000)};
+ $('garde').classList.add('hidden');$('watch').classList.add('hidden');
+ ['play','review','intro'].forEach(s=>$(s).classList.add('hidden'));$('end').classList.remove('hidden');
+ document.body.classList.remove('examen');
+ if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});
+ $('score').textContent=`${score} %`;
+ const t=window.TEJ2O;
+ if(t&&!t.teacher&&t.saveScore)await t.saveScore('final',score,payload);
+ $('summary').textContent=(auto?'Ton défi a été envoyé automatiquement après 3 sorties. ':'Ton défi a été envoyé. ')+`Tu as obtenu ${Math.round(pts*10)/10} point${pts>1?'s':''} sur ${TOTAL}.`+(sorties.length?` Sorties enregistrées : ${sorties.length}.`:'');
+ // Students only see which situations were right; explanations are reviewed in class. The teacher preview shows everything.
+ $('reviews').innerHTML='';
+ data.forEach((d,i)=>{const p=pointsFor(d),max=POINTS(d),div=document.createElement('div');div.className='review';
+  const h=document.createElement('strong');h.textContent=`${p===max?'✓':p>0?'◐':'✕'} ${i+1}. ${d.title}`+(max>1?` (${Math.round(p*10)/10} / ${max})`:'');div.append(h);
+  if(t?.teacher){const r=document.createElement('p');r.textContent='Réponse attendue : '+(d.type==='indices'?d.items.filter(x=>x.bad).map(x=>x.t).join(' · '):d.opts[d.correct]);const w=document.createElement('p');w.style.color='var(--muted)';w.textContent=d.why;div.append(r,w)}
+  $('reviews').append(div)});
+ if(t?.teacher){$('restart').classList.remove('hidden');$('homeLink').href='../index.html'}
+ window.scrollTo(0,0);
+}
+
+/* ---------- Exam mode: fullscreen, exit tracking, copy/print blocking ---------- */
+const fsOK=()=>!!document.documentElement.requestFullscreen;
+const enPleinEcran=()=>!fsOK()||!!document.fullscreenElement;
+function quitter(raison){
+ if(!started||envoye||away)return;
+ away={raison,t:new Date().toISOString(),ms:Date.now()};
+ if(sorties.length+1>=MAX_SORTIES){sorties.push({raison,t:away.t,s:0});away=null;finish(true);return}
+ $('gardeTxt').innerHTML=`Sortie <b>${sorties.length+1}</b> sur ${MAX_SORTIES} (${raison}). Elle est enregistrée et ton enseignant(e) la verra.<br>À la ${MAX_SORTIES}<sup>e</sup> sortie, ton défi sera envoyé automatiquement.`;
+ $('garde').classList.remove('hidden');
+}
+function revenir(){
+ if(!away)return;
+ sorties.push({raison:away.raison,t:away.t,s:Math.round((Date.now()-away.ms)/1000)});away=null;
+ $('watchN').textContent=sorties.length;$('garde').classList.add('hidden');
+}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)quitter('changement d’onglet ou d’application')});
+window.addEventListener('blur',()=>setTimeout(()=>{if(!document.hasFocus())quitter('autre fenêtre')},300));
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement)quitter('sortie du plein écran');else if(document.hasFocus()&&!document.hidden)revenir()});
+window.addEventListener('focus',()=>{if(away&&enPleinEcran()&&!document.hidden)revenir()});
+$('retour').onclick=async()=>{try{if(fsOK()&&!document.fullscreenElement)await document.documentElement.requestFullscreen()}catch(e){}if(enPleinEcran())revenir()};
+['copy','cut','paste','contextmenu','dragstart'].forEach(ev=>document.addEventListener(ev,e=>{if(started)e.preventDefault()}));
+document.addEventListener('keydown',e=>{if(!started)return;const k=e.key.toLowerCase();if((e.ctrlKey||e.metaKey)&&['c','x','v','p','s','u','a','f'].includes(k)||k==='f12'||k==='printscreen')e.preventDefault()});
+window.addEventListener('beforeunload',e=>{if(started&&!envoye){e.preventDefault();e.returnValue=''}});
+
+/* ---------- Start: wait for access check, block a second attempt ---------- */
+// Wait for access.js without giving up: a slow connection only delays the page, and a real failure is explained.
+async function attendreAcces(){
+ for(let i=0;;i++){
+  if(window.TEJ2O||window.TEJ2O_ACCESS_ERROR)return window.TEJ2O;
+  if(i===80){$('introMsg').innerHTML='La vérification de ton compte prend plus de temps que prévu. Attends quelques secondes…<br><small>Si rien ne change, recharge la page (Ctrl + F5). Le défi doit être ouvert depuis le site TEJ2O en ligne (adresse https://…), après t’être connecté(e) : un fichier ouvert directement depuis l’ordinateur ne peut pas vérifier ton compte.</small>';$('introMsg').classList.remove('hidden')}
+  await new Promise(r=>setTimeout(r,100));
+ }
+}
+(async()=>{
+ const t=await attendreAcces();
+ if(!t){$('introMsg').textContent=window.TEJ2O_ACCESS_ERROR||'Impossible de vérifier ton compte.';$('introMsg').classList.remove('hidden');$('start').textContent='Accès impossible';return}
+ $('introMsg').classList.add('hidden');
+ if(t.corrige){if(t.teacher)apercu();else corrigeEleve(t.corrige);return}
+ if(!t.teacher){
+  const {data:fait}=await t.db.from('tej2o_results').select('score,completed_at').eq('class_id',t.classId).eq('activity_id','final').maybeSingle();
+  if(fait){$('introMsg').innerHTML=`✓ Tu as déjà envoyé ce défi le <b>${new Date(fait.completed_at).toLocaleString('fr-CA',{dateStyle:'long',timeStyle:'short'})}</b>. Ton score : <b>${fait.score} %</b>.<br>Il n’y a qu’une seule tentative. Si tu dois le refaire, demande à ton enseignant(e).`;$('introMsg').classList.remove('hidden');$('start').textContent='Défi déjà envoyé';return}
+ }else{$('introMsg').textContent='Aperçu enseignant : le mode examen fonctionne, mais aucune note n’est enregistrée.';$('voirTout').classList.remove('hidden');$('introMsg').classList.remove('hidden')}
+ $('start').disabled=false;$('start').textContent='Commencer le défi en plein écran →';
+})();
+$('start').onclick=async()=>{
+ try{if(fsOK())await document.documentElement.requestFullscreen()}catch(e){}
+ prepare();debut=Date.now();started=true;document.body.classList.add('examen');
+ $('intro').classList.add('hidden');$('play').classList.remove('hidden');$('watch').classList.remove('hidden');$('watchN').textContent='0';render();window.scrollTo(0,0);
+};
+$('back').onclick=()=>{if(index>0){index--;render();window.scrollTo(0,0)}};
+$('next').onclick=()=>{if(index<data.length-1){index++;render();window.scrollTo(0,0)}else showReview()};
+$('revoir').onclick=()=>{$('review').classList.add('hidden');$('play').classList.remove('hidden');render()};
+$('send').onclick=()=>{const b=$('send');if(b.dataset.confirm!=='1'){b.dataset.confirm='1';b.textContent='Confirmer l’envoi (définitif)';return}finish(false)};
+
+
+/* ---------- Student: own answer key, once the teacher has published it ---------- */
+function corrigeEleve(c){
+ const a=c.reponses||{},rep=a.reponses||{};
+ $('corScore').textContent=c.score+' %';
+ $('corInfo').textContent=(a.sorties&&a.sorties.length?`Sorties enregistrées pendant le défi : ${a.sorties.length}. `:'')+'Voici chaque situation avec ta réponse, la bonne réponse et l’explication.';
+ const box=$('corListe');box.innerHTML='';
+ data.forEach((d,i)=>{
+  const art=document.createElement('div');art.className='review apercu-item';const mine=rep[d.id];let body,ok;
+  if(d.type==='indices'){
+   const pris=new Set(Array.isArray(mine)?mine:[]);const pts=Array.isArray(mine)?Math.max(0,(d.items.filter((x,k)=>x.bad&&pris.has(k)).length-[...pris].filter(k=>!d.items[k].bad).length)/d.items.filter(x=>x.bad).length)*2:0;ok=pts===2?'✓':pts>0?'◐':'✕';
+   body='<ul>'+d.items.map((x,k)=>`<li>${x.bad?'<b style="color:var(--good)">✓ vrai indice</b>':'<span style="color:var(--muted)">✗ pas un indice</span>'} — ${x.t}${pris.has(k)?' <b style="color:var(--gold)">(tu l’as coché)</b>':''}</li>`).join('')+`</ul><p>Points : ${Math.round(pts*10)/10} / 2</p>`;
+  }else{
+   ok=mine===d.correct?'✓':'✕';
+   body=`<p><b>Ta réponse :</b> ${mine==null?'<i>aucune</i>':d.opts[mine]}</p>`+(mine===d.correct?'':`<p><b style="color:var(--good)">Bonne réponse :</b> ${d.opts[d.correct]}</p>`);
+  }
+  art.innerHTML=`<h2 style="margin:6px 0">${ok} ${i+1}. ${d.title}</h2><p class="lead">${d.context}</p><div class="case">${d.example}</div><p><b>${d.q}</b></p>${body}<p><b>Explication :</b> ${d.why}</p>`;
+  box.append(art);
+ });
+ $('intro').classList.add('hidden');$('corrigeEl').classList.remove('hidden');window.scrollTo(0,0);
+}
+/* ---------- Teacher only: full answer key on one page ---------- */
+function apercu(){
+ const box=$('apercuListe');box.innerHTML='';
+ data.forEach((d,i)=>{
+  const art=document.createElement('div');art.className='review apercu-item';
+  let rep;
+  if(d.type==='indices')rep='<p><b>Vrais indices (à cocher) :</b></p><ul>'+d.items.map(x=>`<li${x.bad?'':' style="opacity:.6"'}>${x.bad?'✓':'✗'} ${x.t}</li>`).join('')+'</ul><p style="color:var(--muted)">2 points · une case cochée à tort enlève des points.</p>';
+  else rep='<ul>'+d.opts.map((o,j)=>`<li${j===d.correct?' style="color:var(--good);font-weight:700"':' style="opacity:.6"'}>${j===d.correct?'✓':'✗'} ${o}</li>`).join('')+'</ul>';
+  art.innerHTML=`<div class="eyebrow">Situation ${i+1} · ${d.kind}</div><h2 style="margin:6px 0">${d.title}</h2><p class="lead">${d.context}</p><div class="case">${d.example}</div><p><b>${d.q}</b></p>${rep}<p><b>Explication :</b> ${d.why}</p>`;
+  box.append(art);
+ });
+ $('intro').classList.add('hidden');$('apercu').classList.remove('hidden');window.scrollTo(0,0);
+}
+$('voirTout').onclick=()=>{if(window.TEJ2O?.teacher)apercu()};
+$('apercuRetour').onclick=()=>{$('apercu').classList.add('hidden');$('intro').classList.remove('hidden');window.scrollTo(0,0)};
+$('apercuPrint').onclick=()=>window.print();
+$('restart').onclick=()=>{$('end').classList.add('hidden');$('intro').classList.remove('hidden');window.scrollTo(0,0)};
+</script>
+<script type="module">import("../access.js").catch(e=>{console.error("Accès TEJ2O",e);window.TEJ2O_ACCESS_ERROR='Le contrôle d’accès n’a pas pu se charger. Vérifie Internet, puis recharge la page (Ctrl + F5). Le défi doit être ouvert depuis le site TEJ2O en ligne, pas depuis un fichier sur l’ordinateur.'});</script>
+</body></html>

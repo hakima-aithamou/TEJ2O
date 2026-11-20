@@ -1,0 +1,249 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TEJ2O | Unité 5 · Leçon 5 — Concevoir et déboguer un algorithme</title>
+<link rel="stylesheet" href="../algo/lecon.css"></head><body data-activity="lesson11"><nav class="tej-nav" aria-label="Navigation principale"><a href="../site.html">← Accueil TEJ2O</a><span>Unité 5 · Algorithmes et Python</span></nav><main class="shell"><header class="top"><div><div class="brand">TEJ2O <span style="color:#fff;font-weight:400">| Algorithmes et Python</span></div><div class="small">Unité 5 · Leçon 5 — Concevoir et déboguer un algorithme</div></div><span class="pill">Unité 5</span></header><div class="intro"><div><h1>Penser comme un programmeur</h1><div class="small">Quatre notions, puis un devoir de dix questions.</div></div><div class="small" id="stepLabel"></div></div><div class="tabs" id="tabs"></div><div class="progress"><div class="fill" id="fill"></div></div><section id="content" aria-live="polite"></section><div class="nav"><button id="prev">← Précédent</button><span class="hint" id="navHint"></span><button id="next">Suivant →</button></div><div class="footer">TEJ2O · Unité 5 · Algorithmes et Python</div></main>
+<script>
+const LECON = {
+ "num": 11,
+ "aff": 5,
+ "titre": "Concevoir et déboguer un algorithme",
+ "labels": [
+  "1 · Décomposer",
+  "2 · Tracer",
+  "3 · Tester",
+  "4 · Déboguer",
+  "Devoir · 10 questions"
+ ],
+ "stages": [
+  {
+   "type": "qcm",
+   "title": "Décomposer un problème",
+   "lead": [
+    "Un gros problème se résout plus facilement en le **décomposant** en petites étapes simples.",
+    "On se pose trois questions : **Quelles sont les entrées ?** **Quel traitement ?** **Quelle sortie ?**",
+    "On écrit ensuite les étapes **dans l’ordre**, en pseudocode.",
+    "On repère les parties qui **se répètent** (boucle) et les **choix** à faire (condition)."
+   ],
+   "tip": "Si une étape est encore difficile à écrire, décompose-la à son tour en étapes plus petites.",
+   "doc": "Problème à décomposer",
+   "sample": [
+    "Calculer la moyenne de 5 notes,",
+    "puis afficher « Réussi » si la moyenne est de 50 ou plus."
+   ],
+   "consigne": "Quelle décomposition est la bonne ?",
+   "opts": [
+    "Afficher le message, puis lire les notes, puis calculer la moyenne.",
+    "Lire les 5 notes (boucle) en les additionnant, calculer moyenne ← total ÷ 5, puis SI moyenne ≥ 50, afficher « Réussi ».",
+    "Calculer la moyenne, puis lire les notes.",
+    "Lire une seule note et l’afficher."
+   ],
+   "correct": 1,
+   "why": "On lit d’abord les entrées (avec une boucle et un total), puis on fait le calcul, puis la condition et la sortie. Les autres ordres utilisent des valeurs qui n’existent pas encore."
+  },
+  {
+   "type": "qcm",
+   "title": "Tracer un algorithme avec un tableau",
+   "lead": [
+    "**Tracer**, c’est exécuter l’algorithme **à la main**, comme l’ordinateur, ligne par ligne.",
+    "On fait un tableau : **une colonne par variable**, et on écrit la nouvelle valeur à chaque changement.",
+    "Dans une boucle, on ajoute une ligne au tableau à **chaque tour**.",
+    "Le tracé montre exactement ce que fait l’algorithme, même quand ce n’est pas ce qu’on voulait."
+   ],
+   "tip": "Trace toujours avec de petites valeurs : c’est plus rapide et les erreurs se voient mieux.",
+   "doc": "Algorithme à tracer",
+   "code": "a ← 1\nb ← 1\nRÉPÉTER 3 FOIS\n    c ← a + b\n    a ← b\n    b ← c\nFIN RÉPÉTER\nAFFICHER b",
+   "consigne": "Trace l’algorithme. Qu’affiche-t-il ?",
+   "opts": [
+    "3",
+    "4",
+    "5",
+    "8"
+   ],
+   "correct": 2,
+   "why": "Tour 1 : c = 2, a = 1, b = 2. Tour 2 : c = 3, a = 2, b = 3. Tour 3 : c = 5, a = 3, b = 5. On affiche 5. (C’est le début de la suite de Fibonacci : 1, 1, 2, 3, 5…)"
+  },
+  {
+   "type": "qcm",
+   "title": "Tester avec de bons exemples",
+   "lead": [
+    "Un algorithme qui marche avec **un** exemple ne marche pas forcément avec **tous**.",
+    "On choisit des **cas de test** : un cas normal, des **cas limites** (juste à la frontière) et des cas particuliers (0, nombre négatif…).",
+    "Pour chaque test, on prévoit d’abord le **résultat attendu**, puis on compare avec le résultat obtenu.",
+    "Si un seul test échoue, l’algorithme a un bogue."
+   ],
+   "tip": "Les cas limites trouvent le plus de bogues : pour « note ≥ 50 », teste 49, 50 et 51.",
+   "doc": "Algorithme à tester",
+   "code": "LIRE note\nSI note ≥ 50 ALORS\n    AFFICHER « Réussi »\nSINON\n    AFFICHER « À reprendre »\nFIN SI",
+   "consigne": "Quel groupe de notes permet le mieux de tester cet algorithme ?",
+   "opts": [
+    "70, 80, 90",
+    "49, 50, 51",
+    "100 seulement",
+    "10, 20, 30"
+   ],
+   "correct": 1,
+   "why": "49, 50 et 51 entourent la limite : ils vérifient que 50 donne bien « Réussi » et que 49 donne « À reprendre ». Les autres groupes ne testent qu’un seul des deux chemins."
+  },
+  {
+   "type": "qcm",
+   "title": "Déboguer : trouver et corriger l’erreur",
+   "lead": [
+    "Un **bogue** est une erreur dans un algorithme ; **déboguer**, c’est la trouver et la corriger.",
+    "Méthode : 1) trouver un test qui échoue ; 2) tracer l’algorithme avec ce test ; 3) repérer la **première ligne** où la valeur devient fausse ; 4) corriger, puis **retester**.",
+    "Erreurs fréquentes : mauvais **ordre** des instructions, mauvaise **comparaison**, variable **pas initialisée**, boucle **infinie**.",
+    "Ne change pas tout au hasard : une seule correction à la fois."
+   ],
+   "tip": "Après une correction, refais tous les tests : une correction peut en casser une autre partie.",
+   "doc": "Algorithme avec un bogue",
+   "code": "total ← 0\nmoyenne ← total ÷ 3\nRÉPÉTER 3 FOIS\n    LIRE note\n    total ← total + note\nFIN RÉPÉTER\nAFFICHER moyenne",
+   "consigne": "Cet algorithme affiche toujours 0. Quel est le bogue ?",
+   "opts": [
+    "total devrait commencer à 1.",
+    "La moyenne est calculée avant la lecture des notes : la ligne moyenne ← total ÷ 3 doit venir après la boucle.",
+    "Il faut diviser par 2.",
+    "La boucle devrait tourner 4 fois."
+   ],
+   "correct": 1,
+   "why": "Au moment du calcul, total vaut encore 0, donc moyenne = 0. C’est un bogue d’ordre : il faut calculer la moyenne après avoir additionné les notes."
+  }
+ ],
+ "questions": [
+  [
+   "Quelle est la première chose à identifier quand on décompose un problème ?",
+   [
+    "La couleur de l’écran",
+    "Les entrées, le traitement et la sortie",
+    "Le nombre de lignes du programme",
+    "Le langage le plus rapide"
+   ],
+   1,
+   "Savoir ce qu’on reçoit, ce qu’on doit calculer et ce qu’on doit donner guide toute la suite."
+  ],
+  [
+   "Qu’est-ce que tracer un algorithme ?",
+   [
+    "Le dessiner avec des couleurs",
+    "L’exécuter à la main, ligne par ligne, en notant la valeur des variables",
+    "Le recopier au propre",
+    "L’effacer pour recommencer"
+   ],
+   1,
+   "Tracer, c’est faire le travail de l’ordinateur à la main pour voir exactement ce qui se passe."
+  ],
+  [
+   "Trace cet algorithme. Qu’affiche-t-il ?",
+   [
+    "6",
+    "10",
+    "8",
+    "12"
+   ],
+   0,
+   "x prend les valeurs 0 + 1 = 1, puis 1 + 2 = 3, puis 3 + 3 = 6 (i vaut 1, puis 2, puis 3).",
+   "x ← 0\ni ← 1\nTANT QUE i ≤ 3 FAIRE\n    x ← x + i\n    i ← i + 1\nFIN TANT QUE\nAFFICHER x"
+  ],
+  [
+   "Un algorithme vérifie « âge ≥ 16 ». Quel est le meilleur groupe de tests ?",
+   [
+    "15, 16, 17",
+    "30, 40, 50",
+    "16 seulement",
+    "1, 2, 3"
+   ],
+   0,
+   "15, 16 et 17 entourent la limite : ils vérifient les deux chemins et la valeur exacte 16."
+  ],
+  [
+   "Pourquoi prévoit-on le résultat attendu AVANT d’exécuter un test ?",
+   [
+    "Pour gagner du temps",
+    "Pour pouvoir comparer et savoir si l’algorithme se trompe",
+    "Parce que l’ordinateur l’exige",
+    "Ce n’est pas utile"
+   ],
+   1,
+   "Sans résultat attendu, on ne peut pas savoir si le résultat obtenu est bon ou faux."
+  ],
+  [
+   "Un algorithme doit afficher le plus grand de deux nombres a et b. Lequel est correct ?",
+   [
+    "SI a > b ALORS AFFICHER b SINON AFFICHER a",
+    "SI a > b ALORS AFFICHER a SINON AFFICHER b",
+    "AFFICHER a + b",
+    "SI a = b ALORS AFFICHER a"
+   ],
+   1,
+   "Si a est plus grand, on affiche a ; sinon, on affiche b (qui est plus grand ou égal)."
+  ],
+  [
+   "Cet algorithme devait afficher 5 étoiles, mais il en affiche 6. Quelle correction faut-il faire ?",
+   [
+    "Commencer avec i ← −1",
+    "Remplacer i ← i + 1 par i ← i + 2",
+    "Commencer avec i ← 1",
+    "Remplacer AFFICHER par LIRE"
+   ],
+   2,
+   "Avec i qui commence à 0 et i ≤ 5, la boucle tourne pour 0, 1, 2, 3, 4, 5 : 6 tours. En commençant à 1, elle tourne 5 fois (1 à 5). Commencer à −1 donnerait 7 étoiles et ajouter 2 à chaque tour en donnerait 3.",
+   "i ← 0\nTANT QUE i ≤ 5 FAIRE\n    AFFICHER « * »\n    i ← i + 1\nFIN TANT QUE"
+  ],
+  [
+   "Quelle est la bonne méthode pour déboguer ?",
+   [
+    "Changer plusieurs lignes au hasard jusqu’à ce que ça marche",
+    "Trouver un test qui échoue, tracer, corriger la première ligne fautive, puis retester",
+    "Recommencer l’algorithme au complet",
+    "Ajouter des boucles"
+   ],
+   1,
+   "Une méthode organisée trouve l’erreur à coup sûr ; les changements au hasard créent souvent d’autres bogues."
+  ],
+  [
+   "Un algorithme additionne des notes, mais le total est beaucoup trop grand. Quelle est la cause probable ?",
+   [
+    "total n’a pas été mis à 0 avant la boucle",
+    "Il y a trop peu de notes",
+    "La condition est fausse",
+    "AFFICHER est mal écrit"
+   ],
+   0,
+   "Si total ne commence pas à 0, il garde une ancienne valeur et toutes les notes s’y ajoutent."
+  ],
+  [
+   "Pour trouver le plus petit nombre d’une liste, quelles structures faut-il ?",
+   [
+    "Une boucle pour parcourir la liste et une condition pour comparer avec le plus petit trouvé jusqu’ici",
+    "Seulement une condition",
+    "Seulement une séquence",
+    "Aucune structure"
+   ],
+   0,
+   "On parcourt la liste (boucle) et, à chaque nombre, on compare avec le plus petit actuel (condition) pour le remplacer si besoin."
+  ]
+ ],
+ "ecrire": [
+  {
+   "titre": "Trouver et corriger le bogue",
+   "enonce": "Cet algorithme affiche toujours 0. Explique le bogue, puis réécris l’algorithme corrigé.\n    total ← 0\n    moyenne ← total ÷ 3\n    RÉPÉTER 3 FOIS\n        LIRE note\n        total ← total + note\n    FIN RÉPÉTER\n    AFFICHER moyenne",
+   "verif": [
+    "expliquer : la moyenne est calculée avant la lecture des notes",
+    "déplacer moyenne ← total ÷ 3 après la boucle",
+    "garder total ← 0 avant la boucle"
+   ],
+   "modele": "Bogue : la moyenne est calculée avant la lecture des notes (total vaut encore 0).\n\ntotal ← 0\nRÉPÉTER 3 FOIS\n    LIRE note\n    total ← total + note\nFIN RÉPÉTER\nmoyenne ← total ÷ 3\nAFFICHER moyenne"
+  },
+  {
+   "titre": "Le plus petit de trois nombres",
+   "enonce": "Écris un algorithme qui lit trois nombres a, b et c et affiche le plus petit. Commence par décomposer : entrées, traitement, sortie.",
+   "verif": [
+    "LIRE a, b et c",
+    "une variable petit qui commence avec a",
+    "comparer b, puis c, avec petit",
+    "AFFICHER petit à la fin"
+   ],
+   "modele": "LIRE a, b, c\npetit ← a\nSI b < petit ALORS\n    petit ← b\nFIN SI\nSI c < petit ALORS\n    petit ← c\nFIN SI\nAFFICHER petit"
+  }
+ ]
+};
+</script>
+<script src="../algo/python.js"></script>
+<script src="../algo/lecon.js"></script>
+<script>window.tej2oAccessReady=import('../access.js');</script><script type="module">try{await window.tej2oAccessReady;const c=window.TEJ2O?.corrige;if(c){openCorrige(c)}else if(new URLSearchParams(location.search).has("devoir")&&(window.TEJ2O?.teacher||window.TEJ2O?.homeworkOpen))go(4)}catch(err){console.error("Accès TEJ2O",err);const box=document.createElement("aside");box.style="padding:18px;margin:16px;border:2px solid #d5a83b;background:#163a2e;color:#fff";box.textContent="Impossible de vérifier l’accès à cette leçon. Vérifie Internet et ouvre le site depuis son adresse HTTPS.";document.body.prepend(box)}</script><script src="../telecharger.js"></script></body></html>

@@ -1,0 +1,114 @@
+TEJ2O — Cyberdétectives
+
+CONNEXION (comme Assiduité et Habiletés)
+- Mêmes comptes, classes et élèves qu'Assiduité et Habiletés (serveur « Assiduité »).
+- Élève : « S'identifier » la première fois (le mot de passe s'affiche 30 secondes), puis « Se connecter » avec prénom, nom et mot de passe.
+- Enseignant(e) : « Se connecter », « Créer un compte » (approbation par Mme Hakima dans Assiduité) ou « Mot de passe oublié » (question secrète).
+
+PAGES
+- index.html : connexion ; espace enseignant (publications, élèves, mots de passe, résultats, export CSV).
+- index.html?compte : compte de l'élève (leçons publiées, devoirs, notes).
+- site.html : portail des leçons et devoirs publiés.
+- access.js : vérifie l'accès sur chaque leçon, le défi final et le mini-projet.
+
+À METTRE SUR GITHUB
+Remplacer TOUS les fichiers en gardant les sous-dossiers (lecon-1 … lecon-6, defi-final, mini-projet).
+
+DÉFI FINAL (mode examen)
+- 14 situations tirées des leçons 1 à 6 ; ordre des situations et des choix mélangé pour chaque élève.
+- Une seule tentative. Le bouton ↺ de la colonne « Défi final » (Résultats) permet de le refaire.
+- Plein écran obligatoire. Changer d'onglet, de fenêtre ou quitter le plein écran = une sortie (heure enregistrée).
+- À la 3e sortie, le défi est envoyé automatiquement. Dans Résultats, « ⚠ 2 » = 2 sorties (survoler pour voir les heures).
+- Les explications ne sont pas montrées aux élèves ; l'aperçu enseignant affiche les réponses attendues.
+
+LEÇONS — VERSION 2 (novembre 2026)
+- Les six leçons ont la même présentation. Chaque notion a sa leçon : 1 Bases · 2 Comprendre l'hameçonnage · 3 Repérer · 4 Protéger ses comptes · 5 Réagir · 6 Synthèse.
+- Devoirs : 10 questions à 4 choix plus exigeants ; l'ordre des choix change pour chaque élève.
+- Les notes déjà enregistrées ne changent pas. Pour un devoir envoyé avant la mise à jour, le corrigé affiche les nouvelles questions avec leurs bonnes réponses et un avis « Ce devoir a été modifié après ton envoi ».
+- Pour faire refaire un devoir avec la nouvelle version : bouton ↺ dans Résultats (l'ancienne note est effacée).
+
+DÉFI FINAL — PUBLICATION ET CORRIGÉ
+- Espace enseignant → Publications → « Pour aller plus loin » : Défi final, Corrigé du défi et Mini-projet, chacun avec sa date d'ouverture.
+- Liens « Voir le défi » et « Voir le corrigé du défi » : visibles seulement dans le compte enseignant.
+- Élève : le défi apparaît dans son compte une fois publié ; le corrigé (ses réponses, les bonnes réponses, les explications) seulement s'il a envoyé son défi et que le corrigé est publié.
+
+DÉFI FINAL POUR LES ÉLÈVES PRÉSENTS (novembre 2026)
+- 👥 Élèves : une case 🏆 Défi devant chaque élève (+ « Tout cocher » / « Tout décocher »).
+- Le défi final s'ouvre seulement pour les élèves cochés ET quand il est publié dans 📣 Publications.
+- Un élève non coché voit le défi verrouillé ; son envoi serait refusé par le serveur.
+- Table du serveur : tej2o_final_students (classe, élève).
+
+MINI-PROJET : VERSION IMPRIMABLE (novembre 2026)
+- mini-projet/imprimer.html : tout le projet sur une seule page claire (5 parties + grille avec une case « Niveau » à remplir),
+  bouton « Imprimer ou enregistrer en PDF ». Accès : l'enseignante toujours ; l'élève quand le mini-projet est publié.
+- Liens : dans le compte de l'élève (section 🎬 Mini-projet), dans 📣 Publications (enseignante) et en haut du mini-projet.
+- Nombre de scénarios : 5 pour un projet individuel, 7 pour un projet à deux (pages 1, 2, 4 et critère 10 de la grille).
+- Outil : Quizizz ou Genially (pages 1, 3, 4 et critère 7).
+
+MINI-PROJET : MODIFIER LE DOCUMENT (novembre 2026)
+- Page du mini-projet, compte enseignant : « ⬇️ Télécharger en Word (pour modifier) » donne Mini-projet TEJ2O.doc.
+- Modifie le fichier dans Word, enregistre-le (.docx ou .doc), puis « ⬆️ Mettre mon fichier sur le site » : un aperçu s’affiche, « 💾 Publier sur le site » le met en ligne.
+- Les élèves voient alors ta version, sur la page du mini-projet et dans la version imprimable. « ↺ Version d’origine » la retire.
+- Garde les sauts de page (ou les lignes « Page 1 / 5 · … ») pour que le site redécoupe le document en pages.
+- Liens : projet d’Ilef et Julie-Anne (Wayground) et découverte de Quizizz.
+
+MINI-PROJET — MISE À JOUR (novembre 2026)
+- mini-projet/index.html et mini-projet/imprimer.html : contenu repris du document Word « Mini-projet TEJ2O »
+  (outils suggérés, tutoriel Genially, projet d'élèves d'Ilef Tarkhani et Julie-Anne Patenaude, grille mise à jour).
+- Nouveau : mini-projet/guide.html (+ dossier mini-projet/guide/ avec les captures) : « Guide de réalisation »
+  repris du document « Guide pour le projet phishing » : mission, scénario, 9 méthodes (A à I), intégrer 5 QCM
+  dans Wayground, vérification et grille. Bouton « 📘 Guide de réalisation » sur la page du mini-projet,
+  lien à la page 3 et dans l'espace enseignant / le compte élève.
+- Version imprimable : les liens restent cachés sous leur texte (l'adresse n'est plus écrite à côté).
+- IMPORTANT : une version publiée par toi (bouton « Mettre mon fichier sur le site ») remplace le contenu de la page.
+  Pour voir la nouvelle version, clique sur « ↺ Version d'origine » sur la page du mini-projet (compte enseignant).
+
+UNITÉ 5 — ALGORITHMES ET PYTHON (novembre 2026)
+- Menu à gauche sur site.html : Unités 1 à 3 (à venir, grisées), Unité 4 · Cybersécurité (leçons 1 à 6, défi final, mini-projet)
+  et Unité 5 · Algorithmes et Python. Titre du site : « TEJ2O | Technologie informatique ».
+- L'unité 5 est indépendante et commence à la leçon 1 :
+  1 Qu'est-ce qu'un algorithme ? · 2 Les variables · 3 Les conditions · 4 Les boucles · 5 Concevoir et déboguer un algorithme ·
+  6 Atelier : écrire des algorithmes · 7 Python : l'indentation et les variables · 8 Python : print et input ·
+  9 Python : if, elif et else · 10 Python : and et or · 11 Python : la boucle for et range · 12 Python : les fonctions.
+- Leçon 6 (atelier) : l'élève écrit lui-même 16 algorithmes en pseudocode (gardés dans son navigateur), puis les compare avec une liste
+  de vérification et un corrigé possible. Le corrigé s'affiche seulement quand l'enseignante a publié le corrigé de la leçon 6.
+  Chaque leçon : 4 activités + un devoir de 10 questions + corrigé.
+- Devoirs des leçons 1 à 6 : partie 1 = 10 questions (la note) ; partie 2 = 2 ou 3 algorithmes à écrire en pseudocode, envoyés avec le devoir.
+  Quand le corrigé est publié, l'élève voit son algorithme, une liste à cocher et un corrigé possible pour s'autocorriger.
+  Espace enseignant → 📊 Résultats : le bouton 📄 à côté d'une note affiche ce que l'élève a écrit, avec le corrigé.
+- Dans l'espace enseignant et les fichiers Excel, ses devoirs s'appellent « Devoir 1 (U5) » … « Devoir 12 (U5) » (colonnes U5-D1 … U5-D12).
+- Leçons 7 à 12 : Python, une notion par activité, avec un encadré « Comment l'écrire », des exemples et ce qui s'affiche à l'écran.
+  Les exercices sont écrits et exécutés dans la page (rien à installer). Pas de while : les boucles se font avec for et range.
+  « ▶ Exécuter » lance le programme ; la case « Entrées » contient les réponses de l'utilisateur (une par ligne).
+  « ✓ Vérifier » teste le programme avec plusieurs entrées. Indice, puis une solution après 2 essais ratés.
+  Un programme qui tourne plus de 5 secondes (boucle sans fin) est arrêté. Le code de l'élève reste dans son navigateur.
+- Le premier lancement de Python prend quelques secondes (le navigateur le garde ensuite en mémoire).
+- Fichiers : les dossiers lecon-7 à lecon-18 contiennent les leçons 1 à 12 de l'unité 5 ; le dossier algo contient leur moteur
+  (lecon.css, lecon.js, python.js, python-worker.js). Fichiers modifiés : site.html et index.html.
+
+SERVEUR — À FAIRE AVANT DE PUBLIER L'UNITÉ 5
+- Le serveur « Assiduité » accepte seulement les leçons, devoirs et corrigés de l'unité 4.
+  Tant que cette règle n'est pas élargie, publier une leçon de l'unité 5 affichera une erreur et ses devoirs ne pourront pas être enregistrés.
+  L'unité 4 fonctionne comme avant.
+
+
+ÉVALUATION FORMATIVE (UNITÉ 5)
+- Dossier formative-5 : version en ligne (index.html) et version imprimable (formative-unite5.pdf).
+- Elle s'ouvre pour les élèves quand la leçon 6 de l'unité 5 (l'atelier) est publiée.
+- Le bouton Vérifier indique ce qui est juste sans donner les réponses ; les parties 4 et 6 se corrigent en classe.
+- Connectée comme enseignante, le bouton « Afficher les réponses » remplit tout pour projeter la correction.
+
+PAGE D'ACCUEIL (site.html)
+- L'accueil montre les 5 unités du cours en cadrans de couleur, avec une illustration dessinée dans la page (aucune image externe). Les unités 1 à 3 sont affichées « À venir ».
+- Un seul menu « Unités » : au survol d'une unité, ses leçons s'affichent (unité 5 en deux colonnes : algorithmes et Python).
+- Chaque leçon a sa carte avec deux boutons : Leçon et Devoir (verrouillé, à faire, ou envoyé avec le score).
+- Les leçons et devoirs non publiés restent grisés, dans les cartes comme dans le menu.
+- Photos des cadrans (facultatif) : déposez une photo nommée unite-1.jpg … unite-5.jpg dans un dossier « images » à côté de site.html.
+  Elle remplace alors le dessin du cadran correspondant. Utilisez vos propres photos ou des photos libres de droits.
+
+LECTURE « CONNAÎTRE L'IA » (UNITÉ 5)
+- Fichier : ressources/connaitre-ia.pdf (« Comment fonctionne l'intelligence artificielle ? », 7 pages).
+- Une carte « Connaître l'intelligence artificielle » dans l'unité 5, avec « Lire le document » et « Télécharger ».
+- Aussi dans le menu Unités → Unité 5 → « Connaître l'IA (lecture) ». Le document est toujours visible (pas de publication à faire).
+- Pour le remplacer, gardez le même nom de fichier : ressources/connaitre-ia.pdf.
+- Questions de lecture : ressources/quiz-ia.html (10 questions, correction immédiate, non notées), lien « Vérifie ta lecture » sur la carte.

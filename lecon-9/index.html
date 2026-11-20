@@ -1,0 +1,249 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TEJ2O | Unité 5 · Leçon 3 — Les conditions</title>
+<link rel="stylesheet" href="../algo/lecon.css"></head><body data-activity="lesson9"><nav class="tej-nav" aria-label="Navigation principale"><a href="../site.html">← Accueil TEJ2O</a><span>Unité 5 · Algorithmes et Python</span></nav><main class="shell"><header class="top"><div><div class="brand">TEJ2O <span style="color:#fff;font-weight:400">| Algorithmes et Python</span></div><div class="small">Unité 5 · Leçon 3 — Les conditions</div></div><span class="pill">Unité 5</span></header><div class="intro"><div><h1>Choisir le bon chemin</h1><div class="small">Quatre notions, puis un devoir de dix questions.</div></div><div class="small" id="stepLabel"></div></div><div class="tabs" id="tabs"></div><div class="progress"><div class="fill" id="fill"></div></div><section id="content" aria-live="polite"></section><div class="nav"><button id="prev">← Précédent</button><span class="hint" id="navHint"></span><button id="next">Suivant →</button></div><div class="footer">TEJ2O · Unité 5 · Algorithmes et Python</div></main>
+<script>
+const LECON = {
+ "num": 9,
+ "aff": 3,
+ "titre": "Les conditions",
+ "labels": [
+  "1 · SI… ALORS",
+  "2 · SI… SINON",
+  "3 · Comparer",
+  "4 · ET et OU",
+  "Devoir · 10 questions"
+ ],
+ "stages": [
+  {
+   "type": "qcm",
+   "title": "SI… ALORS : faire quelque chose seulement si…",
+   "lead": [
+    "Une **condition** est une question dont la réponse est **vraie** ou **fausse**.",
+    "**SI** la condition est vraie **ALORS** on fait le bloc ; si elle est fausse, on **saute** le bloc et on continue après **FIN SI**.",
+    "Les instructions du bloc sont **décalées** vers la droite : on voit tout de suite ce qui dépend de la condition.",
+    "Exemple : SI âge < 12 ALORS AFFICHER « rabais » FIN SI."
+   ],
+   "tip": "Une condition fausse ne provoque pas d’erreur : le bloc est simplement ignoré.",
+   "doc": "Pseudocode à analyser",
+   "code": "LIRE temperature\nSI temperature < 0 ALORS\n    AFFICHER « Mets ta tuque ! »\nFIN SI\nAFFICHER « Bonne journée »",
+   "consigne": "L’utilisateur entre 5. Qu’affiche l’algorithme ?",
+   "opts": [
+    "« Mets ta tuque ! » puis « Bonne journée »",
+    "Seulement « Bonne journée »",
+    "Seulement « Mets ta tuque ! »",
+    "Rien du tout"
+   ],
+   "correct": 1,
+   "why": "5 < 0 est faux : on saute le bloc. La dernière ligne est après FIN SI, elle s’exécute toujours."
+  },
+  {
+   "type": "qcm",
+   "title": "SI… SINON : deux chemins",
+   "lead": [
+    "Avec **SINON**, on prévoit aussi ce qu’il faut faire quand la condition est fausse.",
+    "Un seul des deux blocs est exécuté : jamais les deux, jamais aucun.",
+    "**SINON SI** permet d’ajouter d’autres cas, testés dans l’ordre : on s’arrête au premier qui est vrai.",
+    "Exemple : SI note ≥ 80 … SINON SI note ≥ 50 … SINON …"
+   ],
+   "tip": "Teste toujours une condition avec une valeur juste à la limite, par exemple 50 pour « note ≥ 50 ».",
+   "doc": "Pseudocode à analyser",
+   "code": "LIRE note\nSI note ≥ 50 ALORS\n    AFFICHER « Réussi »\nSINON\n    AFFICHER « À reprendre »\nFIN SI",
+   "consigne": "Quelles notes font afficher « Réussi » ?",
+   "opts": [
+    "Seulement 49",
+    "Seulement 50",
+    "Toute note de 50 ou plus",
+    "Toute note de moins de 50"
+   ],
+   "correct": 2,
+   "why": "La condition note ≥ 50 est vraie pour 50 et pour toute note plus grande. Pour 49 et moins, on passe dans SINON."
+  },
+  {
+   "type": "qcm",
+   "title": "Comparer des valeurs",
+   "lead": [
+    "On compare avec : **=** (égal), **≠** (différent), **<** (plus petit), **>** (plus grand), **≤** (plus petit ou égal), **≥** (plus grand ou égal).",
+    "« **au moins** 16 » se traduit par ≥ 16 ; « **plus de** 16 » par > 16. La différence, c’est le 16 lui-même.",
+    "« **au plus** 10 » se traduit par ≤ 10 ; « **moins de** 10 » par < 10.",
+    "Le résultat d’une comparaison est un **booléen** : vrai ou faux."
+   ],
+   "tip": "Les erreurs de limite (< au lieu de ≤) sont parmi les bogues les plus fréquents.",
+   "doc": "Règle à traduire",
+   "sample": [
+    "Pour s’inscrire à l’activité, il faut avoir au moins 14 ans."
+   ],
+   "consigne": "Quelle condition traduit correctement cette règle ?",
+   "opts": [
+    "âge > 14",
+    "âge ≥ 14",
+    "âge < 14",
+    "âge = 14"
+   ],
+   "correct": 1,
+   "why": "« Au moins 14 » inclut 14 : on écrit âge ≥ 14. Avec âge > 14, un élève de 14 ans serait refusé."
+  },
+  {
+   "type": "qcm",
+   "title": "Combiner des conditions : ET, OU",
+   "lead": [
+    "**ET** : la condition complète est vraie seulement si **les deux** parties sont vraies.",
+    "**OU** : la condition complète est vraie si **au moins une** des parties est vraie.",
+    "Exemple : « entre 13 et 17 ans » s’écrit âge ≥ 13 ET âge ≤ 17.",
+    "**NON** inverse une condition : NON (âge ≥ 18) est vrai pour un âge de moins de 18."
+   ],
+   "tip": "Pour vérifier une condition avec ET ou OU, teste chaque partie séparément, puis combine.",
+   "doc": "Pseudocode à analyser",
+   "code": "LIRE age\nSI age < 12 OU age ≥ 65 ALORS\n    AFFICHER « Tarif réduit »\nSINON\n    AFFICHER « Tarif régulier »\nFIN SI",
+   "consigne": "Pour quels âges l’algorithme affiche-t-il « Tarif réduit » ?",
+   "opts": [
+    "Seulement de 12 à 64 ans",
+    "Moins de 12 ans, ou 65 ans et plus",
+    "Seulement 65 ans et plus",
+    "Aucun âge : une personne ne peut pas avoir moins de 12 ans ET 65 ans ou plus"
+   ],
+   "correct": 1,
+   "why": "Avec OU, une seule partie vraie suffit : un enfant de 8 ans (8 < 12) ou une personne de 70 ans (70 ≥ 65) ont le tarif réduit."
+  }
+ ],
+ "questions": [
+  [
+   "L’utilisateur entre 0. Qu’affiche cet algorithme ?",
+   [
+    "Gel",
+    "Pas de gel",
+    "Les deux messages",
+    "Rien"
+   ],
+   1,
+   "0 < 0 est faux : on passe dans SINON. Pour afficher « Gel » à 0 °C, il faudrait t ≤ 0.",
+   "LIRE t\nSI t < 0 ALORS\n    AFFICHER « Gel »\nSINON\n    AFFICHER « Pas de gel »\nFIN SI"
+  ],
+  [
+   "L’utilisateur entre 14. Qu’affiche cet algorithme ?",
+   [
+    "28",
+    "8",
+    "4",
+    "18"
+   ],
+   1,
+   "14 > 10 est vrai, donc x ← 14 − 10 = 4. On affiche ensuite 4 × 2 = 8.",
+   "LIRE x\nSI x > 10 ALORS\n    x ← x − 10\nFIN SI\nAFFICHER x × 2"
+  ],
+  [
+   "Quelle condition traduit « plus de 100 points » ?",
+   [
+    "points ≥ 100",
+    "points > 100",
+    "points < 100",
+    "points = 100"
+   ],
+   1,
+   "« Plus de 100 » exclut 100 : on écrit > 100. « Au moins 100 » s’écrirait ≥ 100."
+  ],
+  [
+   "Quelle condition est vraie seulement pour un âge de 13 à 17 ans (13 et 17 compris) ?",
+   [
+    "âge ≥ 13 OU âge ≤ 17",
+    "âge ≥ 13 ET âge ≤ 17",
+    "âge > 13 ET âge < 17",
+    "âge = 13 ET âge = 17"
+   ],
+   1,
+   "Avec ET, les deux conditions doivent être vraies. Avec OU, presque tous les âges conviennent ; avec > et <, 13 et 17 sont exclus."
+  ],
+  [
+   "La note est 85. Qu’affiche cet algorithme ?",
+   [
+    "Excellent",
+    "Réussi",
+    "Excellent puis Réussi",
+    "À reprendre"
+   ],
+   0,
+   "85 ≥ 80 est vrai : on affiche « Excellent » et on ignore les autres cas. SINON SI n’est testé que si les cas précédents sont faux.",
+   "SI note ≥ 80 ALORS\n    AFFICHER « Excellent »\nSINON SI note ≥ 50 ALORS\n    AFFICHER « Réussi »\nSINON\n    AFFICHER « À reprendre »\nFIN SI"
+  ],
+  [
+   "Avec le même algorithme, quelle note fait afficher « Réussi » ?",
+   [
+    "80",
+    "92",
+    "65",
+    "40"
+   ],
+   2,
+   "65 ≥ 80 est faux, puis 65 ≥ 50 est vrai : « Réussi ». 80 et 92 donnent « Excellent », 40 donne « À reprendre ».",
+   "SI note ≥ 80 ALORS\n    AFFICHER « Excellent »\nSINON SI note ≥ 50 ALORS\n    AFFICHER « Réussi »\nSINON\n    AFFICHER « À reprendre »\nFIN SI"
+  ],
+  [
+   "« Il pleut » est vrai et « il fait froid » est faux. Que vaut « il pleut ET il fait froid » ?",
+   [
+    "Vrai",
+    "Faux",
+    "Ça dépend de la température",
+    "On ne peut pas le savoir"
+   ],
+   1,
+   "Avec ET, les deux parties doivent être vraies. Une partie est fausse : le tout est faux."
+  ],
+  [
+   "Même situation : que vaut « il pleut OU il fait froid » ?",
+   [
+    "Vrai",
+    "Faux",
+    "Ça dépend de la température",
+    "On ne peut pas le savoir"
+   ],
+   0,
+   "Avec OU, une seule partie vraie suffit."
+  ],
+  [
+   "Un algorithme devait afficher « Réussi » pour une note de 50 et plus, mais il affiche « À reprendre » pour 50. Quelle est la cause la plus probable ?",
+   [
+    "La condition est « note > 50 » au lieu de « note ≥ 50 »",
+    "La note est trop basse",
+    "L’ordinateur a fait une erreur de calcul",
+    "Il manque une boucle"
+   ],
+   0,
+   "C’est un bogue de limite : avec >, la note 50 est exclue. L’ordinateur ne se trompe pas, il fait exactement ce qui est écrit."
+  ],
+  [
+   "Une condition peut-elle être à la fois vraie et fausse ?",
+   [
+    "Oui, selon l’ordinateur",
+    "Non : une condition est soit vraie, soit fausse",
+    "Oui, si on utilise ET",
+    "Oui, avec SINON"
+   ],
+   1,
+   "Une condition a toujours une seule réponse : vraie ou fausse. C’est pour ça qu’un seul des deux blocs (ALORS ou SINON) est exécuté."
+  ]
+ ],
+ "ecrire": [
+  {
+   "titre": "Entrée au manège",
+   "enonce": "Lis l’âge et la taille (en cm) d’une personne. Affiche « Accès au manège » si elle a au moins 10 ans ET mesure au moins 120 cm, sinon « Accès refusé ».",
+   "verif": [
+    "LIRE l’âge et la taille",
+    "age ≥ 10 ET taille ≥ 120 (au moins = ≥)",
+    "un message dans ALORS, l’autre dans SINON"
+   ],
+   "modele": "LIRE age\nLIRE taille\nSI age ≥ 10 ET taille ≥ 120 ALORS\n    AFFICHER « Accès au manège »\nSINON\n    AFFICHER « Accès refusé »\nFIN SI"
+  },
+  {
+   "titre": "Billet de cinéma",
+   "enonce": "Lis l’âge. Affiche « tarif enfant » si l’âge est plus petit que 12, « tarif aîné » si l’âge est 65 ou plus, sinon « tarif régulier ».",
+   "verif": [
+    "LIRE l’âge",
+    "trois cas : SI… SINON SI… SINON",
+    "age < 12, puis age ≥ 65"
+   ],
+   "modele": "LIRE age\nSI age < 12 ALORS\n    AFFICHER « tarif enfant »\nSINON SI age ≥ 65 ALORS\n    AFFICHER « tarif aîné »\nSINON\n    AFFICHER « tarif régulier »\nFIN SI"
+  }
+ ]
+};
+</script>
+<script src="../algo/python.js"></script>
+<script src="../algo/lecon.js"></script>
+<script>window.tej2oAccessReady=import('../access.js');</script><script type="module">try{await window.tej2oAccessReady;const c=window.TEJ2O?.corrige;if(c){openCorrige(c)}else if(new URLSearchParams(location.search).has("devoir")&&(window.TEJ2O?.teacher||window.TEJ2O?.homeworkOpen))go(4)}catch(err){console.error("Accès TEJ2O",err);const box=document.createElement("aside");box.style="padding:18px;margin:16px;border:2px solid #d5a83b;background:#163a2e;color:#fff";box.textContent="Impossible de vérifier l’accès à cette leçon. Vérifie Internet et ouvre le site depuis son adresse HTTPS.";document.body.prepend(box)}</script><script src="../telecharger.js"></script></body></html>

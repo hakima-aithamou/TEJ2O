@@ -1,0 +1,371 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TEJ2O | Unité 5 · Leçon 12 — Python : les fonctions</title>
+<link rel="stylesheet" href="../algo/lecon.css"></head><body data-activity="lesson18"><nav class="tej-nav" aria-label="Navigation principale"><a href="../site.html">← Accueil TEJ2O</a><span>Unité 5 · Algorithmes et Python</span></nav><main class="shell"><header class="top"><div><div class="brand">TEJ2O <span style="color:#fff;font-weight:400">| Algorithmes et Python</span></div><div class="small">Unité 5 · Leçon 12 — Python : les fonctions</div></div><span class="pill">Unité 5</span></header><div class="intro"><div><h1>Créer ses propres outils</h1><div class="small">Quatre activités courtes, puis un devoir de dix questions.</div></div><div class="small" id="stepLabel"></div></div><div class="tabs" id="tabs"></div><div class="progress"><div class="fill" id="fill"></div></div><section id="content" aria-live="polite"></section><div class="nav"><button id="prev">← Précédent</button><span class="hint" id="navHint"></span><button id="next">Suivant →</button></div><div class="footer">TEJ2O · Unité 5 · Algorithmes et Python</div></main>
+<script>
+const LECON = {
+ "num": 18,
+ "aff": 12,
+ "titre": "Python : les fonctions",
+ "labels": [
+  "1 · Définir une fonction",
+  "2 · Les paramètres",
+  "3 · return",
+  "4 · Défi",
+  "Devoir · 10 questions"
+ ],
+ "stages": [
+  {
+   "type": "code",
+   "title": "Définir et appeler une fonction",
+   "lead": [
+    "Tu connais déjà des fonctions toutes prêtes : `print`, `input`, `int`, `len`, `range`.",
+    "Avec **def**, tu crées **ta propre** fonction : un bloc d’instructions avec un **nom**, que tu peux réutiliser.",
+    "**Définir** une fonction ne l’exécute pas. Elle s’exécute quand on l’**appelle** : son nom suivi de parenthèses.",
+    "On définit la fonction **avant** de l’appeler."
+   ],
+   "syntaxe": [
+    {
+     "t": "Définir",
+     "code": "def saluer():\n    print(\"Bonjour !\")",
+     "parties": [
+      [
+       "def",
+       "le mot clé « définir »"
+      ],
+      [
+       "saluer",
+       "le nom de la fonction (mêmes règles que les variables)"
+      ],
+      [
+       "():",
+       "parenthèses et deux-points"
+      ],
+      [
+       "    print(...)",
+       "le corps de la fonction, décalé de 4 espaces"
+      ]
+     ]
+    },
+    {
+     "t": "Appeler",
+     "code": "saluer()",
+     "parties": [
+      [
+       "saluer()",
+       "tout à gauche : exécute le corps de la fonction"
+      ]
+     ]
+    }
+   ],
+   "exemples": [
+    {
+     "t": "Définir, puis appeler deux fois",
+     "code": "def saluer():\n    print(\"Bonjour !\")\n    print(\"Bienvenue en TEJ2O\")\n\nsaluer()\nsaluer()",
+     "sortie": "Bonjour !\nBienvenue en TEJ2O\nBonjour !\nBienvenue en TEJ2O"
+    },
+    {
+     "t": "Sans appel, rien ne s’affiche",
+     "note": "La fonction est définie, mais jamais appelée.",
+     "code": "def saluer():\n    print(\"Bonjour !\")",
+     "sortie": ""
+    }
+   ],
+   "tip": "def crée la fonction ; nom() l’exécute.",
+   "consigne": "Définis une fonction `ligne()` qui affiche « ********** » (10 étoiles). Appelle-la, affiche « MENU », puis appelle-la encore.",
+   "starter": "# Définis la fonction ligne\n\n\n# Appelle-la, affiche MENU, appelle-la encore\n",
+   "tests": [
+    {
+     "in": [],
+     "out": "**********\nMENU\n**********"
+    }
+   ],
+   "require": [
+    {
+     "re": "def\\s+ligne\\s*\\(\\s*\\)\\s*:",
+     "msg": "Définis la fonction avec `def ligne():`."
+    },
+    {
+     "re": "^ligne\\s*\\(\\s*\\)",
+     "msg": "Appelle la fonction avec `ligne()`, tout à gauche."
+    }
+   ],
+   "hint": "`def ligne():` puis `print(\"**********\")` décalé. Ensuite, tout à gauche : `ligne()`, `print(\"MENU\")`, `ligne()`.",
+   "solution": "# Définis la fonction ligne\ndef ligne():\n    print(\"**********\")\n\n# Appelle-la, affiche MENU, appelle-la encore\nligne()\nprint(\"MENU\")\nligne()",
+   "bravo": "Pour changer toutes les lignes d’étoiles, tu n’as qu’une seule ligne à modifier : dans la fonction."
+  },
+  {
+   "type": "code",
+   "title": "Donner des informations : les paramètres",
+   "lead": [
+    "Un **paramètre** est une variable placée entre les parenthèses de def. Il reçoit une valeur à chaque appel.",
+    "À l’appel, on donne la valeur entre parenthèses : `saluer(\"Maya\")`.",
+    "Plusieurs paramètres se séparent par des **virgules**, dans le même ordre à la définition et à l’appel."
+   ],
+   "syntaxe": {
+    "code": "def saluer(prenom):\n    print(\"Bonjour\", prenom)\n\nsaluer(\"Maya\")",
+    "parties": [
+     [
+      "prenom",
+      "le paramètre : une variable de la fonction"
+     ],
+     [
+      "saluer(\"Maya\")",
+      "à l’appel, prenom reçoit \"Maya\""
+     ]
+    ]
+   },
+   "exemples": [
+    {
+     "t": "Une fonction, plusieurs appels",
+     "code": "def saluer(prenom):\n    print(\"Bonjour\", prenom)\n\nsaluer(\"Maya\")\nsaluer(\"Léo\")",
+     "sortie": "Bonjour Maya\nBonjour Léo"
+    },
+    {
+     "t": "Deux paramètres",
+     "code": "def aire(longueur, largeur):\n    print(\"Aire :\", longueur * largeur)\n\naire(5, 4)\naire(3, 7)",
+     "sortie": "Aire : 20\nAire : 21"
+    }
+   ],
+   "tip": "Les valeurs données à l’appel vont dans les paramètres, dans l’ordre.",
+   "consigne": "Définis `table(n)` qui affiche la table de n, de n × 1 à n × 5, sous la forme « 3 x 1 = 3 ». Le programme appelle ensuite table(3).",
+   "starter": "def table(n):\n    # une boucle for de 1 à 5\n\n\ntable(3)\n",
+   "tests": [
+    {
+     "in": [],
+     "out": "3 x 1 = 3\n3 x 2 = 6\n3 x 3 = 9\n3 x 4 = 12\n3 x 5 = 15"
+    }
+   ],
+   "require": [
+    {
+     "re": "def\\s+table\\s*\\(\\s*n\\s*\\)",
+     "msg": "Garde `def table(n):`."
+    },
+    {
+     "re": "\\bfor\\b",
+     "msg": "Utilise une boucle `for` dans la fonction."
+    }
+   ],
+   "hint": "Dans la fonction (décalé de 4) : `for i in range(1, 6):` puis, décalé de 8 : `print(n, \"x\", i, \"=\", n * i)`.",
+   "solution": "def table(n):\n    # une boucle for de 1 à 5\n    for i in range(1, 6):\n        print(n, \"x\", i, \"=\", n * i)\n\n\ntable(3)",
+   "bravo": "Remplace table(3) par table(8) : la même fonction affiche une autre table. Remarque les deux niveaux de décalage : 4 espaces pour la fonction, 8 pour la boucle."
+  },
+  {
+   "type": "code",
+   "title": "Rendre un résultat : return",
+   "lead": [
+    "`return` **renvoie** une valeur au programme qui a appelé la fonction.",
+    "On peut alors ranger le résultat dans une variable ou l’afficher : `print(double(5))`.",
+    "**print** montre une valeur à l’écran ; **return** la donne au programme pour qu’il s’en serve.",
+    "Quand Python rencontre return, la fonction **s’arrête**."
+   ],
+   "syntaxe": {
+    "code": "def double(n):\n    return n * 2\n\nresultat = double(5)",
+    "parties": [
+     [
+      "return n * 2",
+      "renvoie le résultat du calcul"
+     ],
+     [
+      "double(5)",
+      "est remplacé par la valeur renvoyée : 10"
+     ],
+     [
+      "resultat",
+      "reçoit 10"
+     ]
+    ]
+   },
+   "exemples": [
+    {
+     "t": "Utiliser la valeur renvoyée",
+     "code": "def double(n):\n    return n * 2\n\nx = double(5)\nprint(x + 1)",
+     "sortie": "11"
+    },
+    {
+     "t": "Prix avec taxes",
+     "note": "Un calcul avec un nombre décimal donne un nombre décimal.",
+     "code": "def avec_taxes(prix):\n    return prix * 1.13\n\nprint(avec_taxes(100))",
+     "sortie": "113.0"
+    }
+   ],
+   "tip": "return donne le résultat ; print l’affiche seulement.",
+   "consigne": "Complète la fonction `perimetre(longueur, largeur)` pour qu’elle renvoie le périmètre d’un rectangle : 2 × (longueur + largeur). Les deux print sont déjà écrits.",
+   "starter": "def perimetre(longueur, largeur):\n    # renvoie le périmètre\n\n\nprint(perimetre(5, 3))\nprint(perimetre(10, 2))\n",
+   "tests": [
+    {
+     "in": [],
+     "out": "16\n24"
+    }
+   ],
+   "require": [
+    {
+     "re": "\\breturn\\b",
+     "msg": "Utilise `return` dans la fonction."
+    }
+   ],
+   "hint": "Dans la fonction, décalé de 4 : `return 2 * (longueur + largeur)`.",
+   "solution": "def perimetre(longueur, largeur):\n    # renvoie le périmètre\n    return 2 * (longueur + largeur)\n\n\nprint(perimetre(5, 3))\nprint(perimetre(10, 2))",
+   "bravo": "2 × (5 + 3) = 16 et 2 × (10 + 2) = 24."
+  },
+  {
+   "type": "code",
+   "title": "Défi : une fonction qui décide",
+   "lead": [
+    "Une fonction peut contenir un **if / elif / else** avec un **return** dans chaque cas.",
+    "Dès qu’un return s’exécute, la fonction s’arrête et renvoie la valeur."
+   ],
+   "exemples": [
+    {
+     "t": "Pair ou impair",
+     "code": "def parite(n):\n    if n % 2 == 0:\n        return \"pair\"\n    else:\n        return \"impair\"\n\nprint(parite(8))\nprint(parite(3))",
+     "sortie": "pair\nimpair"
+    }
+   ],
+   "tip": "Attention aux deux niveaux de décalage : 4 espaces dans la fonction, 8 dans le if.",
+   "consigne": "Complète `lettre(note)` : elle renvoie « A » pour 80 et plus, « B » de 70 à 79, « C » de 60 à 69, « D » de 50 à 59, sinon « Échec ».",
+   "starter": "def lettre(note):\n    # if, elif, else avec return\n\n\nprint(lettre(85))\nprint(lettre(72))\nprint(lettre(65))\nprint(lettre(50))\nprint(lettre(30))\n",
+   "tests": [
+    {
+     "in": [],
+     "out": "A\nB\nC\nD\nÉchec"
+    }
+   ],
+   "require": [
+    {
+     "re": "\\breturn\\b",
+     "msg": "Utilise `return` dans chaque cas."
+    },
+    {
+     "re": "\\belif\\b",
+     "msg": "Utilise `elif` pour les cas du milieu."
+    }
+   ],
+   "hint": "`if note >= 80: return \"A\"`, puis `elif note >= 70:`… jusqu’à `else: return \"Échec\"`. Chaque return sur sa propre ligne, décalé de 8.",
+   "solution": "def lettre(note):\n    # if, elif, else avec return\n    if note >= 80:\n        return \"A\"\n    elif note >= 70:\n        return \"B\"\n    elif note >= 60:\n        return \"C\"\n    elif note >= 50:\n        return \"D\"\n    else:\n        return \"Échec\"\n\n\nprint(lettre(85))\nprint(lettre(72))\nprint(lettre(65))\nprint(lettre(50))\nprint(lettre(30))",
+   "bravo": "Tu as combiné une fonction, des paramètres, des conditions et return : tout ce que tu as appris en Python."
+  }
+ ],
+ "questions": [
+  [
+   "Quel mot clé sert à créer une fonction ?",
+   [
+    "function",
+    "def",
+    "create",
+    "return"
+   ],
+   1,
+   "On crée une fonction avec def, suivi du nom, des parenthèses et de deux-points."
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "Allô",
+    "Allô deux fois",
+    "Rien",
+    "Une erreur"
+   ],
+   2,
+   "La fonction est définie mais jamais appelée : rien ne s’affiche.",
+   "def message():\n    print(\"Allô\")"
+  ],
+  [
+   "Combien de fois « Bravo » est-il affiché ?",
+   [
+    "1",
+    "2",
+    "3",
+    "0"
+   ],
+   2,
+   "La fonction est appelée trois fois.",
+   "def feliciter():\n    print(\"Bravo\")\n\nfeliciter()\nfeliciter()\nfeliciter()"
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "Bonjour prenom",
+    "Bonjour Ali",
+    "Ali",
+    "Une erreur"
+   ],
+   1,
+   "À l’appel, le paramètre prenom reçoit \"Ali\".",
+   "def saluer(prenom):\n    print(\"Bonjour\", prenom)\n\nsaluer(\"Ali\")"
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "7",
+    "12",
+    "34",
+    "Une erreur"
+   ],
+   1,
+   "a reçoit 3 et b reçoit 4 : 3 × 4 = 12.",
+   "def produit(a, b):\n    return a * b\n\nprint(produit(3, 4))"
+  ],
+  [
+   "Quelle est la différence entre print et return dans une fonction ?",
+   [
+    "Aucune",
+    "print affiche à l’écran ; return renvoie la valeur au programme",
+    "return affiche en couleur",
+    "print arrête la fonction"
+   ],
+   1,
+   "return donne la valeur au programme, qui peut la ranger dans une variable ou la réutiliser."
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "10",
+    "11",
+    "5",
+    "6"
+   ],
+   1,
+   "plus(5) renvoie 5 + 5 = 10, rangé dans x. Puis on affiche x + 1 = 11.",
+   "def plus(n):\n    return n + 5\n\nx = plus(5)\nprint(x + 1)"
+  ],
+  [
+   "Où doit-on placer la définition d’une fonction ?",
+   [
+    "Avant son appel",
+    "Après son appel",
+    "N’importe où",
+    "Dans un commentaire"
+   ],
+   0,
+   "Python lit de haut en bas : la fonction doit être définie avant d’être appelée."
+  ],
+  [
+   "Pourquoi ce programme donne-t-il une erreur ?",
+   [
+    "Le corps de la fonction n’est pas décalé",
+    "Il manque return",
+    "Le nom est trop court",
+    "Il faut des guillemets autour de dire"
+   ],
+   0,
+   "Après def …:, le corps doit être décalé de 4 espaces (IndentationError).",
+   "def dire():\nprint(\"Salut\")\n\ndire()"
+  ],
+  [
+   "Qu’affiche ce programme ?",
+   [
+    "petit",
+    "grand",
+    "petit puis grand",
+    "Rien"
+   ],
+   1,
+   "15 < 10 est faux : on passe au else et la fonction renvoie \"grand\".",
+   "def taille(n):\n    if n < 10:\n        return \"petit\"\n    else:\n        return \"grand\"\n\nprint(taille(15))"
+  ]
+ ],
+ "ecrire": []
+};
+</script>
+<script src="../algo/python.js"></script>
+<script src="../algo/lecon.js"></script>
+<script>window.tej2oAccessReady=import('../access.js');</script><script type="module">try{await window.tej2oAccessReady;const c=window.TEJ2O?.corrige;if(c){openCorrige(c)}else if(new URLSearchParams(location.search).has("devoir")&&(window.TEJ2O?.teacher||window.TEJ2O?.homeworkOpen))go(4)}catch(err){console.error("Accès TEJ2O",err);const box=document.createElement("aside");box.style="padding:18px;margin:16px;border:2px solid #d5a83b;background:#163a2e;color:#fff";box.textContent="Impossible de vérifier l’accès à cette leçon. Vérifie Internet et ouvre le site depuis son adresse HTTPS.";document.body.prepend(box)}</script><script src="../telecharger.js"></script></body></html>
